@@ -289,11 +289,11 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #ifdef DYNAMIC_TAPPING_TERM_ENABLE
 #    define _SL4_2_ DE_SECT, DT_DOWN
 #    define _SL4_3_ DT_PRNT, _SL4_2_
-#    define _SR4_2_ DT_UP, KC_SPC
+#    define _SR4_2_ DT_UP, SFT_SPC
 #else
 #    define _SL4_2_ DE_SECT, DE_GRV
 #    define _SL4_3_ DE_DEG, _SL4_2_
-#    define _SR4_2_ KC_RALT, KC_SPC
+#    define _SR4_2_ KC_RALT, SFT_SPC
 #endif // DYNAMIC_TAPPING_TERM_ENABLE
 #define _SR4_3_ _SR4_2_, CW_TOGG
 //
@@ -354,7 +354,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 //
 #define _LL4_2_ KC_LSFT, KC_TRNS
 #define _LL4_3_ DE_DLR, _LL4_2_
-#define _LR4_2_ ATT(KC_BSPC), KC_SPC
+#define _LR4_2_ ATT(KC_BSPC), SFT_SPC
 #define _LR4_3_ _LR4_2_, KC_APP
 //
 #define _LOWER_3x5_ _LL1_5_, _LR1_5_, _LL2_5_, _LR2_5_, _LL3_5_, _LR3_5_
