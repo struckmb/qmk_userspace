@@ -135,6 +135,8 @@ enum userspace_custom_keycodes {
 // // first and last column for 6 column keyboards:
 #define SFT_ENT LSFT_T(KC_ENT)
 #define SFT_SPC RSFT_T(KC_SPC)
+#define C___TAB C(KC_TAB)
+#define S_C_TAB S(C(KC_TAB))
 
 #ifdef TAP_DANCE_ENABLE
 // Tap Dance keycodes
@@ -162,13 +164,22 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 // /// // /* KEYMAPS */ // /// //
 
 /* first and last column base layer keys for 6x3 keyboards */
-#define _0L1_1_ LALT_T(KC_BSPC)
-#define _0L2_1_ LCTL_T(KC_ESC)
-#define _0L3_1_ LGUI_T(KC_APP)
+// Base layers
+#define _BASE_L_1_ LALT_T(KC_BSPC)
+#define _BASE_L_2_ LCTL_T(KC_ESC)
+#define _BASE_L_3_ LGUI_T(KC_APP)
 // R1 and R2 depend on layout
-#define _0R1_1_(kc) LALT_T(kc)
-#define _0R2_1_(kc) RCTL_T(kc)
-#define _0R3_1_(kc) RGUI_T(kc)
+#define _BASE_R_1_(kc) LALT_T(kc)
+#define _BASE_R_2_(kc) RCTL_T(kc)
+#define _BASE_R_3_(kc) RGUI_T(kc)
+// Additional layers
+#define _ADD_L_1_ KC_LALT
+#define _ADD_L_2_ _BASE_L_2_
+#define _ADD_L_3_ KC_LGUI
+// R1 and R2 depend on layout
+#define _ADD_R_1_ KC_LALT
+#define _ADD_R_2_ KC_RCTL
+#define _ADD_R_3_ KC_RGUI
 // thumbs
 #define _0L4_2_ SFT_ENT, LOW_TAB
 #define _0L4_3_ KC_ESC, _0L4_2_
@@ -188,12 +199,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _QR2_5_ DE_H, DE_J, DE_K, DE_L, SY_R(DE_ODIA)
 #    define _QR3_5_ DE_N, DE_M, DE_COMM, DE_DOT, MS(DE_SS)
 //
-#    define _QL1_6_ _0L1_1_, _QL1_5_
-#    define _QL2_6_ _0L2_1_, _QL2_5_
-#    define _QL3_6_ _0L3_1_, _QL3_5_
-#    define _QR1_6_ _QR1_5_, _0R1_1_(DE_UDIA)
-#    define _QR2_6_ _QR2_5_, _0R2_1_(DE_ADIA)
-#    define _QR3_6_ _QR3_5_, _0R3_1_(KC_ENT)
+#    define _QL1_6_ _BASE_L_1_, _QL1_5_
+#    define _QL2_6_ _BASE_L_2_, _QL2_5_
+#    define _QL3_6_ _BASE_L_3_, _QL3_5_
+#    define _QR1_6_ _QR1_5_, _BASE_R_1_(DE_UDIA)
+#    define _QR2_6_ _QR2_5_, _BASE_R_2_(DE_ADIA)
+#    define _QR3_6_ _QR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _QWERTY_3x5_ _QL1_5_, _QR1_5_, _QL2_5_, _QR2_5_, _QL3_5_, _QR3_5_
 #    define _QWERTY_3x6_ _QL1_6_, _QR1_6_, _QL2_6_, _QR2_6_, _QL3_6_, _QR3_6_
@@ -208,12 +219,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _BR2_5_ DE_B, DE_N, DE_R, DE_S, SY_R(DE_G)
 #    define _BR3_5_ DE_Y, DE_Z, DE_COMM, DE_DOT, MS(DE_K)
 //
-#    define _BL1_6_ _0L1_1_, _BL1_5_
-#    define _BL2_6_ _0L2_1_, _BL2_5_
-#    define _BL3_6_ _0L3_1_, _BL3_5_
-#    define _BR1_6_ _BR1_5_, _0R1_1_(DE_SS)
-#    define _BR2_6_ _BR2_5_, _0R2_1_(DE_Q)
-#    define _BR3_6_ _BR3_5_, _0R3_1_(KC_ENT)
+#    define _BL1_6_ _BASE_L_1_, _BL1_5_
+#    define _BL2_6_ _BASE_L_2_, _BL2_5_
+#    define _BL3_6_ _BASE_L_3_, _BL3_5_
+#    define _BR1_6_ _BR1_5_, _BASE_R_1_(DE_SS)
+#    define _BR2_6_ _BR2_5_, _BASE_R_2_(DE_Q)
+#    define _BR3_6_ _BR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _BONE_3x5_ _BL1_5_, _BR1_5_, _BL2_5_, _BR2_5_, _BL3_5_, _BR3_5_
 #    define _BONE_3x6_ _BL1_6_, _BR1_6_, _BL2_6_, _BR2_6_, _BL3_6_, _BR3_6_
@@ -228,12 +239,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _CR2_5_ DE_M, DE_N, DE_E, DE_I, SY_R(DE_O)
 #    define _CR3_5_ DE_K, DE_H, DE_COMM, DE_DOT, MS(DE_SS)
 //
-#    define _CL1_6_ _0L1_1_, _CL1_5_
-#    define _CL2_6_ _0L2_1_, _CL2_5_
-#    define _CL3_6_ _0L3_1_, _CL3_5_
-#    define _CR1_6_ _BR1_5_, _0R1_1_(DE_SS)
-#    define _CR2_6_ _BR2_5_, _0R2_1_(DE_Q)
-#    define _CR3_6_ _BR3_5_, _0R3_1_(KC_ENT)
+#    define _CL1_6_ _BASE_L_1_, _CL1_5_
+#    define _CL2_6_ _BASE_L_2_, _CL2_5_
+#    define _CL3_6_ _BASE_L_3_, _CL3_5_
+#    define _CR1_6_ _BR1_5_, _BASE_R_1_(DE_SS)
+#    define _CR2_6_ _BR2_5_, _BASE_R_2_(DE_Q)
+#    define _CR3_6_ _BR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _COLEMAK_DH_3x5_ _CL1_5_, _CR1_5_, _CL2_5_, _CR2_5_, _CL3_5_, _CR3_5_
 #    define _COLEMAK_DH_3x6_ _CL1_6_, _CR1_6_, _CL2_6_, _CR2_6_, _CL3_6_, _CR3_6_
@@ -279,12 +290,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _SR2_5_ DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN
 #define _SR3_5_ DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN
 //
-#define _SL1_6_ KC_LALT, _SL1_5_
-#define _SL2_6_ KC_LCTL, _SL2_5_
-#define _SL3_6_ KC_LGUI, _SL3_5_
-#define _SR1_6_ _SR1_5_, KC_LALT
-#define _SR2_6_ _SR2_5_, KC_RCTL
-#define _SR3_6_ _SR3_5_, KC_RGUI
+#define _SL1_6_ _ADD_L_1_, _SL1_5_
+#define _SL2_6_ _ADD_L_2_, _SL2_5_
+#define _SL3_6_ _ADD_L_3_, _SL3_5_
+#define _SR1_6_ _SR1_5_, _ADD_R_1_
+#define _SR2_6_ _SR2_5_, _ADD_R_2_
+#define _SR3_6_ _SR3_5_, _ADD_R_3_
 //
 #ifdef DYNAMIC_TAPPING_TERM_ENABLE
 #    define _SL4_2_ DE_SECT, DT_DOWN
@@ -303,20 +314,29 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #ifdef MOUSEKEY_ENABLE
 #    define MS_GSB1 S(G(KC_BTN1))
 #    define MS_CSB1 S(C(KC_BTN1))
-/* Pointer layer */
+/* Pointer layer
+ (ALT)│vMv│<M<│Ms↑│>M>│             │GSC│CSC│   │   │(ALT)
+ ───── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ─────
+ (C/E)│Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│Sft│Ctl│Alt│Gui│(CTL)
+ ───── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ─────
+ (GUI)│Tb←│Cut│Cpy│Pst│^M^       Slo│Med│Fst│AGr│Tb→│(GUI)
+                 ───┌───┬───┐ ┌───┬───┐───
+                 GSC│Bt1│Bt2│ │Gui│Bt3│CSC
+                 ───└───┴───┘ └───┴───┘───
+ * */
 #    define _PL1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX
 #    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
-#    define _PL3_5_ S(C(KC_TAB)), KC_CUT, KC_COPY, KC_PSTE, KC_WH_U
+#    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, KC_WH_U
 #    define _PR1_5_ XXXXXXX, MS_GSB1, MS_CSB1, XXXXXXX, XXXXXXX
 #    define _PR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
-#    define _PR3_5_ KC_ACL0, KC_ACL1, KC_ACL2, KC_RALT, C(KC_TAB)
+#    define _PR3_5_ KC_ACL0, KC_ACL1, KC_ACL2, KC_RALT, C___TAB
 //
-#    define _PL1_6_ KC_LALT, _PL1_5_
-#    define _PL2_6_ KC_LCTL, _PL2_5_
-#    define _PL3_6_ KC_LGUI, _PL3_5_
-#    define _PR1_6_ _PR1_5_, KC_LALT
-#    define _PR2_6_ _PR2_5_, KC_RCTL
-#    define _PR3_6_ _PR3_5_, KC_RGUI
+#    define _PL1_6_ _ADD_L_1_, _PL1_5_
+#    define _PL2_6_ _ADD_L_2_, _PL2_5_
+#    define _PL3_6_ _ADD_L_3_, _PL3_5_
+#    define _PR1_6_ _PR1_5_, _ADD_R_1_
+#    define _PR2_6_ _PR2_5_, _ADD_R_2_
+#    define _PR3_6_ _PR3_5_, _ADD_R_3_
 //
 #    define _PL4_2_ KC_BTN1, KC_BTN2
 #    define _PL4_3_ MS_GSB1, _PL4_2_
@@ -345,12 +365,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _LR2_5_ DE_PLUS, DE_4, DE_5, DE_6, DE_DOT
 #define _LR3_5_ DE_0, DE_1, DE_2, DE_3, DE_COMM
 //
-#define _LL1_6_ KC_LALT, _LL1_5_
-#define _LL2_6_ KC_LCTL, _LL2_5_
-#define _LL3_6_ KC_LGUI, _LL3_5_
-#define _LR1_6_ _LR1_5_, KC_LALT
-#define _LR2_6_ _LR2_5_, KC_RCTL
-#define _LR3_6_ _LR3_5_, KC_RGUI
+#define _LL1_6_ _ADD_L_1_, _LL1_5_
+#define _LL2_6_ _ADD_L_2_, _LL2_5_
+#define _LL3_6_ _ADD_L_3_, _LL3_5_
+#define _LR1_6_ _LR1_5_, _ADD_R_1_
+#define _LR2_6_ _LR2_5_, _ADD_R_2_
+#define _LR3_6_ _LR3_5_, _ADD_R_3_
 //
 #define _LL4_2_ KC_LSFT, KC_TRNS
 #define _LL4_3_ DE_DLR, _LL4_2_
@@ -368,16 +388,16 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _RR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
 #define _RR3_5_ KC_PSCR, CW_TOGG, KC_PAUS, OSM_AGR, KC_SCRL
 //
-#define _RL1_6_ KC_LALT, _RL1_5_
-#define _RL2_6_ KC_LCTL, _RL2_5_
-#define _RL3_6_ KC_LGUI, _RL3_5_
-#define _RR1_6_ _RR1_5_, KC_LALT
-#define _RR2_6_ _RR2_5_, KC_RCTL
-#define _RR3_6_ _RR3_5_, KC_RGUI
+#define _RL1_6_ _ADD_L_1_, _RL1_5_
+#define _RL2_6_ _ADD_L_2_, _RL2_5_
+#define _RL3_6_ _ADD_L_3_, _RL3_5_
+#define _RR1_6_ _RR1_5_, _ADD_R_1_
+#define _RR2_6_ _RR2_5_, _ADD_R_2_
+#define _RR3_6_ _RR3_5_, _ADD_R_3_
 //
 #define _RL4_2_ LSFT_T(KC_VOLD), ATT(KC_MUTE)
 #define _RL4_3_ KC_MPRV, _RL4_2_
-#define _RR4_2_ KC_TRNS, LSFT_T(KC_VOLU)
+#define _RR4_2_ KC_TRNS, RSFT_T(KC_VOLU)
 #define _RR4_3_ _RR4_2_, KC_MNXT
 //
 #define _RAISE_3x5_ _RL1_5_, _RR1_5_, _RL2_5_, _RR2_5_, _RL3_5_, _RR3_5_
@@ -398,10 +418,10 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _AR2_6_ _AR2_5_, DE_ELLP
 #define _AR3_6_ _AR3_5_, KC_NO
 //
-#define _AL4_2_ KC_BRID, KC_TRNS
+#define _AL4_2_ LSFT_T(KC_BRID), KC_TRNS
 #define _AL4_3_ KC_LSFT, _AL4_2_
-#define _AR4_2_ KC_TRNS, KC_BRIU
-#define _AR4_3_ _AR4_2_, KC_RSFT
+#define _AR4_2_ KC_TRNS, RSFT_T(KC_BRIU)
+#define _AR4_3_ _AR4_2_, KC_NO
 //
 #define _ATTIC_3x5_ _AL1_5_, _AR1_5_, _AL2_5_, _AR2_5_, _AL3_5_, _AR3_5_
 #define _ATTIC_3x6_ _AL1_6_, _AR1_6_, _AL2_6_, _AR2_6_, _AL3_6_, _AR3_6_
