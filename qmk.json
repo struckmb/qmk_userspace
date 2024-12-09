@@ -1,6 +1,7 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["cantor", "struckmb"]
+        ["cantor", "struckmb"],
+        ["bastardkb/charybdis/3x6/v2/splinky_3", "struckmb"]
     ]
 }
