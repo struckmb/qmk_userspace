@@ -9,8 +9,8 @@ First and last column keys on base layers for 6x3 keyboards,
      ───┼─                                     ─┼─────
      ⌃/⎋│           (...other keys...)          │⌃/(X)
      ───┼─                                     ─┼─────
-     ⌘/▤│                                       │⌘/↵
-     ```
+     ⌘/▤│                                       │⌘/ ↵
+```
 
 All base layers share the same thumb cluster:
 (If the keyboard only has 2 keys on one side, the outermost key (marked with *) is missing)
