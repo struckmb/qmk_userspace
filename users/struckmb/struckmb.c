@@ -63,13 +63,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         unregister_code16(KC_BRMD);
                     }
                     return false;
-#ifdef MOUSEKEY_ENABLE
+#    ifdef MOUSEKEY_ENABLE
                 case MS_CSB1:
                     if (record->event.pressed) {
                         tap_code16(S(G(KC_BTN1)));
                     }
                     return false;
-#endif // MOUSEKEY_ENABLE
+#    endif // MOUSEKEY_ENABLE
             }
             break;
 
@@ -279,6 +279,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         unregister_code16(ALGR(DE_N));
                     }
                     return false;
+                case DE_YEN:
+                    if (record->event.pressed) {
+                        register_code16(S(ALGR(DE_Z)));
+                    } else {
+                        unregister_code16(S(ALGR(DE_Z)));
+                    }
+                    return false;
                 case KC_CUT:
                     if (record->event.pressed) {
                         tap_code16(S(KC_DEL));
@@ -294,13 +301,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         tap_code16(S(KC_INS));
                     }
                     return false;
-#ifdef MOUSEKEY_ENABLE
+#    ifdef MOUSEKEY_ENABLE
                 case MS_CSB1:
                     if (record->event.pressed) {
                         tap_code16(S(C(KC_BTN1)));
                     }
                     return false;
-#endif // MOUSEKEY_ENABLE
+#    endif // MOUSEKEY_ENABLE
             }
             break;
 

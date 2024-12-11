@@ -331,7 +331,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _PR3_6_ _PR3_5_, _ADD_R_3_
 //
 #    define _PL4_2_ KC_BTN1, KC_BTN2
-#    define _PL4_3_ MS_GSB1, _PL4_2_
+#    define _PL4_3_ MS_CSB1, _PL4_2_
 #    define _PR4_2_ KC_BTN3, KC_BTN1
 #    define _PR4_3_ _PR4_2_, MS_CSB1
 //
@@ -355,9 +355,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _LR3_6_ _LR3_5_, _ADD_R_3_
 //
 #define _LL4_2_ KC_LSFT, KC_TRNS
-#define _LL4_3_ DE_DLR, _LL4_2_
+#define _LL4_3_ DE_YEN, _LL4_2_
 #define _LR4_2_ ATT(KC_BSPC), SFT_SPC
-#define _LR4_3_ _LR4_2_, KC_APP
+#define _LR4_3_ _LR4_2_, DE_DLR
 //
 #define _LOWER_3x5_ _LL1_5_, _LR1_5_, _LL2_5_, _LR2_5_, _LL3_5_, _LR3_5_
 #define _LOWER_3x6_ _LL1_6_, _LR1_6_, _LL2_6_, _LR2_6_, _LL3_6_, _LR3_6_
