@@ -65,6 +65,9 @@ enum userspace_custom_keycodes {
 /* AS_START, AS_END, // Dummy key codes for combo definitions */
 #endif // ASETNIOP_ENABLE
     DE_RSQU,
+#ifdef MOUSEKEY_ENABLE
+    MS_CSB1,
+#endif // MOUSEKEY_ENABLE
 #ifdef ENCODER_ENABLE
     // Encoder button(s)
     BS_ENC0,
@@ -312,24 +315,13 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _SYMBL_3x6_ _SL1_6_, _SR1_6_, _SL2_6_, _SR2_6_, _SL3_6_, _SR3_6_
 
 #ifdef MOUSEKEY_ENABLE
-#    define MS_GSB1 S(G(KC_BTN1))
-#    define MS_CSB1 S(C(KC_BTN1))
-/* Pointer layer
- (ALT)│vMv│<M<│Ms↑│>M>│             │GSC│CSC│   │   │(ALT)
- ───── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ─────
- (C/E)│Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│Sft│Ctl│Alt│Gui│(CTL)
- ───── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ─────
- (GUI)│Tb←│Cut│Cpy│Pst│^M^       Slo│Med│Fst│AGr│Tb→│(GUI)
-                 ───┌───┬───┐ ┌───┬───┐───
-                 GSC│Bt1│Bt2│ │Gui│Bt3│CSC
-                 ───└───┴───┘ └───┴───┘───
- * */
+/* Pointer layer */
 #    define _PL1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX
 #    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
 #    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, KC_WH_U
-#    define _PR1_5_ XXXXXXX, MS_GSB1, MS_CSB1, XXXXXXX, XXXXXXX
+#    define _PR1_5_ XXXXXXX, XXXXXXX, MS_CSB1, OSM_AGR, XXXXXXX
 #    define _PR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
-#    define _PR3_5_ KC_ACL0, KC_ACL1, KC_ACL2, KC_RALT, C___TAB
+#    define _PR3_5_ XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, C___TAB
 //
 #    define _PL1_6_ _ADD_L_1_, _PL1_5_
 #    define _PL2_6_ _ADD_L_2_, _PL2_5_
@@ -340,24 +332,14 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 //
 #    define _PL4_2_ KC_BTN1, KC_BTN2
 #    define _PL4_3_ MS_GSB1, _PL4_2_
-#    define _PR4_2_ KC_LGUI, KC_BTN3
+#    define _PR4_2_ KC_BTN3, KC_BTN1
 #    define _PR4_3_ _PR4_2_, MS_CSB1
 //
 #    define _POINT_3x5_ _PL1_5_, _PR1_5_, _PL2_5_, _PR2_5_, _PL3_5_, _PR3_5_
 #    define _POINT_3x6_ _PL1_6_, _PR1_6_, _PL2_6_, _PR2_6_, _PL3_6_, _PR3_6_
 #endif // MOUSEKEY_ENABLE
 
-/* Lower: Numbers and function keys
- * F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ -
- * ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
- * F5 │F6 │F7 │F8 │ €         + │ 4 │ 5 │ 6 │ .
- * ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
- * F9 │F10│F11│F12│ ¢         0 │ 1 │ 2 │ 3 │ ,
- *          ┌───┬───┬───┐ ┌───┬───┬───┐
- *          │ $ │Sft│(v)│ │Bsp│Spc│App│
- *          └───┴───┴───┘ └ATT┴───┴───┘
- *            *                     *
- */
+/* Lower: Numbers and function keys */
 #define _LL1_5_ KC_F1, KC_F2, KC_F3, KC_F4, DE_PND
 #define _LL2_5_ KC_F5, KC_F6, KC_F7, KC_F8, DE_EURO
 #define _LL3_5_ KC_F9, KC_F10, KC_F11, KC_F12, DE_CENT
@@ -384,9 +366,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _RL1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_INS
 #define _RL2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
 #define _RL3_5_ KC_ESC, KC_CUT, KC_COPY, KC_PSTE, KC_PGDN
-#define _RR1_5_ KC_MPRV, KC_MSTP, KC_MPLY, KC_MNXT, KC_EJCT
+#define _RR1_5_ KC_MPRV, KC_MSTP, KC_MPLY, OSM_AGR, KC_MNXT
 #define _RR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
-#define _RR3_5_ KC_PSCR, CW_TOGG, KC_PAUS, OSM_AGR, KC_SCRL
+#define _RR3_5_ KC_PSCR, CW_TOGG, KC_PAUS, KC_EJCT, KC_SCRL
 //
 #define _RL1_6_ _ADD_L_1_, _RL1_5_
 #define _RL2_6_ _ADD_L_2_, _RL2_5_

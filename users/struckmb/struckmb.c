@@ -31,30 +31,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             switch (keycode) {
                 case DE_RSQU: // '
                     if (record->event.pressed) {
-                        register_code16(DE_QUOT);
-                    } else {
-                        unregister_code16(DE_QUOT);
+                        tap_code16(S(DE_HASH));
                     }
                     return false;
                 case KC_CUT:
                     if (record->event.pressed) {
-                        register_code16(G(KC_X));
-                    } else {
-                        unregister_code16(G(KC_X));
+                        tap_code16(G(KC_X));
                     }
                     return false;
                 case KC_COPY:
                     if (record->event.pressed) {
-                        register_code16(G(KC_C));
-                    } else {
-                        unregister_code16(G(KC_C));
+                        tap_code16(G(KC_C));
                     }
                     return false;
                 case KC_PSTE:
                     if (record->event.pressed) {
-                        register_code16(G(KC_V));
-                    } else {
-                        unregister_code16(G(KC_V));
+                        tap_code16(G(KC_V));
                     }
                     return false;
                 case KC_BRIU:
@@ -71,6 +63,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         unregister_code16(KC_BRMD);
                     }
                     return false;
+#ifdef MOUSEKEY_ENABLE
+                case MS_CSB1:
+                    if (record->event.pressed) {
+                        tap_code16(S(G(KC_BTN1)));
+                    }
+                    return false;
+#endif // MOUSEKEY_ENABLE
             }
             break;
 
@@ -282,25 +281,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     return false;
                 case KC_CUT:
                     if (record->event.pressed) {
-                        register_code16(S(KC_DEL));
-                    } else {
-                        unregister_code16(S(KC_DEL));
+                        tap_code16(S(KC_DEL));
                     }
                     return false;
                 case KC_COPY:
                     if (record->event.pressed) {
-                        register_code16(C(KC_INS));
-                    } else {
-                        unregister_code16(C(KC_INS));
+                        tap_code16(C(KC_INS));
                     }
                     return false;
                 case KC_PSTE:
                     if (record->event.pressed) {
-                        register_code16(S(KC_INS));
-                    } else {
-                        unregister_code16(S(KC_INS));
+                        tap_code16(S(KC_INS));
                     }
                     return false;
+#ifdef MOUSEKEY_ENABLE
+                case MS_CSB1:
+                    if (record->event.pressed) {
+                        tap_code16(S(C(KC_BTN1)));
+                    }
+                    return false;
+#endif // MOUSEKEY_ENABLE
             }
             break;
 
