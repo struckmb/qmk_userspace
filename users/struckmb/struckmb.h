@@ -187,7 +187,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _ADD_R_3_ KC_RGUI
 // thumbs
 #define _0L4_2_ SFT_ENT, LOW_TAB
-#define _0L4_3_ KC_ESC, _0L4_2_
+#define _0L4_3_ QK_REP, _0L4_2_
 #define _0R4_2_ RSE_BSP, SFT_SPC
 #define _0R4_3_ _0R4_2_, KC_DEL
 
@@ -371,7 +371,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _LOWER_3x6_ _LL1_6_, _LR1_6_, _LL2_6_, _LR2_6_, _LL3_6_, _LR3_6_
 
 /* Raise: Control + Navigation layer */
-#define _RL1_5_ KC_ESC, KC_BSPC, KC_UP, KC_DEL, KC_PGUP
+#define _RL1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_ESC
 #define _RL2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
 #define _RL3_5_ KC_INS, KC_CUT, KC_COPY, KC_PSTE, KC_PGDN
 #define _RR1_5_ KC_MPRV, KC_MSTP, KC_MPLY, OSM_AGR, KC_MNXT

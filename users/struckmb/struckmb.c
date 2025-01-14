@@ -325,6 +325,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         true;
 }
 
+#ifdef QUICK_TAP_TERM
+#    ifdef QUICK_TAP_TERM_PER_KEY
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case RSFT_T(KC_SPC):
+            return 0; // no repeat. Was: QUICK_TAP_TERM - 20
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+#    endif // QUICK_TAP_TERM_PER_KEY
+#endif     // QUICK_TAP_TERM
+
 #ifdef CAPS_WORD_ENABLE
 bool caps_word_press_user(uint16_t keycode) {
     // adapt caps word to german layout

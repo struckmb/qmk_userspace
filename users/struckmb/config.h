@@ -32,6 +32,7 @@
 // Tap-hold settings
 #    define TAPPING_TERM 300
 #    define QUICK_TAP_TERM 175
+#    define QUICK_TAP_TERM_PER_KEY
 #    define PERMISSIVE_HOLD
 #    define TAP_CODE_DELAY 20
 #    define TAPPING_FORCE_HOLD
