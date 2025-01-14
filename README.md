@@ -11,7 +11,7 @@ First and last column keys on base layers for 6x3 keyboards,
 ```
      ⌥/⌫│                                       │⌥/(X)
      ───┼─                                     ─┼─────
-     ⌃/⎋│           (...other keys...)          │⌃/(X)
+     Σ/⎋│           (...other keys...)          │Σ/(X)
      ───┼─                                     ─┼─────
      ⌘/▤│                                       │⌘/ ↵
 ```
@@ -29,7 +29,7 @@ All base layers share the same thumb cluster:
       q │ w │ e │ r │ t         z │ u │ i │ o │ p │(ü)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       a │ s │ d │ f │ g         h │ j │ k │ l │ ö │(ä)
-     ─Σ─┼───┼───┼───┼───       ───┼───┼───┼───┼─Σ─ ───
+     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
       y │ x │ c │ v │ b         n │ m │ , │ . │ ß │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -39,7 +39,7 @@ All base layers share the same thumb cluster:
       j │ d │ u │ a │ x         p │ h │ l │ m │ w │(ß)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       c │ t │ i │ e │ o         b │ n │ r │ s │ g │(q)
-     ─Σ─┼───┼───┼───┼───       ───┼───┼───┼───┼─Σ─ ───
+     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
       f │ v │ ü │ ä │ ö         y │ z │ , │ . │ k │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -49,7 +49,7 @@ All base layers share the same thumb cluster:
       q │ w │ f │ p │ b         j │ l │ u │ y │ ö │(ü)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       a │ r │ s │ t │ g         m │ n │ e │ i │ o │(ä)
-     ─Σ─┼───┼───┼───┼───       ───┼───┼───┼───┼─Σ─ ───
+     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
       z │ x │ c │ d │ v         k │ h │ , │ . │ ß │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -89,11 +89,11 @@ All base layers share the same thumb cluster:
 ## Raise (Navigation and control keys)
 (the home row modifiers on the right are sticky)
 ```
- (⌥)│PUp│BSp│ ↑ │Del│Ins       Prv│Stp│Ply│AGr│Nxt│(⌥)
+ (⌥)│Esc│BSp│ ↑ │Del│PUp       Prv│Stp│Ply│AGr│Nxt│(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
  (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│Sft│ ⌃ │ ⌥ │ ⌘ │(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Esc│Cut│Cpy│Pst│PDn       PSc│CWT│Pse│Ejt│SLk│(⌘)
+ (⌘)│Ins│Cut│Cpy│Pst│PDn       PSc│CWT│Pse│Ejt│SLk│(⌘)
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─⇧─┴ATT┘ └───┴─⇧─┘───
@@ -114,7 +114,7 @@ All base layers share the same thumb cluster:
 
 ## Attic (Adjustments and missing stuff)
 ```
-    │QBt│ECl│LAs│LAr│APP        ¡ │ ‹ │ « │ » │ › │(§)
+    │QBt│ECl│LAs│LAr│APP        ¡ │ ‹ │ « │ » │ › │QBt
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │LyG│Ly←│Ly→│BsL│MDX        ¿ │ • │ ‚ │ ‘ │ ’ │(…)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
@@ -122,4 +122,15 @@ All base layers share the same thumb cluster:
                ───┌───┬───┐ ┌───┬───┐───
                LSf│Br-│(v)│ │(v)│Br+│RSf
                ───└─⇧─┴───┘ └───┴─⇧─┘───
-```
+``
+# Portfolio
+Currently my board contains the following beauties:
+1. Redox (03/2021) (ready assembled)
+1. Kyria rev.2 (05/2021)
+1. dracuLad w/ Pimorini (08/2022)
+1. Iris rev.6 (08/2022)
+1. Paintbrush (10/2022)
+1. [never worked: Aurora sweep (wireless) (03/2023)]
+1. Cantor (11/2023)
+1. Corne (wireless) (01/2025)
+

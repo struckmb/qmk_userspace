@@ -163,17 +163,19 @@ void symL_reset(tap_dance_state_t *state, void *user_data);
 void symR_finished(tap_dance_state_t *state, void *user_data);
 void symR_reset(tap_dance_state_t *state, void *user_data);
 #endif // TAP_DANCE_ENABLE
+#define HRML(k1, k2, k3) LALT_T(k1), LGUI_T(k2), LCTL_T(k3)
+#define HRMR(k1, k2, k3) LCTL_T(k1), LGUI_T(k2), LALT_T(k3)
 
 // /// // /* KEYMAPS */ // /// //
 
 /* first and last column base layer keys for 6x3 keyboards */
 // Base layers
 #define _BASE_L_1_ LALT_T(KC_BSPC)
-#define _BASE_L_2_ LCTL_T(KC_ESC)
+#define _BASE_L_2_ SY_L(KC_ESC)
 #define _BASE_L_3_ LGUI_T(KC_APP)
 // R1 and R2 depend on layout
 #define _BASE_R_1_(kc) LALT_T(kc)
-#define _BASE_R_2_(kc) RCTL_T(kc)
+#define _BASE_R_2_(kc) SY_R(kc)
 #define _BASE_R_3_(kc) RGUI_T(kc)
 // Additional layers
 #define _ADD_L_1_ KC_LALT
@@ -195,18 +197,20 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef QWERTY_ENABLE
 /* QWERTY layout */
+#    define __HRM__QL2_4_ HRML(DE_S, DE_D, DE_F), DE_G
+#    define _HRM_QR2_4_ DE_H, HRMR(DE_J, DE_K, DE_L)
 #    define _QL1_5_ DE_Q, DE_W, DE_E, DE_R, DE_T
-#    define _QL2_5_ SY_L(DE_A), DE_S, DE_D, DE_F, DE_G
+#    define _QL2_5_ SY_L(DE_A), __HRM__QL2_4_
 #    define _QL3_5_ MS(DE_Y), DE_X, DE_C, DE_V, DE_B
 #    define _QR1_5_ DE_Z, DE_U, DE_I, DE_O, DE_P
-#    define _QR2_5_ DE_H, DE_J, DE_K, DE_L, SY_R(DE_ODIA)
+#    define _QR2_5_ _HRM_QR2_4_, SY_R(DE_ODIA)
 #    define _QR3_5_ DE_N, DE_M, DE_COMM, DE_DOT, MS(DE_SS)
 //
 #    define _QL1_6_ _BASE_L_1_, _QL1_5_
-#    define _QL2_6_ _BASE_L_2_, _QL2_5_
+#    define _QL2_6_ _BASE_L_2_, DE_A, __HRM__QL2_4_
 #    define _QL3_6_ _BASE_L_3_, _QL3_5_
 #    define _QR1_6_ _QR1_5_, _BASE_R_1_(DE_UDIA)
-#    define _QR2_6_ _QR2_5_, _BASE_R_2_(DE_ADIA)
+#    define _QR2_6_ _HRM_QR2_4_, DE_ODIA, _BASE_R_2_(DE_ADIA)
 #    define _QR3_6_ _QR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _QWERTY_3x5_ _QL1_5_, _QR1_5_, _QL2_5_, _QR2_5_, _QL3_5_, _QR3_5_
@@ -215,18 +219,20 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef BONE_ENABLE
 /* BONE layout */
+#    define __HRM__BL2_4_ HRML(DE_T, DE_I, DE_E), DE_O
+#    define __HRM__BR2_4_ DE_B, HRMR(DE_N, DE_R, DE_S)
 #    define _BL1_5_ DE_J, DE_D, DE_U, DE_A, DE_X
-#    define _BL2_5_ SY_L(DE_C), DE_T, DE_I, DE_E, DE_O
+#    define _BL2_5_ SY_L(DE_C), __HRM__BL2_4_
 #    define _BL3_5_ MS(DE_F), DE_V, DE_UDIA, DE_ADIA, DE_ODIA
 #    define _BR1_5_ DE_P, DE_H, DE_L, DE_M, DE_W
-#    define _BR2_5_ DE_B, DE_N, DE_R, DE_S, SY_R(DE_G)
+#    define _BR2_5_ __HRM__BR2_4_, SY_R(DE_G)
 #    define _BR3_5_ DE_Y, DE_Z, DE_COMM, DE_DOT, MS(DE_K)
 //
 #    define _BL1_6_ _BASE_L_1_, _BL1_5_
-#    define _BL2_6_ _BASE_L_2_, _BL2_5_
+#    define _BL2_6_ _BASE_L_2_, DE_C, __HRM__BL2_4_
 #    define _BL3_6_ _BASE_L_3_, _BL3_5_
 #    define _BR1_6_ _BR1_5_, _BASE_R_1_(DE_SS)
-#    define _BR2_6_ _BR2_5_, _BASE_R_2_(DE_Q)
+#    define _BR2_6_ __HRM__BR2_4_, DE_G, _BASE_R_2_(DE_Q)
 #    define _BR3_6_ _BR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _BONE_3x5_ _BL1_5_, _BR1_5_, _BL2_5_, _BR2_5_, _BL3_5_, _BR3_5_
@@ -235,18 +241,20 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef COLEMAK_DH_ENABLE
 /* Colemak Mod-DH layout (german adaption) */
+#    define __HRM__CL2_4_ HRML(DE_R, DE_S, DE_T), DE_G
+#    define __HRM__CR2_4_ DE_M, HRMR(DE_N, DE_E, DE_I)
 #    define _CL1_5_ DE_Q, DE_W, DE_F, DE_P, DE_B
-#    define _CL2_5_ SY_L(DE_A), DE_R, DE_S, DE_T, DE_G
+#    define _CL2_5_ SY_L(DE_A), __HRM__CL2_4_
 #    define _CL3_5_ MS(DE_Z), DE_X, DE_C, DE_D, DE_V
 #    define _CR1_5_ DE_J, DE_L, DE_U, DE_Y, DE_ODIA
-#    define _CR2_5_ DE_M, DE_N, DE_E, DE_I, SY_R(DE_O)
+#    define _CR2_5_ __HRM__CR2_4_, SY_R(DE_O)
 #    define _CR3_5_ DE_K, DE_H, DE_COMM, DE_DOT, MS(DE_SS)
 //
 #    define _CL1_6_ _BASE_L_1_, _CL1_5_
-#    define _CL2_6_ _BASE_L_2_, _CL2_5_
+#    define _CL2_6_ _BASE_L_2_, DE_A, __HRM__CL2_4_
 #    define _CL3_6_ _BASE_L_3_, _CL3_5_
 #    define _CR1_6_ _BR1_5_, _BASE_R_1_(DE_SS)
-#    define _CR2_6_ _BR2_5_, _BASE_R_2_(DE_Q)
+#    define _CR2_6_ __HRM__CR2_4_, DE_Q, SY_R(DE_O)
 #    define _CR3_6_ _BR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _COLEMAK_DH_3x5_ _CL1_5_, _CR1_5_, _CL2_5_, _CR2_5_, _CL3_5_, _CR3_5_
@@ -319,8 +327,8 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _PL1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX
 #    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
 #    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, KC_WH_U
-#    define _PR1_5_ XXXXXXX, XXXXXXX, MS_CSB1, OSM_AGR, XXXXXXX
-#    define _PR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
+#    define _PR1_5_ XXXXXXX, OSM_SFT, MS_CSB1, OSM_AGR, XXXXXXX
+#    define _PR2_5_ OSM_MEH, OSM_CTL, OSM_GUI, OSM_ALT, XXXXXXX
 #    define _PR3_5_ XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, C___TAB
 //
 #    define _PL1_6_ _ADD_L_1_, _PL1_5_
@@ -363,9 +371,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _LOWER_3x6_ _LL1_6_, _LR1_6_, _LL2_6_, _LR2_6_, _LL3_6_, _LR3_6_
 
 /* Raise: Control + Navigation layer */
-#define _RL1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_INS
+#define _RL1_5_ KC_ESC, KC_BSPC, KC_UP, KC_DEL, KC_PGUP
 #define _RL2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
-#define _RL3_5_ KC_ESC, KC_CUT, KC_COPY, KC_PSTE, KC_PGDN
+#define _RL3_5_ KC_INS, KC_CUT, KC_COPY, KC_PSTE, KC_PGDN
 #define _RR1_5_ KC_MPRV, KC_MSTP, KC_MPLY, OSM_AGR, KC_MNXT
 #define _RR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
 #define _RR3_5_ KC_PSCR, CW_TOGG, KC_PAUS, KC_EJCT, KC_SCRL

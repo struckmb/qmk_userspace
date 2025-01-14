@@ -30,9 +30,10 @@
 #    endif // DYNAMIC_TAPPING_TERM_ENABLE
 #else
 // Tap-hold settings
-#    define TAPPING_TERM 170
-#    define TAP_CODE_DELAY 20
+#    define TAPPING_TERM 300
+#    define QUICK_TAP_TERM 175
 #    define PERMISSIVE_HOLD
+#    define TAP_CODE_DELAY 20
 #    define TAPPING_FORCE_HOLD
 #    define ONESHOT_TAP_TOGGLE 3
 #endif // TAP_DANCE_ENABLED
