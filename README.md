@@ -89,7 +89,7 @@ All base layers share the same thumb cluster:
 ## Raise (Navigation and control keys)
 (the home row modifiers on the right are sticky)
 ```
- (⌥)│Esc│BSp│ ↑ │Del│PUp       Prv│Stp│Ply│AGr│Nxt│(⌥)
+ (⌥)│PUp│BSp│ ↑ │Del│Esc       Prv│Stp│Ply│AGr│Nxt│(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
  (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│Sft│ ⌃ │ ⌥ │ ⌘ │(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
