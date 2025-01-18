@@ -294,7 +294,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #endif // GAME_ENABLE
 
 /* Symbols layer */
-#define _SL1_5_ DE_AT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
+#define _SL1_5_ DE_AT,   DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
 #define _SL2_5_ DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR
 #define _SL3_5_ DE_HASH, DE_DLR, DE_PIPE, DE_TILD, DE_ACUT
 #define _SR1_5_ DE_EXLM, DE_LABK, DE_RABK, DE_EQL, DE_AMPR
@@ -305,7 +305,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _SL2_6_ _ADD_L_2_, _SL2_5_
 #define _SL3_6_ _ADD_L_3_, _SL3_5_
 #define _SR1_6_ _SR1_5_, _ADD_R_1_
-#define _SR2_6_ _SR2_5_, _ADD_R_2_
+#define _SR2_6_ _SR2_5_, DE_SECT
 #define _SR3_6_ _SR3_5_, _ADD_R_3_
 //
 #ifdef DYNAMIC_TAPPING_TERM_ENABLE
@@ -371,12 +371,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _LOWER_3x6_ _LL1_6_, _LR1_6_, _LL2_6_, _LR2_6_, _LL3_6_, _LR3_6_
 
 /* Raise: Control + Navigation layer */
-#define _RL1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_ESC
+#define _RL1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_PGDN
 #define _RL2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
-#define _RL3_5_ KC_INS, KC_CUT, KC_COPY, KC_PSTE, KC_PGDN
-#define _RR1_5_ KC_MPRV, KC_MSTP, KC_MPLY, OSM_AGR, KC_MNXT
-#define _RR2_5_ OSM_MEH, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI
-#define _RR3_5_ KC_PSCR, CW_TOGG, KC_PAUS, KC_EJCT, KC_SCRL
+#define _RL3_5_ KC_UNDO, KC_CUT, KC_COPY, KC_PSTE, KC_AGAIN
+#define _RR1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
+#define _RR2_5_ OSM_MEH, OSM_CTL, OSM_GUI, OSM_ALT, OSM_SFT
+#define _RR3_5_ KC_PSCR, KC_NO, KC_INSERT, OSM_AGR, CW_TOGG
 //
 #define _RL1_6_ _ADD_L_1_, _RL1_5_
 #define _RL2_6_ _ADD_L_2_, _RL2_5_
@@ -401,12 +401,12 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _AR2_5_ DE_IQUE, DE_MDDT, DE_SLQU, DE_LSQU, DE_RSQU
 #define _AR3_5_ DE_NDSH, DE_MDSH, DE_DLQU, DE_LDQU, DE_RDQU
 //
-#define _AL1_6_ KC_NO, _AL1_5_
+#define _AL1_6_ QK_BOOT, _AL1_5_
 #define _AL2_6_ KC_NO, _AL2_5_
-#define _AL3_6_ KC_NO, _AL3_5_
-#define _AR1_6_ _AR1_5_, DE_SECT
+#define _AL3_6_ EE_CLR, _AL3_5_
+#define _AR1_6_ _AR1_5_, QK_BOOT
 #define _AR2_6_ _AR2_5_, DE_ELLP
-#define _AR3_6_ _AR3_5_, KC_NO
+#define _AR3_6_ _AR3_5_, EE_CLR
 //
 #define _AL4_2_ LSFT_T(KC_BRID), KC_TRNS
 #define _AL4_3_ KC_LSFT, _AL4_2_

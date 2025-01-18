@@ -338,6 +338,21 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 #    endif // QUICK_TAP_TERM_PER_KEY
 #endif     // QUICK_TAP_TERM
 
+#ifdef HOLD_ON_OTHER_KEY_PRESS
+#    ifdef HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case RSFT_T(KC_SPC):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
+#    endif // HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+#endif     // HOLD_ON_OTHER_KEY_PRESS
+
 #ifdef CAPS_WORD_ENABLE
 bool caps_word_press_user(uint16_t keycode) {
     // adapt caps word to german layout
