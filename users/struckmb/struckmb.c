@@ -329,8 +329,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #    ifdef QUICK_TAP_TERM_PER_KEY
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case RSFT_T(KC_SPC):
-            return 0; // no repeat. Was: QUICK_TAP_TERM - 20
+        case SFT_SPC:
+            return 0; // no repeat
         default:
             return QUICK_TAP_TERM;
     }
@@ -342,7 +342,7 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
 #    ifdef HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case RSFT_T(KC_SPC):
+        case SFT_ENT:
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
