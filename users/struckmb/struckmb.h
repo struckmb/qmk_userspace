@@ -294,7 +294,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #endif // GAME_ENABLE
 
 /* Symbols layer */
-#define _SL1_5_ DE_AT,   DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
+#define _SL1_5_ DE_AT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
 #define _SL2_5_ DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR
 #define _SL3_5_ DE_HASH, DE_DLR, DE_PIPE, DE_TILD, DE_ACUT
 #define _SR1_5_ DE_EXLM, DE_LABK, DE_RABK, DE_EQL, DE_AMPR
@@ -321,31 +321,6 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 //
 #define _SYMBL_3x5_ _SL1_5_, _SR1_5_, _SL2_5_, _SR2_5_, _SL3_5_, _SR3_5_
 #define _SYMBL_3x6_ _SL1_6_, _SR1_6_, _SL2_6_, _SR2_6_, _SL3_6_, _SR3_6_
-
-#ifdef MOUSEKEY_ENABLE
-/* Pointer layer */
-#    define _PL1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX
-#    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
-#    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, KC_WH_U
-#    define _PR1_5_ XXXXXXX, OSM_SFT, MS_CSB1, OSM_AGR, XXXXXXX
-#    define _PR2_5_ OSM_MEH, OSM_CTL, OSM_GUI, OSM_ALT, XXXXXXX
-#    define _PR3_5_ XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, C___TAB
-//
-#    define _PL1_6_ _ADD_L_1_, _PL1_5_
-#    define _PL2_6_ _ADD_L_2_, _PL2_5_
-#    define _PL3_6_ _ADD_L_3_, _PL3_5_
-#    define _PR1_6_ _PR1_5_, _ADD_R_1_
-#    define _PR2_6_ _PR2_5_, _ADD_R_2_
-#    define _PR3_6_ _PR3_5_, _ADD_R_3_
-//
-#    define _PL4_2_ KC_BTN1, KC_BTN2
-#    define _PL4_3_ MS_CSB1, _PL4_2_
-#    define _PR4_2_ KC_BTN3, KC_BTN1
-#    define _PR4_3_ _PR4_2_, MS_CSB1
-//
-#    define _POINT_3x5_ _PL1_5_, _PR1_5_, _PL2_5_, _PR2_5_, _PL3_5_, _PR3_5_
-#    define _POINT_3x6_ _PL1_6_, _PR1_6_, _PL2_6_, _PR2_6_, _PL3_6_, _PR3_6_
-#endif // MOUSEKEY_ENABLE
 
 /* Lower: Numbers and function keys */
 #define _LL1_5_ KC_F1, KC_F2, KC_F3, KC_F4, DE_PND
@@ -392,6 +367,31 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 //
 #define _RAISE_3x5_ _RL1_5_, _RR1_5_, _RL2_5_, _RR2_5_, _RL3_5_, _RR3_5_
 #define _RAISE_3x6_ _RL1_6_, _RR1_6_, _RL2_6_, _RR2_6_, _RL3_6_, _RR3_6_
+
+#ifdef MOUSEKEY_ENABLE
+/* Pointer layer */
+#    define _PL1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, KC_WH_U
+#    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
+#    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, MS_CSB1
+#    define _PR1_5_ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#    define _PR2_5_ OSM_MEH, OSM_CTL, OSM_GUI, OSM_ALT, OSM_SFT
+#    define _PR3_5_ KC_ACL0, KC_ACL1, KC_ACL2, OSM_AGR, C___TAB
+//
+#    define _PL1_6_ _ADD_L_1_, _PL1_5_
+#    define _PL2_6_ _ADD_L_2_, _PL2_5_
+#    define _PL3_6_ _ADD_L_3_, _PL3_5_
+#    define _PR1_6_ _PR1_5_, _ADD_R_1_
+#    define _PR2_6_ _PR2_5_, _ADD_R_2_
+#    define _PR3_6_ _PR3_5_, _ADD_R_3_
+//
+#    define _PL4_2_ KC_BTN1, KC_BTN2
+#    define _PL4_3_ MS_CSB1, _PL4_2_
+#    define _PR4_2_ KC_BTN3, KC_BTN1
+#    define _PR4_3_ _PR4_2_, MS_CSB1
+//
+#    define _POINT_3x5_ _PL1_5_, _PR1_5_, _PL2_5_, _PR2_5_, _PL3_5_, _PR3_5_
+#    define _POINT_3x6_ _PL1_6_, _PR1_6_, _PL2_6_, _PR2_6_, _PL3_6_, _PR3_6_
+#endif // MOUSEKEY_ENABLE
 
 /* Attic: Adjustments and missing stuff */
 #define _AL1_5_ QK_BOOT, EE_CLR, DL_ASET, DL_ARTS, KC_APP

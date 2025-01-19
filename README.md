@@ -89,11 +89,11 @@ All base layers share the same thumb cluster:
 ## Raise (Navigation and control keys)
 (the home row modifiers on the right are sticky)
 ```
- (⌥)│PUp│BSp│ ↑ │Del│Esc       Prv│Stp│Ply│AGr│Nxt│(⌥)
+ (⌥)│PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│Sft│ ⌃ │ ⌥ │ ⌘ │(⌃)
+ (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│ ⌃ │ ⌘ │ ⌥ │Sft│(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Ins│Cut│Cpy│Pst│PDn       PSc│CWT│Pse│Ejt│SLk│(⌘)
+ (⌘)│Udo│Cut│Cpy│Pst│Rdo       PSc│   │Ins│AGr│CWT│(⌘)
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─⇧─┴ATT┘ └───┴─⇧─┘───
@@ -102,11 +102,11 @@ All base layers share the same thumb cluster:
 ## Pointer (Mouse, only if enabled)
 * CSC: CTL(/GUI)+Shift+Click
 ```
- (⌥)│vMv│<M<│Ms↑│>M>│             │   │CSC│AGr│   │(⌥)
+ (⌥)│vMv│<M<│Ms↑│>M>│^M^          │   │   │   │   │(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
  (⌃)│Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│Sft│ ⌃ │ ⌥ │ ⌘ │(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Tb←│Cut│Cpy│Pst│^M^          │Slo│Med│Fst│Tb→│(⌘)
+ (⌘)│Tb←│Cut│Cpy│Pst│CSC       Slo│Med│Fst│AGr│Tb→│(⌘)
                ───┌───┬───┐ ┌───┬───┐───
                CSC│Bt1│Bt2│ │Bt3│Bt1│CSC
                ───└───┴───┘ └───┴─⇧─┘───
