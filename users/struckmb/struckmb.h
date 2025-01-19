@@ -45,6 +45,7 @@ enum userspace_layers {
     LAYER_POINTER,
 #endif // MOUSEKEY_ENABLE
     LAYER_ATTIC,
+    LAYER_X
 };
 
 // Custom macro keycode ranges
@@ -68,11 +69,11 @@ enum userspace_custom_keycodes {
 #ifdef MOUSEKEY_ENABLE
     MS_CSB1,
 #endif // MOUSEKEY_ENABLE
-#ifdef ENCODER_ENABLE
+#ifdef X__ENCODER_ENABLE
     // Encoder button(s)
     BS_ENC0,
     BS_ENC1,
-#endif // ENCODER_ENABLE
+#endif // X__ENCODER_ENABLE
        // use for keymap specific codes
     KEYMAP_SAFE_RANGE
 };
@@ -126,6 +127,7 @@ enum userspace_custom_keycodes {
 #else
 #    define MS(kc) kc
 #endif
+#define LX(kc) LT(LAYER_X, kc)
 
 // one shot modifier shortcuts
 #define OSM_ALT OSM(MOD_LALT)
@@ -187,9 +189,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _ADD_R_3_ KC_RGUI
 // thumbs
 #define _0L4_2_ SFT_ENT, LOW_TAB
-#define _0L4_3_ QK_REP, _0L4_2_
+#define _0L4_3_ KC_ESC, _0L4_2_
 #define _0R4_2_ RSE_BSP, SFT_SPC
-#define _0R4_3_ _0R4_2_, KC_DEL
+#define _0R4_3_ _0R4_2_, QK_REP
 
 /* THUMBS for base layers */
 #define _THUMBS_3_2_ _0L4_3_, _0R4_2_
@@ -197,24 +199,32 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef QWERTY_ENABLE
 /* QWERTY layout */
+#    define __QL1_1_ DE_Q
+#    define __QL1_4_ DE_W, DE_E, DE_R, DE_T
+#    define __QR1_4_ DE_Z, DE_U, DE_I, DE_O
+#    define __QR1_1_ DE_P
+#    define __QL2_1_ DE_A
 #    define __HRM__QL2_4_ HRML(DE_S, DE_D, DE_F), DE_G
 #    define _HRM_QR2_4_ DE_H, HRMR(DE_J, DE_K, DE_L)
-#    define _QL1_5_ DE_Q, DE_W, DE_E, DE_R, DE_T
-#    define _QL2_5_ SY_L(DE_A), __HRM__QL2_4_
+#    define __QR2_1_ DE_ODIA
+
+#    define _QL1_5_ LX(__QL1_1_), __QL1_4_
+#    define _QL2_5_ SY_L(__QL2_1_), __HRM__QL2_4_
 #    define _QL3_5_ MS(DE_Y), DE_X, DE_C, DE_V, DE_B
-#    define _QR1_5_ DE_Z, DE_U, DE_I, DE_O, DE_P
-#    define _QR2_5_ _HRM_QR2_4_, SY_R(DE_ODIA)
+#    define _QR1_5_ __QR1_4_, __QR1_1_
+#    define _QR2_5_ _HRM_QR2_4_, SY_R(__QR2_1_)
 #    define _QR3_5_ DE_N, DE_M, DE_COMM, DE_DOT, MS(DE_SS)
 //
-#    define _QL1_6_ _BASE_L_1_, _QL1_5_
-#    define _QL2_6_ _BASE_L_2_, DE_A, __HRM__QL2_4_
+#    define _QL1_6_ _BASE_L_1_, __QL1_1_, __QL1_4_
+#    define _QL2_6_ _BASE_L_2_, __QL2_1_, __HRM__QL2_4_
 #    define _QL3_6_ _BASE_L_3_, _QL3_5_
 #    define _QR1_6_ _QR1_5_, _BASE_R_1_(DE_UDIA)
-#    define _QR2_6_ _HRM_QR2_4_, DE_ODIA, _BASE_R_2_(DE_ADIA)
+#    define _QR2_6_ _HRM_QR2_4_, __QR2_1_, _BASE_R_2_(DE_ADIA)
 #    define _QR3_6_ _QR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _QWERTY_3x5_ _QL1_5_, _QR1_5_, _QL2_5_, _QR2_5_, _QL3_5_, _QR3_5_
 #    define _QWERTY_3x6_ _QL1_6_, _QR1_6_, _QL2_6_, _QR2_6_, _QL3_6_, _QR3_6_
+#    define _QWERTY_L_X_ _QL1_5_, __QR1_4_, DE_UDIA, _QL2_5_, _HRM_QR2_4_, DE_ADIA, _QL3_5_, _QR3_5_
 #endif // QWERTY_ENABLE
 
 #ifdef BONE_ENABLE
