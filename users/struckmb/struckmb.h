@@ -171,11 +171,11 @@ td_state_t cur_dance(tap_dance_state_t *state);
 // `finished` and `reset` functions for each tapdance keycode
 void symL_finished(tap_dance_state_t *state, void *user_data);
 void symL_reset(tap_dance_state_t *state, void *user_data);
-void symR_finished(tap_dance_state_t *state, void *user_data);
+void symR_finished(tap_da1ce_state_t *state, void *user_data);
 void symR_reset(tap_dance_state_t *state, void *user_data);
 #endif // TAP_DANCE_ENABLE
-#define HRML(k1, k2, k3) LALT_T(k1), LGUI_T(k2), LCTL_T(k3)
-#define HRMR(k1, k2, k3) LCTL_T(k1), LGUI_T(k2), LALT_T(k3)
+#define HRML(k1, k2, k3, k4) LGUI_T(k1), LSFT_T(k2), LCTL_T(k3), LALT_T(k4)
+#define HRMR(k1, k2, k3, k4) LALT_T(k1), RCTL_T(k2), RSFT_T(k3), RGUI_T(k4)
 
 // /// // /* KEYMAPS */ // /// //
 
@@ -213,8 +213,8 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define __QR1_4_ DE_Z, DE_U, DE_I, DE_O
 #    define __QR1_1_ DE_P
 #    define __QL2_1_ DE_A
-#    define __HRM__QL2_4_ HRML(DE_S, DE_D, DE_F), DE_G
-#    define _HRM_QR2_4_ DE_H, HRMR(DE_J, DE_K, DE_L)
+#    define __HRM__QL2_4_ HRML(DE_S, DE_D, DE_F, DE_G)
+#    define _HRM_QR2_4_ HRMR(DE_H, DE_J, DE_K, DE_L)
 #    define __QR2_1_ DE_ODIA
 
 #    define _QL1_5_ LX(__QL1_1_), __QL1_4_
@@ -238,8 +238,8 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef BONE_ENABLE
 /* BONE layout */
-#    define __HRM__BL2_4_ HRML(DE_T, DE_I, DE_E), DE_O
-#    define __HRM__BR2_4_ DE_B, HRMR(DE_N, DE_R, DE_S)
+#    define __HRM__BL2_4_ HRML(DE_T, DE_I, DE_E, DE_O)
+#    define __HRM__BR2_4_ HRMR(DE_B, DE_N, DE_R, DE_S)
 #    define _BL1_5_ DE_J, DE_D, DE_U, DE_A, DE_X
 #    define _BL2_5_ SY_L(DE_C), __HRM__BL2_4_
 #    define _BL3_5_ MS(DE_F), DE_V, DE_UDIA, DE_ADIA, DE_ODIA
@@ -260,8 +260,8 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef NOTED_ENABLE
 /* NOTED layout */
-#    define __HRM__NL2_4_ HRML(DE_S, DE_I, DE_E), DE_O
-#    define __HRM__NR2_4_ DE_D, HRMR(DE_T, DE_N, DE_R)
+#    define __HRM__NL2_4_ HRML(DE_S, DE_I, DE_E, DE_O)
+#    define __HRM__NR2_4_ HRMR(DE_D, DE_T, DE_N, DE_R)
 #    define _NL1_5_ DE_Z, DE_Y, DE_U, DE_A, DE_Q
 #    define _NL2_5_ SY_L(DE_C), __HRM__NL2_4_
 #    define _NL3_5_ MS(DE_V), DE_X, DE_UDIA, DE_ADIA, DE_ODIA
@@ -282,8 +282,8 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef COLEMAK_DH_ENABLE
 /* Colemak Mod-DH layout (german adaption) */
-#    define __HRM__CL2_4_ HRML(DE_R, DE_S, DE_T), DE_G
-#    define __HRM__CR2_4_ DE_M, HRMR(DE_N, DE_E, DE_I)
+#    define __HRM__CL2_4_ HRML(DE_R, DE_S, DE_T, DE_G)
+#    define __HRM__CR2_4_ HRMR(DE_M, DE_N, DE_E, DE_I)
 #    define _CL1_5_ DE_Q, DE_W, DE_F, DE_P, DE_B
 #    define _CL2_5_ SY_L(DE_A), __HRM__CL2_4_
 #    define _CL3_5_ MS(DE_Z), DE_X, DE_C, DE_D, DE_V
