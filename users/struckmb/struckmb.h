@@ -3,12 +3,14 @@
 #include "keymap_german_mac_iso.h"
 
 #ifndef QWERTY_ENABLE
-#    ifndef BONE_ENABLE
-#        ifndef COLEMAK_DH_ENABLE
-#            fail // at least one base layer has to be enabled!
-#        endif    // !COLEMAK_DH_ENABLE
-#    endif        // !BONE_ENABLE
-#endif            // !QWERTY_ENABLE
+#  ifndef BONE_ENABLE
+#    ifndef NOTED_ENABLE
+#      ifndef COLEMAK_DH_ENABLE
+#        fail // at least one base layer has to be enabled!
+#      endif // !COLEMAK_DH_ENABLE
+#    endif // !NOTED_ENABLE
+#  endif // !BONE_ENABLE
+#endif // !QWERTY_ENABLE
 
 /// Enumeration of layers
 enum userspace_layers {
@@ -19,6 +21,9 @@ enum userspace_layers {
 #ifdef BONE_ENABLE
     LAYER_BONE,
 #endif /* ifdef BONE_ENABLE */
+#ifdef NOTED_ENABLE
+    LAYER_NOTED,
+#endif /* ifdef NOTED_ENABLE */
 #ifdef COLEMAK_DH_ENABLE
     LAYER_COLEMAK_DH,
 #endif /* ifdef COLEMAK_DH_ENABLE */
@@ -85,6 +90,9 @@ enum userspace_custom_keycodes {
 #ifndef BONE_ENABLE
 #    define LAYER_BONE 0
 #endif // ifndef BONE_ENABLE
+#ifndef NOTED_ENABLE
+#    define LAYER_NOTED 0
+#endif // ifndef NOTED_ENABLE
 #ifndef COLEMAK_DH_ENABLE
 #    define LAYER_COLEMAK_DH 0
 #endif // ifndef COLEMAK_DH_ENABLE
@@ -105,6 +113,7 @@ enum userspace_custom_keycodes {
 // sticky layers (withstands reset):
 #define DL_QWER PDF(LAYER_QWERTY)
 #define DL_BONE PDF(LAYER_BONE)
+#define DL_NOTE PDF(LAYER_NOTED)
 #define DL_CODH PDF(LAYER_COLEMAK_DH)
 // non-sticky layers (return to saved after reset):
 #define DL_GAME DF(LAYER_GAME)
@@ -249,6 +258,28 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _BONE_3x6_ _BL1_6_, _BR1_6_, _BL2_6_, _BR2_6_, _BL3_6_, _BR3_6_
 #endif // BONE_ENABLE
 
+#ifdef NOTED_ENABLE
+/* NOTED layout */
+#    define __HRM__NL2_4_ HRML(DE_S, DE_I, DE_E), DE_O
+#    define __HRM__NR2_4_ DE_D, HRMR(DE_T, DE_N, DE_R)
+#    define _NL1_5_ DE_Z, DE_Y, DE_U, DE_A, DE_Q
+#    define _NL2_5_ SY_L(DE_C), __HRM__NL2_4_
+#    define _NL3_5_ MS(DE_V), DE_X, DE_UDIA, DE_ADIA, DE_ODIA
+#    define _NR1_5_ DE_P, DE_B, DE_M, DE_L, DE_F
+#    define _NR2_5_ __HRM__NR2_4_, SY_R(DE_H)
+#    define _NR3_5_ DE_W, DE_G, DE_COMM, DE_DOT, MS(DE_K)
+//
+#    define _NL1_6_ _BASE_L_1_, _NL1_5_
+#    define _NL2_6_ _BASE_L_2_, DE_C, __HRM__NL2_4_
+#    define _NL3_6_ _BASE_L_3_, _NL3_5_
+#    define _NR1_6_ _NR1_5_, _BASE_R_1_(DE_J)
+#    define _NR2_6_ __HRM__NR2_4_, DE_H, _BASE_R_2_(DE_SS)
+#    define _NR3_6_ _NR3_5_, _BASE_R_3_(KC_ENT)
+//
+#    define _NOTED_3x5_ _NL1_5_, _NR1_5_, _NL2_5_, _NR2_5_, _NL3_5_, _NR3_5_
+#    define _NOTED_3x6_ _NL1_6_, _NR1_6_, _NL2_6_, _NR2_6_, _NL3_6_, _NR3_6_
+#endif // NOTED_ENABLE
+
 #ifdef COLEMAK_DH_ENABLE
 /* Colemak Mod-DH layout (german adaption) */
 #    define __HRM__CL2_4_ HRML(DE_R, DE_S, DE_T), DE_G
@@ -263,9 +294,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _CL1_6_ _BASE_L_1_, _CL1_5_
 #    define _CL2_6_ _BASE_L_2_, DE_A, __HRM__CL2_4_
 #    define _CL3_6_ _BASE_L_3_, _CL3_5_
-#    define _CR1_6_ _BR1_5_, _BASE_R_1_(DE_SS)
+#    define _CR1_6_ _CR1_5_, _BASE_R_1_(DE_SS)
 #    define _CR2_6_ __HRM__CR2_4_, DE_Q, SY_R(DE_O)
-#    define _CR3_6_ _BR3_5_, _BASE_R_3_(KC_ENT)
+#    define _CR3_6_ _CR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _COLEMAK_DH_3x5_ _CL1_5_, _CR1_5_, _CL2_5_, _CR2_5_, _CL3_5_, _CR3_5_
 #    define _COLEMAK_DH_3x6_ _CL1_6_, _CR1_6_, _CL2_6_, _CR2_6_, _CL3_6_, _CR3_6_

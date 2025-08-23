@@ -3,6 +3,7 @@
 // // select at least on of these base layers
 // #define QWERTY_ENABLE
 // #define BONE_ENABLE
+// #define NOTED_ENABLE
 // #define COLEMAK_DH_ENABLE
 
 // // some additionl layers can be added

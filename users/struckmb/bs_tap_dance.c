@@ -34,6 +34,9 @@ void symL_finished(tap_dance_state_t *state, void *user_data) {
 #    ifdef BONE_ENABLE
             if (LAYER_BONE == current_layer) register_code16(DE_C);
 #    endif // BONE_ENABLE
+#    ifdef NOTED_ENABLE
+            if (LAYER_NOTED == current_layer) register_code16(DE_C);
+#    endif // NOTED_ENABLE
 #    ifdef COLEMAK_DH_ENABLE
             if (LAYER_COLEMAK_DH == current_layer) register_code16(DE_A);
 #    endif // COLEMAK_DH_ENABLE
@@ -51,6 +54,12 @@ void symL_finished(tap_dance_state_t *state, void *user_data) {
                 register_code16(DE_C);
             }
 #    endif // BONE_ENABLE
+#    ifdef NOTED_ENABLE
+            if (LAYER_NOTED == current_layer) {
+                tap_code16(DE_C);
+                register_code16(DE_C);
+            }
+#    endif // NOTED_ENABLE
 #    ifdef COLEMAK_DH_ENABLE
             if (LAYER_COLEMAK_DH == current_layer) {
                 tap_code16(DE_A);
@@ -78,6 +87,9 @@ void symL_reset(tap_dance_state_t *state, void *user_data) {
 #    ifdef BONE_ENABLE
             if (LAYER_BONE == current_layer) unregister_code16(DE_C);
 #    endif // BONE_ENABLE
+#    ifdef NOTED_ENABLE
+            if (LAYER_NOTED == current_layer) unregister_code16(DE_C);
+#    endif // NOTED_ENABLE
 #    ifdef COLEMAK_DH_ENABLE
             if (LAYER_COLEMAK_DH == current_layer) unregister_code16(DE_A);
 #    endif // COLEMAK_DH_ENABLE
@@ -102,6 +114,9 @@ void symR_finished(tap_dance_state_t *state, void *user_data) {
 #    ifdef BONE_ENABLE
             if (LAYER_BONE == current_layer) register_code16(DE_G);
 #    endif // BONE_ENABLE
+#    ifdef NOTED_ENABLE
+            if (LAYER_NOTED == current_layer) register_code16(DE_G);
+#    endif // NOTED_ENABLE
 #    ifdef COLEMAK_DH_ENABLE
             if (LAYER_COLEMAK_DH == current_layer) register_code16(DE_O);
 #    endif // COLEMAK_DH_ENABLE
@@ -119,6 +134,12 @@ void symR_finished(tap_dance_state_t *state, void *user_data) {
                 register_code16(DE_G);
             }
 #    endif // BONE_ENABLE
+#    ifdef NOTED_ENABLE
+            if (LAYER_NOTED == current_layer) {
+                tap_code16(DE_G);
+                register_code16(DE_G);
+            }
+#    endif // NOTED_ENABLE
 #    ifdef COLEMAK_DH_ENABLE
             if (LAYER_COLEMAK_DH == current_layer) {
                 tap_code16(DE_O);
@@ -146,6 +167,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data) {
 #    ifdef BONE_ENABLE
             if (LAYER_BONE == current_layer) unregister_code16(DE_G);
 #    endif // BONE_ENABLE
+#    ifdef NOTED_ENABLE
+            if (LAYER_NOTED == current_layer) unregister_code16(DE_G);
+#    endif // NOTED_ENABLE
 #    ifdef COLEMAK_DH_ENABLE
             if (LAYER_COLEMAK_DH == current_layer) unregister_code16(DE_O);
 #    endif // COLEMAK_DH_ENABLE

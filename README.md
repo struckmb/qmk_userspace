@@ -20,7 +20,7 @@ All base layers share the same thumb cluster:
 (If the keyboard only has 2 keys on one side, the outermost key (marked with *) is missing)
 ```
                 *                     *
-                ⎋ │ ↵ │ ⇥ │ │Rpt│Spc│ ⌦
+                ⎋ │ ↵ │ ⇥ │ │ ⌦ │Spc│Rpt
                ───┴─⇧─┴LOW┘ └RSE┴─⇧─┴───
 ```
 
@@ -41,6 +41,16 @@ All base layers share the same thumb cluster:
       c │ t │ i │ e │ o         b │ n │ r │ s │ g │(q)
      (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
       f │ v │ ü │ ä │ ö         y │ z │ , │ . │ k │
+     ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
+```
+
+## NOTED
+```
+      z │ y │ u │ a │ q         p │ b │ m │ l │ f │(j)
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
+      c │ s │ i │ e │ o         d │ t │ n │ r │ h │(ß)
+     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
+      v │ x │ ü │ ä │ ö         w │ g │ , │ . │ k │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
 
