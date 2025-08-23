@@ -354,7 +354,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _SL4_3_ DT_PRNT, _SL4_2_
 #    define _SR4_2_ DT_UP, SFT_SPC
 #else
-#    define _SL4_2_ DE_SECT, DE_GRV
+#    define _SL4_2_ DE_SECT, G(DE_CIRC)
 #    define _SL4_3_ DE_DEG, _SL4_2_
 #    define _SR4_2_ KC_RALT, SFT_SPC
 #endif // DYNAMIC_TAPPING_TERM_ENABLE
