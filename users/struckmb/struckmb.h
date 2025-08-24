@@ -53,7 +53,7 @@ enum userspace_layers {
     LAYER_X
 };
 
-// Custom mancro keycode ranges
+// Custom macro keycode ranges
 enum userspace_custom_keycodes {
     // Safe stuff
     BS_SAFE = SAFE_RANGE,
@@ -171,11 +171,10 @@ td_state_t cur_dance(tap_dance_state_t *state);
 // `finished` and `reset` functions for each tapdance keycode
 void symL_finished(tap_dance_state_t *state, void *user_data);
 void symL_reset(tap_dance_state_t *state, void *user_data);
-void symR_finished(tap_da1ce_state_t *state, void *user_data);
+void symR_finished(tap_dance_state_t *state, void *user_data);
 void symR_reset(tap_dance_state_t *state, void *user_data);
 #endif // TAP_DANCE_ENABLE
-#define HRML5(k1, k2, k3, k4) LGUI_T(k1), LSFT_T(k2), LCTL_T(k3), LALT_T(k4)
-#define HRMR5(k1, k2, k3, k4) LALT_T(k1), RCTL_T(k2), RSFT_T(k3), RGUI_T(k4)
+
 #define HRML(k1, k2, k3, k4) LGUI_T(k1), LALT_T(k2), LSFT_T(k3), LCTL_T(k4)
 #define HRMR(k1, k2, k3, k4) RCTL_T(k1), RSFT_T(k2), LALT_T(k3), RGUI_T(k4)
 
