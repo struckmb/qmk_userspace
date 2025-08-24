@@ -392,7 +392,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _RL2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
 #define _RL3_5_ KC_UNDO, KC_CUT, KC_COPY, KC_PSTE, KC_AGAIN
 #define _RR1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
-#define _RR2_5_ OSM_MEH, OSM_CTL, OSM_GUI, OSM_ALT, OSM_SFT
+#define _RR2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
 #define _RR3_5_ KC_PSCR, KC_NO, KC_INSERT, OSM_AGR, CW_TOGG
 //
 #define _RL1_6_ _ADD_L_1_, _RL1_5_
@@ -416,7 +416,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
 #    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, MS_CSB1
 #    define _PR1_5_ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#    define _PR2_5_ OSM_MEH, OSM_CTL, OSM_GUI, OSM_ALT, OSM_SFT
+#    define _PR2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
 #    define _PR3_5_ KC_ACL0, KC_ACL1, KC_ACL2, OSM_AGR, C___TAB
 //
 #    define _PL1_6_ _ADD_L_1_, _PL1_5_
