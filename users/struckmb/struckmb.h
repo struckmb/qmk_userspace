@@ -174,8 +174,9 @@ void symL_reset(tap_dance_state_t *state, void *user_data);
 void symR_finished(tap_dance_state_t *state, void *user_data);
 void symR_reset(tap_dance_state_t *state, void *user_data);
 #endif // TAP_DANCE_ENABLE
-#define HRML(k1, k2, k3) LALT_T(k1), LGUI_T(k2), LCTL_T(k3)
-#define HRMR(k1, k2, k3) LCTL_T(k1), LGUI_T(k2), LALT_T(k3)
+
+#define HRML(k1, k2, k3, k4) LGUI_T(k1), LALT_T(k2), LSFT_T(k3), LCTL_T(k4)
+#define HRMR(k1, k2, k3, k4) RCTL_T(k1), RSFT_T(k2), LALT_T(k3), RGUI_T(k4)
 
 // /// // /* KEYMAPS */ // /// //
 
@@ -212,46 +213,46 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define __QL1_4_ DE_W, DE_E, DE_R, DE_T
 #    define __QR1_4_ DE_Z, DE_U, DE_I, DE_O
 #    define __QR1_1_ DE_P
-#    define __QL2_1_ DE_A
-#    define __HRM__QL2_4_ HRML(DE_S, DE_D, DE_F), DE_G
-#    define _HRM_QR2_4_ DE_H, HRMR(DE_J, DE_K, DE_L)
-#    define __QR2_1_ DE_ODIA
+#    define __QL2_4_ HRML(DE_A, DE_S, DE_D, DE_F)
+#    define __QL2_1_ DE_G
+#    define __QR2_1_ DE_H
+#    define __QR2_4_ HRMR(DE_J, DE_K, DE_L, DE_ODIA)
 
 #    define _QL1_5_ LX(__QL1_1_), __QL1_4_
-#    define _QL2_5_ SY_L(__QL2_1_), __HRM__QL2_4_
+#    define _QL2_5_ __QL2_4_, SY_L(__QL2_1_)
 #    define _QL3_5_ MS(DE_Y), DE_X, DE_C, DE_V, DE_B
 #    define _QR1_5_ __QR1_4_, __QR1_1_
-#    define _QR2_5_ _HRM_QR2_4_, SY_R(__QR2_1_)
+#    define _QR2_5_ SY_R(__QR2_1_), __QR2_4_
 #    define _QR3_5_ DE_N, DE_M, DE_COMM, DE_DOT, MS(DE_SS)
 //
 #    define _QL1_6_ _BASE_L_1_, __QL1_1_, __QL1_4_
-#    define _QL2_6_ _BASE_L_2_, __QL2_1_, __HRM__QL2_4_
+#    define _QL2_6_ _BASE_L_2_, __QL2_4_, __QL2_1_
 #    define _QL3_6_ _BASE_L_3_, _QL3_5_
 #    define _QR1_6_ _QR1_5_, _BASE_R_1_(DE_UDIA)
-#    define _QR2_6_ _HRM_QR2_4_, __QR2_1_, _BASE_R_2_(DE_ADIA)
+#    define _QR2_6_ __QR2_1_, __QR2_4_, _BASE_R_2_(DE_ADIA)
 #    define _QR3_6_ _QR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _QWERTY_3x5_ _QL1_5_, _QR1_5_, _QL2_5_, _QR2_5_, _QL3_5_, _QR3_5_
 #    define _QWERTY_3x6_ _QL1_6_, _QR1_6_, _QL2_6_, _QR2_6_, _QL3_6_, _QR3_6_
-#    define _QWERTY_L_X_ _QL1_5_, __QR1_4_, DE_UDIA, _QL2_5_, _HRM_QR2_4_, DE_ADIA, _QL3_5_, _QR3_5_
+#    define _QWERTY_L_X_ _QL1_5_, DE_Z, DE_UDIA, DE_I, DE_O, DE_P, _QL2_5_, __QR2_4_, DE_ADIA, _QL3_5_, _QR3_5_
 #endif // QWERTY_ENABLE
 
 #ifdef BONE_ENABLE
 /* BONE layout */
-#    define __HRM__BL2_4_ HRML(DE_T, DE_I, DE_E), DE_O
-#    define __HRM__BR2_4_ DE_B, HRMR(DE_N, DE_R, DE_S)
+#    define __HRM__BL2_4_ HRML(DE_C, DE_T, DE_I, DE_E)
+#    define __HRM__BR2_4_ HRMR(DE_N, DE_R, DE_S, DE_G)
 #    define _BL1_5_ DE_J, DE_D, DE_U, DE_A, DE_X
-#    define _BL2_5_ SY_L(DE_C), __HRM__BL2_4_
+#    define _BL2_5_ __HRM__BL2_4_, SY_L(DE_O)
 #    define _BL3_5_ MS(DE_F), DE_V, DE_UDIA, DE_ADIA, DE_ODIA
 #    define _BR1_5_ DE_P, DE_H, DE_L, DE_M, DE_W
-#    define _BR2_5_ __HRM__BR2_4_, SY_R(DE_G)
+#    define _BR2_5_ SY_R(DE_B), __HRM__BR2_4_
 #    define _BR3_5_ DE_Y, DE_Z, DE_COMM, DE_DOT, MS(DE_K)
 //
 #    define _BL1_6_ _BASE_L_1_, _BL1_5_
-#    define _BL2_6_ _BASE_L_2_, DE_C, __HRM__BL2_4_
+#    define _BL2_6_ _BASE_L_2_, __HRM__BL2_4_, DE_O
 #    define _BL3_6_ _BASE_L_3_, _BL3_5_
 #    define _BR1_6_ _BR1_5_, _BASE_R_1_(DE_SS)
-#    define _BR2_6_ __HRM__BR2_4_, DE_G, _BASE_R_2_(DE_Q)
+#    define _BR2_6_ DE_B, __HRM__BR2_4_, _BASE_R_2_(DE_Q)
 #    define _BR3_6_ _BR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _BONE_3x5_ _BL1_5_, _BR1_5_, _BL2_5_, _BR2_5_, _BL3_5_, _BR3_5_
@@ -260,20 +261,20 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef NOTED_ENABLE
 /* NOTED layout */
-#    define __HRM__NL2_4_ HRML(DE_S, DE_I, DE_E), DE_O
-#    define __HRM__NR2_4_ DE_D, HRMR(DE_T, DE_N, DE_R)
+#    define __HRM__NL2_4_ HRML(DE_C, DE_S, DE_I, DE_E)
+#    define __HRM__NR2_4_ HRMR(DE_T, DE_N, DE_R, DE_H)
 #    define _NL1_5_ DE_Z, DE_Y, DE_U, DE_A, DE_Q
-#    define _NL2_5_ SY_L(DE_C), __HRM__NL2_4_
+#    define _NL2_5_ __HRM__NL2_4_, SY_L(DE_O)
 #    define _NL3_5_ MS(DE_V), DE_X, DE_UDIA, DE_ADIA, DE_ODIA
 #    define _NR1_5_ DE_P, DE_B, DE_M, DE_L, DE_F
-#    define _NR2_5_ __HRM__NR2_4_, SY_R(DE_H)
+#    define _NR2_5_ SY_R(DE_D), __HRM__NR2_4_
 #    define _NR3_5_ DE_W, DE_G, DE_COMM, DE_DOT, MS(DE_K)
 //
 #    define _NL1_6_ _BASE_L_1_, _NL1_5_
-#    define _NL2_6_ _BASE_L_2_, DE_C, __HRM__NL2_4_
+#    define _NL2_6_ _BASE_L_2_, __HRM__NL2_4_, DE_O
 #    define _NL3_6_ _BASE_L_3_, _NL3_5_
 #    define _NR1_6_ _NR1_5_, _BASE_R_1_(DE_J)
-#    define _NR2_6_ __HRM__NR2_4_, DE_H, _BASE_R_2_(DE_SS)
+#    define _NR2_6_ DE_D, __HRM__NR2_4_, _BASE_R_2_(DE_SS)
 #    define _NR3_6_ _NR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _NOTED_3x5_ _NL1_5_, _NR1_5_, _NL2_5_, _NR2_5_, _NL3_5_, _NR3_5_
@@ -282,20 +283,20 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 
 #ifdef COLEMAK_DH_ENABLE
 /* Colemak Mod-DH layout (german adaption) */
-#    define __HRM__CL2_4_ HRML(DE_R, DE_S, DE_T), DE_G
-#    define __HRM__CR2_4_ DE_M, HRMR(DE_N, DE_E, DE_I)
+#    define __HRM__CL2_4_ HRML(DE_A, DE_R, DE_S, DE_T)
+#    define __HRM__CR2_4_ HRMR(DE_N, DE_E, DE_I, DE_O)
 #    define _CL1_5_ DE_Q, DE_W, DE_F, DE_P, DE_B
-#    define _CL2_5_ SY_L(DE_A), __HRM__CL2_4_
-#    define _CL3_5_ MS(DE_Z), DE_X, DE_C, DE_D, DE_V
 #    define _CR1_5_ DE_J, DE_L, DE_U, DE_Y, DE_ODIA
-#    define _CR2_5_ __HRM__CR2_4_, SY_R(DE_O)
+#    define _CL2_5_ __HRM__CL2_4_, SY_L(DE_G)
+#    define _CR2_5_ SY_R(DE_M), __HRM__CR2_4_
+#    define _CL3_5_ MS(DE_Z), DE_X, DE_C, DE_D, DE_V
 #    define _CR3_5_ DE_K, DE_H, DE_COMM, DE_DOT, MS(DE_SS)
 //
 #    define _CL1_6_ _BASE_L_1_, _CL1_5_
-#    define _CL2_6_ _BASE_L_2_, DE_A, __HRM__CL2_4_
+#    define _CR1_6_ _CR1_5_, _BASE_R_1_(DE_UDIA)
+#    define _CL2_6_ _BASE_L_2_, __HRM__CL2_4_, DE_G
+#    define _CR2_6_ DE_M, __HRM__CR2_4_, _BASE_R_2_(DE_ADIA)
 #    define _CL3_6_ _BASE_L_3_, _CL3_5_
-#    define _CR1_6_ _CR1_5_, _BASE_R_1_(DE_SS)
-#    define _CR2_6_ __HRM__CR2_4_, DE_Q, SY_R(DE_O)
 #    define _CR3_6_ _CR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _COLEMAK_DH_3x5_ _CL1_5_, _CR1_5_, _CL2_5_, _CR2_5_, _CL3_5_, _CR3_5_
@@ -354,7 +355,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _SL4_3_ DT_PRNT, _SL4_2_
 #    define _SR4_2_ DT_UP, SFT_SPC
 #else
-#    define _SL4_2_ DE_SECT, DE_GRV
+#    define _SL4_2_ DE_SECT, G(DE_CIRC)
 #    define _SL4_3_ DE_DEG, _SL4_2_
 #    define _SR4_2_ KC_RALT, SFT_SPC
 #endif // DYNAMIC_TAPPING_TERM_ENABLE
