@@ -124,13 +124,8 @@ enum userspace_custom_keycodes {
 #define LOW_TAB LT(LAYER_LOWER, KC_TAB)
 #define RSE_BSP LT(LAYER_RAISE, KC_BSPC)
 #define ATT(kc) LT(LAYER_ATTIC, kc)
-#ifdef TAP_DANCE_ENABLE
-#    define SY_L(kc) TD(SYM_L)
-#    define SY_R(kc) TD(SYM_R)
-#else
-#    define SY_L(kc) LT(LAYER_SYMBL, kc)
-#    define SY_R(kc) LT(LAYER_SYMBL, kc)
-#endif // TAP_DANCE_ENABLE
+#define SY_L(kc) LT(LAYER_SYMBL, kc)
+#define SY_R(kc) LT(LAYER_SYMBL, kc)
 #ifdef MOUSEKEY_ENABLE
 #    define MS(kc) LT(LAYER_POINTER, kc)
 #else
@@ -151,29 +146,6 @@ enum userspace_custom_keycodes {
 #define SFT_SPC RSFT_T(KC_SPC)
 #define C___TAB C(KC_TAB)
 #define S_C_TAB S(C(KC_TAB))
-
-#ifdef TAP_DANCE_ENABLE
-// Tap Dance keycodes
-enum td_keycodes {
-    // Toggle symbol layer if held, key based on current base layer, else
-    SYM_L,
-    SYM_R
-};
-
-// Define a type containing as many tapdance states as you need
-typedef enum { TD_NONE, TD_UNKNOWN, TD_SINGLE_TAP, TD_SINGLE_HOLD, TD_DOUBLE_SINGLE_TAP } td_state_t;
-
-// Declare your tapdance functions:
-
-// Function to determine the current tapdance state
-td_state_t cur_dance(tap_dance_state_t *state);
-
-// `finished` and `reset` functions for each tapdance keycode
-void symL_finished(tap_dance_state_t *state, void *user_data);
-void symL_reset(tap_dance_state_t *state, void *user_data);
-void symR_finished(tap_dance_state_t *state, void *user_data);
-void symR_reset(tap_dance_state_t *state, void *user_data);
-#endif // TAP_DANCE_ENABLE
 
 #define HRML(k1, k2, k3, k4) LGUI_T(k1), LALT_T(k2), LSFT_T(k3), LCTL_T(k4)
 #define HRMR(k1, k2, k3, k4) RCTL_T(k1), RSFT_T(k2), LALT_T(k3), RGUI_T(k4)
