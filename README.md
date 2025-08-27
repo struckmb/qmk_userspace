@@ -21,7 +21,7 @@ All base layers share the same thumb cluster:
 ```
                 *                     *
                 ⎋ │ ↵ │ ⇥ │ │ ⌦ │Spc│Rpt
-               ───┴─⇧─┴LOW┘ └RSE┴─⇧─┴───
+               ───┴─⇧─┴LOW┘ └RSE┴───┴───
 ```
 
 ## QWERTY (german adaption)
@@ -101,9 +101,9 @@ All base layers share the same thumb cluster:
 ```
  (⌥)│PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│ ⌃ │ ⌘ │ ⌥ │Sft│(⌃)
+ (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│ ⌃ │Sft│ ⌘ │ ⌥ │(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Udo│Cut│Cpy│Pst│Rdo       PSc│   │Ins│AGr│CWT│(⌘)
+ (⌘)│Udo│Cut│Cpy│Pst│Rdo       PSc│CWT│Ins│AGr│CWT│(⌘)
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─⇧─┴ATT┘ └───┴─⇧─┘───
@@ -114,7 +114,7 @@ All base layers share the same thumb cluster:
 ```
  (⌥)│vMv│<M<│Ms↑│>M>│^M^          │   │   │   │   │(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│Sft│ ⌃ │ ⌥ │ ⌘ │(⌃)
+ (⌃)│Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│ ⌃ │Sft│ ⌘ │ ⌥ │(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
  (⌘)│Tb←│Cut│Cpy│Pst│CSC       Slo│Med│Fst│AGr│Tb→│(⌘)
                ───┌───┬───┐ ┌───┬───┐───
