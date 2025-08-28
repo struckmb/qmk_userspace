@@ -29,7 +29,7 @@ All base layers share the same thumb cluster:
       q │ w │ e │ r │ t         z │ u │ i │ o │ p │(ü)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       a │ s │ d │ f │ g         h │ j │ k │ l │ ö │(ä)
-     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       y │ x │ c │ v │ b         n │ m │ , │ . │ ß │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -39,7 +39,7 @@ All base layers share the same thumb cluster:
       j │ d │ u │ a │ x         p │ h │ l │ m │ w │(ß)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       c │ t │ i │ e │ o         b │ n │ r │ s │ g │(q)
-     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       f │ v │ ü │ ä │ ö         y │ z │ , │ . │ k │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -49,7 +49,7 @@ All base layers share the same thumb cluster:
       z │ y │ u │ a │ q         p │ b │ m │ l │ f │(j)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       c │ s │ i │ e │ o         d │ t │ n │ r │ h │(ß)
-     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       v │ x │ ü │ ä │ ö         w │ g │ , │ . │ k │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -59,7 +59,7 @@ All base layers share the same thumb cluster:
       q │ w │ f │ p │ b         j │ l │ u │ y │ ö │(ü)
      ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
       a │ r │ s │ t │ g         m │ n │ e │ i │ o │(ä)
-     (Σ)┼─⌥─┼─⌘─┼─⌃─┼───       ───┼─⌃─┼─⌘─┼─⌥─┼(Σ) ───
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       z │ x │ c │ d │ v         k │ h │ , │ . │ ß │
      ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
 ```
@@ -68,58 +68,58 @@ All base layers share the same thumb cluster:
 
 ## Symbols
 ```
- (⌥)│ @ │ _ │ [ │ ] │ ^         ! │ < │ > │ = │ & │(⌥)
+    │ @ │ _ │ [ │ ] │ ^         ! │ < │ > │ = │ & │   
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│ \ │ / │ { │ } │ *         ? │ ( │ ) │ - │ : │(⌃)
+    │ \ │ / │ { │ } │ *         ? │ ( │ ) │ - │ : │ § 
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│ # │ $ │ | │ ~ │ ´         + │ % │ " │ ' │ ; │(⌘)
+    │ # │ $ │ | │ ~ │ ´         + │ % │ " │ ' │ ; │   
                ───┌───┬───┐ ┌───┬───┐───
                 ° │ § │ ` │ │AGr│Spc│CWT
-               ───└───┴───┘ └───┴─⇧─┘───
+               ───└───┴───┘ └───┴─S─┘───
 ```
        (when dynamic tapping term is enabled, thumbs change to:)
 ```
                ───┌───┬───┐ ┌───┬───┐───
                PTT│ § │TT+│ │TT-│Spc│CWT
-               ───└───┴───┘ └───┴─⇧─┘───
+               ───└───┴───┘ └───┴─S─┘───
 ```
 
 ## Lower (Function keys and numbers)
 ```
- (⌥)│F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ - │(⌥)
+    │F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ - │   
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│F5 │F6 │F7 │F8 │ €         + │ 4 │ 5 │ 6 │ . │(⌃)
+    │F5 │F6 │F7 │F8 │ €         + │ 4 │ 5 │ 6 │ . │   
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│F9 │F10│F11│F12│ ¢         0 │ 1 │ 2 │ 3 │ , │(⌘)
+    │F9 │F10│F11│F12│ ¢         0 │ 1 │ 2 │ 3 │ , │   
                ───┌───┬───┐ ┌───┬───┐───
                 ¥ │Sft│(v)│ │Bsp│Spc│ $
-               ───└───┴───┘ └ATT┴─⇧─┘───
+               ───└───┴───┘ └ATT┴─S─┘───
 ```
 
 ## Raise (Navigation and control keys)
 (the home row modifiers on the right are sticky)
 ```
- (⌥)│PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│(⌥)
+    │PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│Hme│ ← │ ↓ │ → │End     * Meh│ ⌃ │Sft│ ⌘ │ ⌥ │(⌃)
+    │Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Udo│Cut│Cpy│Pst│Rdo       PSc│CWT│Ins│AGr│CWT│(⌘)
+    │Udo│Cut│Cpy│Pst│Rdo       PSc│   │Ins│AGr│CWT│
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
-               ───└─⇧─┴ATT┘ └───┴─⇧─┘───
+               ───└─S─┴ATT┘ └───┴─S─┘───
 ```
 
 ## Pointer (Mouse, only if enabled)
 * CSC: CTL(/GUI)+Shift+Click
 ```
- (⌥)│vMv│<M<│Ms↑│>M>│^M^          │   │   │   │   │(⌥)
+    │vMv│<M<│Ms↑│>M>│^M^          │   │   │   │   │   
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌃)│Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│ ⌃ │Sft│ ⌘ │ ⌥ │(⌃)
+    │Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│ C │ S │ A │ G │   
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Tb←│Cut│Cpy│Pst│CSC       Slo│Med│Fst│AGr│Tb→│(⌘)
+    │Tb←│Cut│Cpy│Pst│CSC       Slo│Med│Fst│AGr│Tb→│   
                ───┌───┬───┐ ┌───┬───┐───
                CSC│Bt1│Bt2│ │Bt3│Bt1│CSC
-               ───└───┴───┘ └───┴─⇧─┘───
+               ───└───┴───┘ └───┴─S─┘───
 ```
 
 ## Attic (Adjustments and missing stuff)
@@ -131,7 +131,7 @@ All base layers share the same thumb cluster:
     │RGB│R_S│R_H│R_V│R_M       n-–│m-—│ „ │ “ │ ” │
                ───┌───┬───┐ ┌───┬───┐───
                LSf│Br-│(v)│ │(v)│Br+│RSf
-               ───└─⇧─┴───┘ └───┴─⇧─┘───
+               ───└─S─┴───┘ └───┴─S─┘───
 ``
 # Portfolio
 Currently my board contains the following beauties:

@@ -1,6 +1,6 @@
 #pragma once
 #include QMK_KEYBOARD_H
-#include "keymap_german_mac_iso.h"
+#include "keymap_german_extended.h"
 
 #ifndef QWERTY_ENABLE
 #  ifndef BONE_ENABLE
@@ -70,10 +70,6 @@ enum userspace_custom_keycodes {
 #ifdef ASETNIOP_ENABLE
 /* AS_START, AS_END, // Dummy key codes for combo definitions */
 #endif // ASETNIOP_ENABLE
-    DE_RSQU,
-#ifdef MOUSEKEY_ENABLE
-    MS_CSB1,
-#endif // MOUSEKEY_ENABLE
 #ifdef X__ENCODER_ENABLE
     // Encoder button(s)
     BS_ENC0,
@@ -124,13 +120,8 @@ enum userspace_custom_keycodes {
 #define LOW_TAB LT(LAYER_LOWER, KC_TAB)
 #define RSE_BSP LT(LAYER_RAISE, KC_BSPC)
 #define ATT(kc) LT(LAYER_ATTIC, kc)
-#ifdef TAP_DANCE_ENABLE
-#    define SY_L(kc) TD(SYM_L)
-#    define SY_R(kc) TD(SYM_R)
-#else
-#    define SY_L(kc) LT(LAYER_SYMBL, kc)
-#    define SY_R(kc) LT(LAYER_SYMBL, kc)
-#endif // TAP_DANCE_ENABLE
+#define SY_L(kc) LT(LAYER_SYMBL, kc)
+#define SY_R(kc) LT(LAYER_SYMBL, kc)
 #ifdef MOUSEKEY_ENABLE
 #    define MS(kc) LT(LAYER_POINTER, kc)
 #else
@@ -151,29 +142,6 @@ enum userspace_custom_keycodes {
 #define SFT_SPC RSFT_T(KC_SPC)
 #define C___TAB C(KC_TAB)
 #define S_C_TAB S(C(KC_TAB))
-
-#ifdef TAP_DANCE_ENABLE
-// Tap Dance keycodes
-enum td_keycodes {
-    // Toggle symbol layer if held, key based on current base layer, else
-    SYM_L,
-    SYM_R
-};
-
-// Define a type containing as many tapdance states as you need
-typedef enum { TD_NONE, TD_UNKNOWN, TD_SINGLE_TAP, TD_SINGLE_HOLD, TD_DOUBLE_SINGLE_TAP } td_state_t;
-
-// Declare your tapdance functions:
-
-// Function to determine the current tapdance state
-td_state_t cur_dance(tap_dance_state_t *state);
-
-// `finished` and `reset` functions for each tapdance keycode
-void symL_finished(tap_dance_state_t *state, void *user_data);
-void symL_reset(tap_dance_state_t *state, void *user_data);
-void symR_finished(tap_dance_state_t *state, void *user_data);
-void symR_reset(tap_dance_state_t *state, void *user_data);
-#endif // TAP_DANCE_ENABLE
 
 #define HRML(k1, k2, k3, k4) LGUI_T(k1), LALT_T(k2), LSFT_T(k3), LCTL_T(k4)
 #define HRMR(k1, k2, k3, k4) RCTL_T(k1), RSFT_T(k2), LALT_T(k3), RGUI_T(k4)
@@ -407,7 +375,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 /* Pointer layer */
 #    define _PL1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, KC_WH_U
 #    define _PL2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
-#    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, MS_CSB1
+#    define _PL3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, XXXXXXX
 #    define _PR1_5_ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #    define _PR2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
 #    define _PR3_5_ KC_ACL0, KC_ACL1, KC_ACL2, OSM_AGR, C___TAB
@@ -420,9 +388,9 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #    define _PR3_6_ _PR3_5_, _ADD_R_3_
 //
 #    define _PL4_2_ KC_BTN1, KC_BTN2
-#    define _PL4_3_ MS_CSB1, _PL4_2_
+#    define _PL4_3_ XXXXXXX, _PL4_2_
 #    define _PR4_2_ KC_BTN3, KC_BTN1
-#    define _PR4_3_ _PR4_2_, MS_CSB1
+#    define _PR4_3_ _PR4_2_, XXXXXXX
 //
 #    define _POINT_3x5_ _PL1_5_, _PR1_5_, _PL2_5_, _PR2_5_, _PL3_5_, _PR3_5_
 #    define _POINT_3x6_ _PL1_6_, _PR1_6_, _PL2_6_, _PR2_6_, _PL3_6_, _PR3_6_
@@ -433,7 +401,7 @@ void symR_reset(tap_dance_state_t *state, void *user_data);
 #define _AL2_5_ DL_GAME, DL_PREV, DL_NEXT, DL_QWER, NO_MODS
 #define _AL3_5_ RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD
 #define _AR1_5_ DE_IEXL, DE_LSAQ, DE_LDAQ, DE_RDAQ, DE_RSAQ
-#define _AR2_5_ DE_IQUE, DE_MDDT, DE_SLQU, DE_LSQU, DE_RSQU
+#define _AR2_5_ DE_IQUE, DE_MDOT, DE_SLQU, DE_LSQU, DE_RSQU
 #define _AR3_5_ DE_NDSH, DE_MDSH, DE_DLQU, DE_LDQU, DE_RDQU
 //
 #define _AL1_6_ QK_BOOT, _AL1_5_

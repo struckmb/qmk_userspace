@@ -66,7 +66,6 @@
 // // clang-format on
 
 #include "struckmb.h"
-#include "bs_tap_dance.c"
 
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT(__VA_ARGS__)
 
