@@ -138,7 +138,7 @@ enum userspace_custom_keycodes {
 #define OSM_SFT OSM(MOD_LSFT)
 
 // // first and last column for 6 column keyboards:
-#define SFT_ENT LSFT_T(KC_ENT)
+#define GUI_ENT LGUI_T(KC_ENT)
 #define SFT_SPC RSFT_T(KC_SPC)
 #define C___TAB C(KC_TAB)
 #define S_C_TAB S(C(KC_TAB))
@@ -166,9 +166,9 @@ enum userspace_custom_keycodes {
 #define _ADD_R_2_ KC_RCTL
 #define _ADD_R_3_ KC_RGUI
 // thumbs
-#define _0L4_2_ SFT_ENT, LOW_TAB
+#define _0L4_2_ GUI_ENT, LOW_TAB  cs            
 #define _0L4_3_ KC_ESC, _0L4_2_
-#define _0R4_2_ RSE_BSP, SFT_SPC
+#define _0R4_2_ RSE_BSP, KC_SPC
 #define _0R4_3_ _0R4_2_, QK_REP
 
 /* THUMBS for base layers */
@@ -177,27 +177,20 @@ enum userspace_custom_keycodes {
 
 #ifdef QWERTY_ENABLE
 /* QWERTY layout */
-#    define __QL1_1_ DE_Q
-#    define __QL1_4_ DE_W, DE_E, DE_R, DE_T
-#    define __QR1_4_ DE_Z, DE_U, DE_I, DE_O
-#    define __QR1_1_ DE_P
 #    define __QL2_4_ HRML(DE_A, DE_S, DE_D, DE_F)
-#    define __QL2_1_ DE_G
-#    define __QR2_1_ DE_H
 #    define __QR2_4_ HRMR(DE_J, DE_K, DE_L, DE_ODIA)
-
-#    define _QL1_5_ LX(__QL1_1_), __QL1_4_
-#    define _QL2_5_ __QL2_4_, SY_L(__QL2_1_)
+#    define _QL1_5_ LX(DE_Q), DE_W, DE_E, DE_R, DE_T
+#    define _QL2_5_ __QL2_4_, SY_L(DE_G)
 #    define _QL3_5_ MS(DE_Y), DE_X, DE_C, DE_V, DE_B
-#    define _QR1_5_ __QR1_4_, __QR1_1_
-#    define _QR2_5_ SY_R(__QR2_1_), __QR2_4_
+#    define _QR1_5_ DE_Z, DE_U, DE_I, DE_O, DE_P
+#    define _QR2_5_ SY_R(DE_H), __QR2_4_
 #    define _QR3_5_ DE_N, DE_M, DE_COMM, DE_DOT, MS(DE_SS)
 //
-#    define _QL1_6_ _BASE_L_1_, __QL1_1_, __QL1_4_
-#    define _QL2_6_ _BASE_L_2_, __QL2_4_, __QL2_1_
+#    define _QL1_6_ _BASE_L_1_, DE_Q, DE_W, DE_E, DE_R, DE_T
+#    define _QL2_6_ _BASE_L_2_, __QL2_4_, DE_G
 #    define _QL3_6_ _BASE_L_3_, _QL3_5_
 #    define _QR1_6_ _QR1_5_, _BASE_R_1_(DE_UDIA)
-#    define _QR2_6_ __QR2_1_, __QR2_4_, _BASE_R_2_(DE_ADIA)
+#    define _QR2_6_ DE_H, __QR2_4_, _BASE_R_2_(DE_ADIA)
 #    define _QR3_6_ _QR3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _QWERTY_3x5_ _QL1_5_, _QR1_5_, _QL2_5_, _QR2_5_, _QL3_5_, _QR3_5_
@@ -273,22 +266,22 @@ enum userspace_custom_keycodes {
 
 #ifdef GAME_ENABLE
 /* GAME layout
- *  q │ w │ e │ r │ t         6 │ 7 │ 8 │ 9 │ 0
+ *  q │ w │ e │ r │ t         6 │ 7 │ 8 │ 9 │Tab
  * ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
- *  a │ s │ d │ f │ g         ← │ ↓ │ ↑ │ → │Tab
+ *  a │ s │ d │ f │ g         ← │ ↓ │ ↑ │ → │ 5
  * ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
- *  y │ x │ c │ v │ b         1 │ 2 │ 3 │ 4 │ 5
+ *  y │ x │ c │ v │ b         0 │ 1 │ 2 │ 3 │ 4
  *          ┌───┬───┬───┐ ┌───┬───┬───┐
- *          │Esc│Sft│Ctl│ │Spc│Ent│Alt│
+ *          │Esc│Sft│Ctl│ │Ent│Spc│Alt│
  *          └───┴───┴───┘ └───┴───┴───┘
  *            *                     *
  */
 #    define _GL1_5_ _QL1_5_
 #    define _GL2_5_ _QL2_5_
 #    define _GL3_5_ _QL3_5_
-#    define _GR1_5_ KC_6, KC_7, KC_8, KC_9, KC_0
-#    define _GR2_5_ KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_TAB
-#    define _GR3_5_ KC_1, KC_2, KC_3, KC_4, KC_5
+#    define _GR1_5_ KC_6, KC_7, KC_8, KC_9, KC_TAB
+#    define _GR2_5_ KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_5
+#    define _GR3_5_ KC_0, KC_1, KC_2, KC_3, KC_4
 //
 #    define _GL1_6_ KC_NO, _GL1_5_
 #    define _GL2_6_ KC_NO, _GL2_5_
@@ -299,7 +292,7 @@ enum userspace_custom_keycodes {
 //
 #    define _GL4_2_ KC_LSFT, KC_LCTL
 #    define _GL4_3_ KC_ESC, _GL4_2_
-#    define _GR4_2_ KC_SPC, KC_ENT
+#    define _GR4_2_ KC_ENT, KC_SPC
 #    define _GR4_3_ _GR4_2_, KC_LALT
 #endif // GAME_ENABLE
 
@@ -334,10 +327,10 @@ enum userspace_custom_keycodes {
 
 /* Lower: Numbers and function keys */
 #define _LL1_5_ KC_F1, KC_F2, KC_F3, KC_F4, DE_PND
-#define _LL2_5_ KC_F5, KC_F6, KC_F7, KC_F8, DE_EURO
+#define _LL2_5_ HRML(KC_F5, KC_F6, KC_F7, KC_F8), DE_EURO
 #define _LL3_5_ KC_F9, KC_F10, KC_F11, KC_F12, DE_CENT
 #define _LR1_5_ DE_SLSH, DE_7, DE_8, DE_9, DE_MINS
-#define _LR2_5_ DE_PLUS, DE_4, DE_5, DE_6, DE_DOT
+#define _LR2_5_ DE_PLUS, HRMR(DE_4, DE_5, DE_6, DE_DOT)
 #define _LR3_5_ DE_0, DE_1, DE_2, DE_3, DE_COMM
 //
 #define _LL1_6_ _ADD_L_1_, _LL1_5_
@@ -361,7 +354,7 @@ enum userspace_custom_keycodes {
 #define _RL3_5_ KC_UNDO, KC_CUT, KC_COPY, KC_PSTE, KC_AGAIN
 #define _RR1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
 #define _RR2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
-#define _RR3_5_ KC_PSCR, KC_NO, KC_INSERT, OSM_AGR, CW_TOGG
+#define _RR3_5_ KC_PSCR, CW_TOGG, KC_INS, OSM_AGR, CW_TOGG
 //
 #define _RL1_6_ _ADD_L_1_, _RL1_5_
 #define _RL2_6_ _ADD_L_2_, _RL2_5_

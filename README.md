@@ -21,7 +21,7 @@ All base layers share the same thumb cluster:
 ```
                 *                     *
                 ⎋ │ ↵ │ ⇥ │ │ ⌦ │Spc│Rpt
-               ───┴─⇧─┴LOW┘ └RSE┴─⇧─┴───
+               ───┴─⇧─┴LOW┘ └RSE┴───┴───
 ```
 
 ## QWERTY (german adaption)
@@ -99,11 +99,11 @@ All base layers share the same thumb cluster:
 ## Raise (Navigation and control keys)
 (the home row modifiers on the right are sticky)
 ```
-    │PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│   
+    │PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │   
+    │Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Udo│Cut│Cpy│Pst│Rdo       PSc│   │Ins│AGr│CWT│   
+    │Udo│Cut│Cpy│Pst│Rdo       PSc│   │Ins│AGr│CWT│
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─S─┴ATT┘ └───┴─S─┘───
