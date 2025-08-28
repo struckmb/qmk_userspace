@@ -166,7 +166,7 @@ enum userspace_custom_keycodes {
 #define _ADD_R_2_ KC_RCTL
 #define _ADD_R_3_ KC_RGUI
 // thumbs
-#define _0L4_2_ GUI_ENT, LOW_TAB  cs            
+#define _0L4_2_ GUI_ENT, LOW_TAB
 #define _0L4_3_ KC_ESC, _0L4_2_
 #define _0R4_2_ RSE_BSP, KC_SPC
 #define _0R4_3_ _0R4_2_, QK_REP
