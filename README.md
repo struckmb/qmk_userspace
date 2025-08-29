@@ -21,7 +21,7 @@ All base layers share the same thumb cluster:
 ```
                 *                     *
                 ⎋ │ ↵ │ ⇥ │ │ ⌦ │Spc│Rpt
-               ───┴─⇧─┴LOW┘ └RSE┴───┴───
+               ───┴─G─┴LOW┘ └RSE┴───┴───
 ```
 
 ## QWERTY (german adaption)
