@@ -6,9 +6,11 @@
 #  ifndef NEO2_ENABLE
 #    ifndef BONE_ENABLE
 #      ifndef NOTED_ENABLE
-#        ifndef COLEMAK_DH_ENABLE
-#          fail // at least one base layer has to be enabled!
-#        endif // !COLEMAK_DH_ENABLE
+#        ifndef DVORAK_DE_ENABLE
+#          ifndef COLEMAK_DH_ENABLE
+#            fail // at least one base layer has to be enabled!
+#          endif // !COLEMAK_DH_ENABLE
+#        endif // !DVORAK_DE_ENABLE
 #      endif // !NOTED_ENABLE
 #    endif // !BONE_ENABLE
 #  endif // !NEO2_ENABLE
@@ -29,6 +31,9 @@ enum userspace_layers {
 #ifdef NOTED_ENABLE
     LAYER_NOTED,
 #endif /* ifdef NOTED_ENABLE */
+#ifdef DVORAK_DE_ENABLE
+    LAYER_DVORAK_DE,
+#endif /* ifdef DVORAK_DE_ENABLE */
 #ifdef COLEMAK_DH_ENABLE
     LAYER_COLEMAK_DH,
 #endif /* ifdef COLEMAK_DH_ENABLE */
@@ -97,6 +102,9 @@ enum userspace_custom_keycodes {
 #ifndef NOTED_ENABLE
 #    define LAYER_NOTED 0
 #endif // ifndef NOTED_ENABLE
+#ifndef DVORAK_DE_ENABLE
+#    define LAYER_DVORAK_DE 0
+#endif // ifndef DVORAK_DE_ENABLE
 #ifndef COLEMAK_DH_ENABLE
 #    define LAYER_COLEMAK_DH 0
 #endif // ifndef COLEMAK_DH_ENABLE
@@ -115,10 +123,7 @@ enum userspace_custom_keycodes {
 #    define LAYER_ASETNIOP 0
 #endif /* ifndef ASETNIOP_ENABLE */
 // sticky layers (withstands reset):
-#define DL_QWER PDF(LAYER_QWERTY)
-#define DL_BONE PDF(LAYER_BONE)
-#define DL_NOTE PDF(LAYER_NOTED)
-#define DL_CODH PDF(LAYER_COLEMAK_DH)
+#define DL_BASE PDF(0)
 // non-sticky layers (return to saved after reset):
 #define DL_GAME DF(LAYER_GAME)
 #define DL_ARTS DF(LAYER_ARTSENIO)
@@ -207,7 +212,7 @@ enum userspace_custom_keycodes {
 #endif // QWERTY_ENABLE
 
 #ifdef NEO2_ENABLE
-/* BONE layout */
+/* NEO2 layout */
 #    define __HRM__NEO2_L2_4_ HRML(DE_U, DE_I, DE_A, DE_E)
 #    define __HRM__NEO2_R2_4_ HRMR(DE_N, DE_R, DE_T, DE_D)
 #    define _NEO2_L1_5_ DE_X, DE_V, DE_L, DE_C, DE_W
@@ -272,22 +277,37 @@ enum userspace_custom_keycodes {
 #    define _NOTED_3x6_ _NOTED_L1_6_, _NOTED_R1_6_, _NOTED_L2_6_, _NOTED_R2_6_, _NOTED_L3_6_, _NOTED_R3_6_
 #endif // NOTED_ENABLE
 
+#ifdef DVORAK_DE_ENABLE
+/* Dvorak layout (german adaption, 3x6 only) */
+#    define __HRM__DVORAK_DE_L2_4_ HRML(DE_A, DE_O, DE_E, DE_I)
+#    define __HRM__DVORAK_DE_R2_4_ HRMR(DE_D, DE_R, DE_N, DE_S)
+//
+#    define _DVORAK_DE_L1_6_ _BASE_L_1_, DE_UDIA, DE_COMM, DE_DOT, DE_P, DE_Y
+#    define _DVORAK_DE_L2_6_ _BASE_L_2_, __HRM__DVORAK_DE_L2_4_, DE_U
+#    define _DVORAK_DE_L3_6_ DE_ADIA, MS(DE_ODIA), DE_Q, DE_J, DE_K, DE_X
+#    define _DVORAK_DE_R1_6_ DE_F, DE_G, DE_C, DE_T, DE_Z, _BASE_R_1_(DE_UDIA)
+#    define _DVORAK_DE_R2_6_ DE_H, __HRM__DVORAK_DE_R2_4_, _BASE_R_2_(DE_L)
+#    define _DVORAK_DE_R3_6_ DE_B, DE_M, DE_W, DE_V, MS(DE_HASH), _BASE_R_3_(KC_ENT)
+//
+#    define _DVORAK_DE_3x6_ _DVORAK_DE_L1_6_, _DVORAK_DE_R1_6_, _DVORAK_DE_L2_6_, _DVORAK_DE_R2_6_, _DVORAK_DE_L3_6_, _DVORAK_DE_R3_6_
+#endif // DVORAK_DE_ENABLE
+
 #ifdef COLEMAK_DH_ENABLE
 /* Colemak Mod-DH layout (german adaption) */
 #    define __HRM__COLEMAK_DH_L2_4_ HRML(DE_A, DE_R, DE_S, DE_T)
 #    define __HRM__COLEMAK_DH_R2_4_ HRMR(DE_N, DE_E, DE_I, DE_O)
 #    define _COLEMAK_DH_L1_5_ DE_Q, DE_W, DE_F, DE_P, DE_B
-#    define _COLEMAK_DH_R1_5_ DE_J, DE_L, DE_U, DE_Y, DE_ODIA
 #    define _COLEMAK_DH_L2_5_ __HRM__COLEMAK_DH_L2_4_, SY_L(DE_G)
-#    define _COLEMAK_DH_R2_5_ SY_R(DE_M), __HRM__COLEMAK_DH_R2_4_
 #    define _COLEMAK_DH_L3_5_ MS(DE_Z), DE_X, DE_C, DE_D, DE_V
+#    define _COLEMAK_DH_R1_5_ DE_J, DE_L, DE_U, DE_Y, DE_ODIA
+#    define _COLEMAK_DH_R2_5_ SY_R(DE_M), __HRM__COLEMAK_DH_R2_4_
 #    define _COLEMAK_DH_R3_5_ DE_K, DE_H, DE_COMM, DE_DOT, MS(DE_SS)
 //
 #    define _COLEMAK_DH_L1_6_ _BASE_L_1_, _COLEMAK_DH_L1_5_
-#    define _COLEMAK_DH_R1_6_ _COLEMAK_DH_R1_5_, _BASE_R_1_(DE_UDIA)
 #    define _COLEMAK_DH_L2_6_ _BASE_L_2_, __HRM__COLEMAK_DH_L2_4_, DE_G
-#    define _COLEMAK_DH_R2_6_ DE_M, __HRM__COLEMAK_DH_R2_4_, _BASE_R_2_(DE_ADIA)
 #    define _COLEMAK_DH_L3_6_ _BASE_L_3_, _COLEMAK_DH_L3_5_
+#    define _COLEMAK_DH_R1_6_ _COLEMAK_DH_R1_5_, _BASE_R_1_(DE_UDIA)
+#    define _COLEMAK_DH_R2_6_ DE_M, __HRM__COLEMAK_DH_R2_4_, _BASE_R_2_(DE_ADIA)
 #    define _COLEMAK_DH_R3_6_ _COLEMAK_DH_R3_5_, _BASE_R_3_(KC_ENT)
 //
 #    define _COLEMAK_DH_3x5_ _COLEMAK_DH_L1_5_, _COLEMAK_DH_R1_5_, _COLEMAK_DH_L2_5_, _COLEMAK_DH_R2_5_, _COLEMAK_DH_L3_5_, _COLEMAK_DH_R3_5_
@@ -427,7 +447,7 @@ enum userspace_custom_keycodes {
 
 /* Attic: Adjustments and missing stuff */
 #define _ATTIC_L1_5_ QK_BOOT, EE_CLR, DL_ASET, DL_ARTS, KC_APP
-#define _ATTIC_L2_5_ DL_GAME, DL_PREV, DL_NEXT, DL_QWER, NO_MODS
+#define _ATTIC_L2_5_ DL_GAME, DL_PREV, DL_NEXT, DL_BASE, NO_MODS
 #define _ATTIC_L3_5_ RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD
 #define _ATTIC_R1_5_ DE_IEXL, DE_LSAQ, DE_LDAQ, DE_RDAQ, DE_RSAQ
 #define _ATTIC_R2_5_ DE_IQUE, DE_MDOT, DE_SLQU, DE_LSQU, DE_RSQU

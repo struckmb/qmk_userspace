@@ -83,6 +83,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef NOTED_ENABLE
     [LAYER_NOTED] = LAYOUT_split_3x6_3_wrapper(_NOTED_3x6_, _THUMBS_3_2_),
 #endif // ifdef NOTED_ENABLE
+#ifdef DVORAK_DE_ENABLE
+    [LAYER_DVORAK_DE] = LAYOUT_split_3x6_3_wrapper(_DVORAK_DE_3x6_, _THUMBS_3_2_),
+#endif /* ifdef DVORAK_DE_ENABLE */
 #ifdef COLEMAK_DH_ENABLE
     [LAYER_COLEMAK_DH] = LAYOUT_split_3x6_3_wrapper(_COLEMAK_DH_3x6_, _THUMBS_3_2_),
 #endif /* ifdef COLEMAK_DH_ENABLE */
