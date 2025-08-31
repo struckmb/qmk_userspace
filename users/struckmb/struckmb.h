@@ -3,40 +3,40 @@
 #include "keymap_german_extended.h"
 
 #ifndef QWERTY_ENABLE
-#  ifndef NEO2_ENABLE
-#    ifndef BONE_ENABLE
-#      ifndef NOTED_ENABLE
-#        ifndef DVORAK_DE_ENABLE
-#          ifndef COLEMAK_DH_ENABLE
-#            fail // at least one base layer has to be enabled!
-#          endif // !COLEMAK_DH_ENABLE
-#        endif // !DVORAK_DE_ENABLE
-#      endif // !NOTED_ENABLE
-#    endif // !BONE_ENABLE
-#  endif // !NEO2_ENABLE
+#ifndef NOTED_ENABLE
+#ifndef BONE_ENABLE
+#ifndef NEO2_ENABLE
+#ifndef COLEMAK_DH_ENABLE
+#ifndef DVORAK_DE_ENABLE
+#fail // at least one base layer has to be enabled!
+#endif // !COLEMAK_DH_ENABLE
+#endif // !DVORAK_DE_ENABLE
+#endif // !NOTED_ENABLE
+#endif // !BONE_ENABLE
+#endif // !NEO2_ENABLE
 #endif // !QWERTY_ENABLE
 
 /// Enumeration of layers
 enum userspace_layers {
-// base layers
+    // base layers
 #ifdef QWERTY_ENABLE
     LAYER_QWERTY,
 #endif // QWERTY_ENABLE
-#ifdef NEO2_ENABLE
-    LAYER_NEO2,
-#endif /* ifdef NEO2_ENABLE */
-#ifdef BONE_ENABLE
-    LAYER_BONE,
-#endif /* ifdef BONE_ENABLE */
 #ifdef NOTED_ENABLE
     LAYER_NOTED,
 #endif /* ifdef NOTED_ENABLE */
-#ifdef DVORAK_DE_ENABLE
-    LAYER_DVORAK_DE,
-#endif /* ifdef DVORAK_DE_ENABLE */
+#ifdef BONE_ENABLE
+    LAYER_BONE,
+#endif /* ifdef BONE_ENABLE */
+#ifdef NEO2_ENABLE
+    LAYER_NEO2,
+#endif /* ifdef NEO2_ENABLE */
 #ifdef COLEMAK_DH_ENABLE
     LAYER_COLEMAK_DH,
 #endif /* ifdef COLEMAK_DH_ENABLE */
+#ifdef DVORAK_DE_ENABLE
+    LAYER_DVORAK_DE,
+#endif /* ifdef DVORAK_DE_ENABLE */
 #ifdef GAME_ENABLE
     LAYER_GAME,
 #endif /* ifdef GAME_ENABLE */
@@ -78,7 +78,7 @@ enum userspace_custom_keycodes {
     AR_O,
 #endif // ARTSENIO_ENABLE
 #ifdef ASETNIOP_ENABLE
-/* AS_START, AS_END, // Dummy key codes for combo definitions */
+    /* AS_START, AS_END, // Dummy key codes for combo definitions */
 #endif // ASETNIOP_ENABLE
 #ifdef X__ENCODER_ENABLE
     // Encoder button(s)
@@ -93,21 +93,21 @@ enum userspace_custom_keycodes {
 #ifndef QWERTY_ENABLE
 #    define LAYER_QWERTY 0
 #endif // ifndef QWERTY_ENABLE
-#ifndef NEO2_ENABLE
-#    define LAYER_NEO2 0
-#endif // ifndef NEO2_ENABLE
-#ifndef BONE_ENABLE
-#    define LAYER_BONE 0
-#endif // ifndef BONE_ENABLE
 #ifndef NOTED_ENABLE
 #    define LAYER_NOTED 0
 #endif // ifndef NOTED_ENABLE
-#ifndef DVORAK_DE_ENABLE
-#    define LAYER_DVORAK_DE 0
-#endif // ifndef DVORAK_DE_ENABLE
+#ifndef BONE_ENABLE
+#    define LAYER_BONE 0
+#endif // ifndef BONE_ENABLE
+#ifndef NEO2_ENABLE
+#    define LAYER_NEO2 0
+#endif // ifndef NEO2_ENABLE
 #ifndef COLEMAK_DH_ENABLE
 #    define LAYER_COLEMAK_DH 0
 #endif // ifndef COLEMAK_DH_ENABLE
+#ifndef DVORAK_DE_ENABLE
+#    define LAYER_DVORAK_DE 0
+#endif // ifndef DVORAK_DE_ENABLE
 #ifndef GAME_ENABLE
 #    define LAYER_GAME 0
 #endif /* ifndef GAME_ENABLE */
@@ -211,27 +211,27 @@ enum userspace_custom_keycodes {
 #    define _QWERTY_L_X_ _QWER_L1_5_, DE_Z, DE_UDIA, DE_I, DE_O, DE_P, _QWER_L2_5_, __QWER_R2_4_, DE_ADIA, _QWER_L3_5_, _QWER_R3_5_
 #endif // QWERTY_ENABLE
 
-#ifdef NEO2_ENABLE
-/* NEO2 layout */
-#    define __HRM__NEO2_L2_4_ HRML(DE_U, DE_I, DE_A, DE_E)
-#    define __HRM__NEO2_R2_4_ HRMR(DE_N, DE_R, DE_T, DE_D)
-#    define _NEO2_L1_5_ DE_X, DE_V, DE_L, DE_C, DE_W
-#    define _NEO2_L2_5_ __HRM__NEO2_L2_4_, SY_L(DE_O)
-#    define _NEO2_L3_5_ MS(DE_UDIA), DE_ODIA, DE_ADIA, DE_P, DE_Z
-#    define _NEO2_R1_5_ DE_K, DE_H, DE_G, DE_F, DE_Q
-#    define _NEO2_R2_5_ SY_R(DE_S), __HRM__NEO2_R2_4_
-#    define _NEO2_R3_5_ DE_B, DE_M, DE_COMM, DE_DOT, MS(DE_J)
+#ifdef NOTED_ENABLE
+/* NOTED layout */
+#    define __HRM__NOTED_L2_4_ HRML(DE_C, DE_S, DE_I, DE_E)
+#    define __HRM__NOTED_R2_4_ HRMR(DE_T, DE_N, DE_R, DE_H)
+#    define _NOTED_L1_5_ DE_Z, DE_Y, DE_U, DE_A, DE_Q
+#    define _NOTED_L2_5_ __HRM__NOTED_L2_4_, SY_L(DE_O)
+#    define _NOTED_L3_5_ MS(DE_V), DE_X, DE_UDIA, DE_ADIA, DE_ODIA
+#    define _NOTED_R1_5_ DE_P, DE_B, DE_M, DE_L, DE_F
+#    define _NOTED_R2_5_ SY_R(DE_D), __HRM__NOTED_R2_4_
+#    define _NOTED_R3_5_ DE_W, DE_G, DE_COMM, DE_DOT, MS(DE_K)
 //
-#    define _NEO2_L1_6_ _BASE_L_1_, _NEO2_L1_5_
-#    define _NEO2_L2_6_ _BASE_L_2_, __HRM__NEO2_L2_4_, DE_O
-#    define _NEO2_L3_6_ _BASE_L_3_, _NEO2_L3_5_
-#    define _NEO2_R1_6_ _NEO2_R1_5_, _BASE_R_1_(DE_SS)
-#    define _NEO2_R2_6_ DE_B, __HRM__NEO2_R2_4_, _BASE_R_2_(DE_Y)
-#    define _NEO2_R3_6_ _NEO2_R3_5_, _BASE_R_3_(KC_ENT)
+#    define _NOTED_L1_6_ _BASE_L_1_, _NOTED_L1_5_
+#    define _NOTED_L2_6_ _BASE_L_2_, __HRM__NOTED_L2_4_, DE_O
+#    define _NOTED_L3_6_ _BASE_L_3_, _NOTED_L3_5_
+#    define _NOTED_R1_6_ _NOTED_R1_5_, _BASE_R_1_(DE_J)
+#    define _NOTED_R2_6_ DE_D, __HRM__NOTED_R2_4_, _BASE_R_2_(DE_SS)
+#    define _NOTED_R3_6_ _NOTED_R3_5_, _BASE_R_3_(KC_ENT)
 //
-#    define _NEO2_3x5_ _NEO2_L1_5_, _NEO2_R1_5_, _NEO2_L2_5_, _NEO2_R2_5_, _NEO2_L3_5_, _NEO2_R3_5_
-#    define _NEO2_3x6_ _NEO2_L1_6_, _NEO2_R1_6_, _NEO2_L2_6_, _NEO2_R2_6_, _NEO2_L3_6_, _NEO2_R3_6_
-#endif // NEO2_ENABLE
+#    define _NOTED_3x5_ _NOTED_L1_5_, _NOTED_R1_5_, _NOTED_L2_5_, _NOTED_R2_5_, _NOTED_L3_5_, _NOTED_R3_5_
+#    define _NOTED_3x6_ _NOTED_L1_6_, _NOTED_R1_6_, _NOTED_L2_6_, _NOTED_R2_6_, _NOTED_L3_6_, _NOTED_R3_6_
+#endif // NOTED_ENABLE
 
 #ifdef BONE_ENABLE
 /* BONE layout */
@@ -255,42 +255,27 @@ enum userspace_custom_keycodes {
 #    define _BONE_3x6_ _BONE_L1_6_, _BONE_R1_6_, _BONE_L2_6_, _BONE_R2_6_, _BONE_L3_6_, _BONE_R3_6_
 #endif // BONE_ENABLE
 
-#ifdef NOTED_ENABLE
-/* NOTED layout */
-#    define __HRM__NOTED_L2_4_ HRML(DE_C, DE_S, DE_I, DE_E)
-#    define __HRM__NOTED_R2_4_ HRMR(DE_T, DE_N, DE_R, DE_H)
-#    define _NOTED_L1_5_ DE_Z, DE_Y, DE_U, DE_A, DE_Q
-#    define _NOTED_L2_5_ __HRM__NOTED_L2_4_, SY_L(DE_O)
-#    define _NOTED_L3_5_ MS(DE_V), DE_X, DE_UDIA, DE_ADIA, DE_ODIA
-#    define _NOTED_R1_5_ DE_P, DE_B, DE_M, DE_L, DE_F
-#    define _NOTED_R2_5_ SY_R(DE_D), __HRM__NOTED_R2_4_
-#    define _NOTED_R3_5_ DE_W, DE_G, DE_COMM, DE_DOT, MS(DE_K)
+#ifdef NEO2_ENABLE
+/* NEO2 layout */
+#    define __HRM__NEO2_L2_4_ HRML(DE_U, DE_I, DE_A, DE_E)
+#    define __HRM__NEO2_R2_4_ HRMR(DE_N, DE_R, DE_T, DE_D)
+#    define _NEO2_L1_5_ DE_X, DE_V, DE_L, DE_C, DE_W
+#    define _NEO2_L2_5_ __HRM__NEO2_L2_4_, SY_L(DE_O)
+#    define _NEO2_L3_5_ MS(DE_UDIA), DE_ODIA, DE_ADIA, DE_P, DE_Z
+#    define _NEO2_R1_5_ DE_K, DE_H, DE_G, DE_F, DE_Q
+#    define _NEO2_R2_5_ SY_R(DE_S), __HRM__NEO2_R2_4_
+#    define _NEO2_R3_5_ DE_B, DE_M, DE_COMM, DE_DOT, MS(DE_J)
 //
-#    define _NOTED_L1_6_ _BASE_L_1_, _NOTED_L1_5_
-#    define _NOTED_L2_6_ _BASE_L_2_, __HRM__NOTED_L2_4_, DE_O
-#    define _NOTED_L3_6_ _BASE_L_3_, _NOTED_L3_5_
-#    define _NOTED_R1_6_ _NOTED_R1_5_, _BASE_R_1_(DE_J)
-#    define _NOTED_R2_6_ DE_D, __HRM__NOTED_R2_4_, _BASE_R_2_(DE_SS)
-#    define _NOTED_R3_6_ _NOTED_R3_5_, _BASE_R_3_(KC_ENT)
+#    define _NEO2_L1_6_ _BASE_L_1_, _NEO2_L1_5_
+#    define _NEO2_L2_6_ _BASE_L_2_, __HRM__NEO2_L2_4_, DE_O
+#    define _NEO2_L3_6_ _BASE_L_3_, _NEO2_L3_5_
+#    define _NEO2_R1_6_ _NEO2_R1_5_, _BASE_R_1_(DE_SS)
+#    define _NEO2_R2_6_ DE_B, __HRM__NEO2_R2_4_, _BASE_R_2_(DE_Y)
+#    define _NEO2_R3_6_ _NEO2_R3_5_, _BASE_R_3_(KC_ENT)
 //
-#    define _NOTED_3x5_ _NOTED_L1_5_, _NOTED_R1_5_, _NOTED_L2_5_, _NOTED_R2_5_, _NOTED_L3_5_, _NOTED_R3_5_
-#    define _NOTED_3x6_ _NOTED_L1_6_, _NOTED_R1_6_, _NOTED_L2_6_, _NOTED_R2_6_, _NOTED_L3_6_, _NOTED_R3_6_
-#endif // NOTED_ENABLE
-
-#ifdef DVORAK_DE_ENABLE
-/* Dvorak layout (german adaption, 3x6 only) */
-#    define __HRM__DVORAK_DE_L2_4_ HRML(DE_A, DE_O, DE_E, DE_I)
-#    define __HRM__DVORAK_DE_R2_4_ HRMR(DE_D, DE_R, DE_N, DE_S)
-//
-#    define _DVORAK_DE_L1_6_ _BASE_L_1_, DE_UDIA, DE_COMM, DE_DOT, DE_P, DE_Y
-#    define _DVORAK_DE_L2_6_ _BASE_L_2_, __HRM__DVORAK_DE_L2_4_, DE_U
-#    define _DVORAK_DE_L3_6_ DE_ADIA, MS(DE_ODIA), DE_Q, DE_J, DE_K, DE_X
-#    define _DVORAK_DE_R1_6_ DE_F, DE_G, DE_C, DE_T, DE_Z, _BASE_R_1_(DE_UDIA)
-#    define _DVORAK_DE_R2_6_ DE_H, __HRM__DVORAK_DE_R2_4_, _BASE_R_2_(DE_L)
-#    define _DVORAK_DE_R3_6_ DE_B, DE_M, DE_W, DE_V, MS(DE_HASH), _BASE_R_3_(KC_ENT)
-//
-#    define _DVORAK_DE_3x6_ _DVORAK_DE_L1_6_, _DVORAK_DE_R1_6_, _DVORAK_DE_L2_6_, _DVORAK_DE_R2_6_, _DVORAK_DE_L3_6_, _DVORAK_DE_R3_6_
-#endif // DVORAK_DE_ENABLE
+#    define _NEO2_3x5_ _NEO2_L1_5_, _NEO2_R1_5_, _NEO2_L2_5_, _NEO2_R2_5_, _NEO2_L3_5_, _NEO2_R3_5_
+#    define _NEO2_3x6_ _NEO2_L1_6_, _NEO2_R1_6_, _NEO2_L2_6_, _NEO2_R2_6_, _NEO2_L3_6_, _NEO2_R3_6_
+#endif // NEO2_ENABLE
 
 #ifdef COLEMAK_DH_ENABLE
 /* Colemak Mod-DH layout (german adaption) */
@@ -313,6 +298,21 @@ enum userspace_custom_keycodes {
 #    define _COLEMAK_DH_3x5_ _COLEMAK_DH_L1_5_, _COLEMAK_DH_R1_5_, _COLEMAK_DH_L2_5_, _COLEMAK_DH_R2_5_, _COLEMAK_DH_L3_5_, _COLEMAK_DH_R3_5_
 #    define _COLEMAK_DH_3x6_ _COLEMAK_DH_L1_6_, _COLEMAK_DH_R1_6_, _COLEMAK_DH_L2_6_, _COLEMAK_DH_R2_6_, _COLEMAK_DH_L3_6_, _COLEMAK_DH_R3_6_
 #endif // COLEMAK_DH_ENABLE
+
+#ifdef DVORAK_DE_ENABLE
+/* Dvorak layout (german adaption, 3x6 only) */
+#    define __HRM__DVORAK_DE_L2_4_ HRML(DE_A, DE_O, DE_E, DE_I)
+#    define __HRM__DVORAK_DE_R2_4_ HRMR(DE_D, DE_R, DE_N, DE_S)
+//
+#    define _DVORAK_DE_L1_6_ _BASE_L_1_, DE_UDIA, DE_COMM, DE_DOT, DE_P, DE_Y
+#    define _DVORAK_DE_L2_6_ _BASE_L_2_, __HRM__DVORAK_DE_L2_4_, DE_U
+#    define _DVORAK_DE_L3_6_ DE_ADIA, MS(DE_ODIA), DE_Q, DE_J, DE_K, DE_X
+#    define _DVORAK_DE_R1_6_ DE_F, DE_G, DE_C, DE_T, DE_Z, _BASE_R_1_(DE_SS)
+#    define _DVORAK_DE_R2_6_ DE_H, __HRM__DVORAK_DE_R2_4_, _BASE_R_2_(DE_L)
+#    define _DVORAK_DE_R3_6_ DE_B, DE_M, DE_W, DE_V, MS(DE_HASH), _BASE_R_3_(KC_ENT)
+//
+#    define _DVORAK_DE_3x6_ _DVORAK_DE_L1_6_, _DVORAK_DE_R1_6_, _DVORAK_DE_L2_6_, _DVORAK_DE_R2_6_, _DVORAK_DE_L3_6_, _DVORAK_DE_R3_6_
+#endif // DVORAK_DE_ENABLE
 
 #ifdef GAME_ENABLE
 /* GAME layout

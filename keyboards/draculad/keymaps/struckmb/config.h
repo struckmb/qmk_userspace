@@ -15,6 +15,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#define QWERTY_ENABLE
+#define NOTED_ENABLE
+
 // comment that out if your trackball is on the left side
 #define TRACKBALL_RIGHT
 
@@ -23,9 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define PIMORONI_TRACKBALL_INVERT_Y
 #endif // TRACKBALL_RIGHT
 #define POINTING_DEVICE_ROTATION_90
-
-#define QWERTY_ENABLE
-// #define BONE_ENABLE
 
 #ifdef COMBO_ENABLE
 #    define EXTRA_SHORT_COMBOS
