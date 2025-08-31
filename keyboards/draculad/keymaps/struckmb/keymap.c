@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "struckmb.h"
+#include "keyOverride.c"
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 

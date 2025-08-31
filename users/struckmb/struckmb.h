@@ -297,30 +297,29 @@ enum userspace_custom_keycodes {
 #endif // GAME_ENABLE
 
 /* Symbols layer */
-#define _SL1_5_ DE_AT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
+#define _SL1_5_ DE_ELLP, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
 #define _SL2_5_ DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR
 #define _SL3_5_ DE_HASH, DE_DLR, DE_PIPE, DE_TILD, DE_ACUT
 #define _SR1_5_ DE_EXLM, DE_LABK, DE_RABK, DE_EQL, DE_AMPR
 #define _SR2_5_ DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN
 #define _SR3_5_ DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN
 //
-#define _SL1_6_ _ADD_L_1_, _SL1_5_
-#define _SL2_6_ _ADD_L_2_, _SL2_5_
+#define _SL1_6_ DE_AT, _SL1_5_
+#define _SL2_6_ _ADD_L_1_, _SL2_5_
 #define _SL3_6_ _ADD_L_3_, _SL3_5_
-#define _SR1_6_ _SR1_5_, _ADD_R_1_
-#define _SR2_6_ _SR2_5_, DE_SECT
-#define _SR3_6_ _SR3_5_, _ADD_R_3_
+#define _SR1_6_ _SR1_5_, DE_AT
+#define _SR2_6_ _SR2_5_, DE_SLNG
+#define _SR3_6_ _SR3_5_, DE_SECT
 //
 #ifdef DYNAMIC_TAPPING_TERM_ENABLE
 #    define _SL4_2_ DE_SECT, DT_DOWN
-#    define _SL4_3_ DT_PRNT, _SL4_2_
-#    define _SR4_2_ DT_UP, SFT_SPC
+#    define _SR4_2_ DT_UP, DE_AT
 #else
 #    define _SL4_2_ DE_SECT, G(DE_CIRC)
-#    define _SL4_3_ DE_DEG, _SL4_2_
-#    define _SR4_2_ KC_RALT, SFT_SPC
+#    define _SR4_2_ KC_RALT, DE_AT
 #endif // DYNAMIC_TAPPING_TERM_ENABLE
-#define _SR4_3_ _SR4_2_, CW_TOGG
+#define _SL4_3_ DE_DEG, _SL4_2_
+#define _SR4_3_ _SR4_2_, DE_SLNG
 //
 #define _SYMBL_3x5_ _SL1_5_, _SR1_5_, _SL2_5_, _SR2_5_, _SL3_5_, _SR3_5_
 #define _SYMBL_3x6_ _SL1_6_, _SR1_6_, _SL2_6_, _SR2_6_, _SL3_6_, _SR3_6_
