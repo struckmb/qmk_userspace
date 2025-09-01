@@ -347,28 +347,23 @@ enum userspace_custom_keycodes {
 #endif // GAME_ENABLE
 
 /* Symbols layer */
-#define _SYMBL_L1_5_ DE_ELLP, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
+#define _SYMBL_L1_5_ DE_AT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
 #define _SYMBL_L2_5_ DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR
 #define _SYMBL_L3_5_ DE_HASH, DE_DLR, DE_PIPE, DE_TILD, DE_ACUT
 #define _SYMBL_R1_5_ DE_EXLM, DE_LABK, DE_RABK, DE_EQL, DE_AMPR
 #define _SYMBL_R2_5_ DE_QUES, DE_LPRN, DE_RPRN, DE_MINS, DE_COLN
 #define _SYMBL_R3_5_ DE_PLUS, DE_PERC, DE_DQUO, DE_QUOT, DE_SCLN
 //
-#define _SYMBL_L1_6_ DE_AT, _SYMBL_L1_5_
-#define _SYMBL_L2_6_ _ADD_L_1_, _SYMBL_L2_5_
+#define _SYMBL_L1_6_ _ADD_L_1_, _SYMBL_L1_5_
+#define _SYMBL_L2_6_ _ADD_L_2_, _SYMBL_L2_5_
 #define _SYMBL_L3_6_ _ADD_L_3_, _SYMBL_L3_5_
-#define _SYMBL_R1_6_ _SYMBL_R1_5_, DE_AT
-#define _SYMBL_R2_6_ _SYMBL_R2_5_, DE_SLNG
-#define _SYMBL_R3_6_ _SYMBL_R3_5_, DE_SECT
+#define _SYMBL_R1_6_ _SYMBL_R1_5_, DE_SLNG
+#define _SYMBL_R2_6_ _SYMBL_R2_5_, DE_SECT
+#define _SYMBL_R3_6_ _SYMBL_R3_5_, DE_ELLP
 //
-#ifdef DYNAMIC_TAPPING_TERM_ENABLE
-#    define _SYMBL_L4_2_ DE_SECT, DT_DOWN
-#    define _SYMBL_R4_2_ DT_UP, DE_AT
-#else
-#    define _SYMBL_L4_2_ DE_SECT, G(DE_CIRC)
-#    define _SYMBL_R4_2_ KC_RALT, DE_AT
-#endif // DYNAMIC_TAPPING_TERM_ENABLE
+#define _SYMBL_L4_2_ DE_SECT, G(DE_CIRC)
 #define _SYMBL_L4_3_ DE_DEG, _SYMBL_L4_2_
+#define _SYMBL_R4_2_ DE_ELLP, KC_SPC
 #define _SYMBL_R4_3_ _SYMBL_R4_2_, DE_SLNG
 //
 #define _SYMBL_3x5_ _SYMBL_L1_5_, _SYMBL_R1_5_, _SYMBL_L2_5_, _SYMBL_R2_5_, _SYMBL_L3_5_, _SYMBL_R3_5_
@@ -378,16 +373,16 @@ enum userspace_custom_keycodes {
 #define _LOWER_L1_5_ KC_F1, KC_F2, KC_F3, KC_F4, DE_PND
 #define _LOWER_L2_5_ HRML(KC_F5, KC_F6, KC_F7, KC_F8), DE_EURO
 #define _LOWER_L3_5_ KC_F9, KC_F10, KC_F11, KC_F12, DE_CENT
-#define _LOWER_R1_5_ DE_SLSH, DE_7, DE_8, DE_9, DE_MINS
-#define _LOWER_R2_5_ DE_PLUS, HRMR(DE_4, DE_5, DE_6, DE_DOT)
+#define _LOWER_R1_5_ DE_SLSH, DE_7, DE_8, DE_9, DE_PLUS
+#define _LOWER_R2_5_ DE_DOT, HRMR(DE_4, DE_5, DE_6, DE_MINS)
 #define _LOWER_R3_5_ DE_0, DE_1, DE_2, DE_3, DE_COMM
 //
 #define _LOWER_L1_6_ _ADD_L_1_, _LOWER_L1_5_
-#define _LOWER_L2_6_ _ADD_L_2_, _LOWER_L2_5_
+#define _LOWER_L2_6_ DE_LPRN, _LOWER_L2_5_
 #define _LOWER_L3_6_ _ADD_L_3_, _LOWER_L3_5_
-#define _LOWER_R1_6_ _LOWER_R1_5_, _ADD_R_1_
-#define _LOWER_R2_6_ _LOWER_R2_5_, _ADD_R_2_
-#define _LOWER_R3_6_ _LOWER_R3_5_, _ADD_R_3_
+#define _LOWER_R1_6_ _LOWER_R1_5_, DE_HASH
+#define _LOWER_R2_6_ _LOWER_R2_5_, DE_RPRN
+#define _LOWER_R3_6_ _LOWER_R3_5_, DE_YEN
 //
 #define _LOWER_L4_2_ KC_LSFT, KC_TRNS
 #define _LOWER_L4_3_ DE_YEN, _LOWER_L4_2_
@@ -403,7 +398,7 @@ enum userspace_custom_keycodes {
 #define _RAISE_L3_5_ KC_UNDO, KC_CUT, KC_COPY, KC_PSTE, KC_AGAIN
 #define _RAISE_R1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
 #define _RAISE_R2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
-#define _RAISE_R3_5_ KC_PSCR, CW_TOGG, KC_INS, OSM_AGR, CW_TOGG
+#define _RAISE_R3_5_ KC_PSCR, LSAG(DE_V), CW_TOGG, OSM_AGR, KC_INS
 //
 #define _RAISE_L1_6_ _ADD_L_1_, _RAISE_L1_5_
 #define _RAISE_L2_6_ _ADD_L_2_, _RAISE_L2_5_
@@ -457,13 +452,13 @@ enum userspace_custom_keycodes {
 #define _ATTIC_L2_6_ KC_NO, _ATTIC_L2_5_
 #define _ATTIC_L3_6_ EE_CLR, _ATTIC_L3_5_
 #define _ATTIC_R1_6_ _ATTIC_R1_5_, QK_BOOT
-#define _ATTIC_R2_6_ _ATTIC_R2_5_, DE_ELLP
+#define _ATTIC_R2_6_ _ATTIC_R2_5_, KC_NO
 #define _ATTIC_R3_6_ _ATTIC_R3_5_, EE_CLR
 //
 #define _ATTIC_L4_2_ LSFT_T(KC_BRID), KC_TRNS
 #define _ATTIC_L4_3_ KC_LSFT, _ATTIC_L4_2_
 #define _ATTIC_R4_2_ KC_TRNS, RSFT_T(KC_BRIU)
-#define _ATTIC_R4_3_ _ATTIC_R4_2_, KC_NO
+#define _ATTIC_R4_3_ _ATTIC_R4_2_, KC_RSFT
 //
 #define _ATTIC_3x5_ _ATTIC_L1_5_, _ATTIC_R1_5_, _ATTIC_L2_5_, _ATTIC_R2_5_, _ATTIC_L3_5_, _ATTIC_R3_5_
 #define _ATTIC_3x6_ _ATTIC_L1_6_, _ATTIC_R1_6_, _ATTIC_L2_6_, _ATTIC_R2_6_, _ATTIC_L3_6_, _ATTIC_R3_6_
