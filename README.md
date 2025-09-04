@@ -9,11 +9,11 @@ Symbols are 'translated', if a linux/windows host is detected.
 First and last column keys on base layers for 6x3 keyboards,
 (X) is the corresponding key from the currently active base layer:
 ```
-     ⌥/⌫│                                       │⌥/(X)
+     A/⌫│                                       │A/(X)
      ───┼─                                     ─┼─────
      Σ/⎋│           (...other keys...)          │Σ/(X)
      ───┼─                                     ─┼─────
-     ⌘/▤│                                       │⌘/ ↵
+     M/▤│                                       │M/ ↵
 ```
 
 All base layers share the same thumb cluster:
@@ -68,7 +68,7 @@ All base layers share the same thumb cluster:
 
 ## Symbols
 ```
-    │ @ │ _ │ [ │ ] │ ^         ! │ < │ > │ = │ & │(ſ)
+ Bsp│ @ │ _ │ [ │ ] │ ^         ! │ < │ > │ = │ & │(ſ)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │ \ │ / │ { │ } │ *         ? │ ( │ ) │ - │ : │(§)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
@@ -80,7 +80,7 @@ All base layers share the same thumb cluster:
 
 ## Lower (Function keys and numbers)
 ```
-    │F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ + │ #
+ Bsp│F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ + │ #
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
   ( │F5 │F6 │F7 │F8 │ €         . │ 4 │ 5 │ 6 │ - │ )
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
@@ -97,7 +97,7 @@ All base layers share the same thumb cluster:
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Udo│Cut│Cpy│Pst│Rdo       PSc│VPs│CWT│AGr│Ins│
+    │Udo│Cut│Cpy│Pst│Pst*      PSc│MDX│CWT│AGr│Rdo│
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─S─┴ATT┘ └───┴─S─┘───
@@ -109,7 +109,7 @@ All base layers share the same thumb cluster:
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│ C │ S │ A │ G │
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Tb←│Cut│Cpy│Pst│          Slo│Med│Fst│AGr│Tb→│
+    │Tb←│Cut│Cpy│Pst│Pst*      Slo│Med│Fst│AGr│Tb→│
                ───┌───┬───┐ ┌───┬───┐───
                CSC│Bt1│Bt2│ │Bt3│Bt1│CSC
                ───└───┴───┘ └───┴─S─┘───
@@ -117,9 +117,9 @@ All base layers share the same thumb cluster:
 
 ## Attic (Adjustments and missing stuff)
 ```
-    │QBt│ECl│LAs│LAr│APP        ¡ │ ‹ │ « │ » │ › │QBt
+ QBt│QBt│ECl│LAs│LAr│Ins        ¡ │ ‹ │ « │ » │ › │QBt
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │LyG│Ly←│Ly→│BsL│MDX        ¿ │ • │ ‚ │ ‘ │ ’ │
+    │LyG│Ly←│Ly→│BsL│APP        ¿ │ • │ ‚ │ ‘ │ ’ │
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │RGB│R_S│R_H│R_V│R_M       n-–│m-—│ „ │ “ │ ” │ECl
                ───┌───┬───┐ ┌───┬───┐───

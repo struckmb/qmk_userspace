@@ -69,6 +69,12 @@ enum userspace_custom_keycodes {
     BS_SAFE = SAFE_RANGE,
     DL_PREV,
     DL_NEXT,
+    CP_CUT,
+    CP_COPY,
+    CP_PSTE,
+    CP_PSTV,
+    CP_UNDO,
+    CP_REDO,
     NO_MODS,
 #ifdef ARTSENIO_ENABLE
     /* AR_START, AR_END, // Dummy key codes for combo definitions */
@@ -171,9 +177,9 @@ enum userspace_custom_keycodes {
 #define _BASE_R_2_(kc) SY_R(kc)
 #define _BASE_R_3_(kc) RGUI_T(kc)
 // Additional layers
-#define _ADD_L_1_ KC_LALT
+#define _ADD_L_1_ _BASE_L_1_
 #define _ADD_L_2_ _BASE_L_2_
-#define _ADD_L_3_ KC_LGUI
+#define _ADD_L_3_ _BASE_L_3_
 // R1 and R2 depend on layout
 #define _ADD_R_1_ KC_LALT
 #define _ADD_R_2_ KC_RCTL
@@ -393,24 +399,24 @@ enum userspace_custom_keycodes {
 #define _LOWER_3x6_ _LOWER_L1_6_, _LOWER_R1_6_, _LOWER_L2_6_, _LOWER_R2_6_, _LOWER_L3_6_, _LOWER_R3_6_
 
 /* Raise: Control + Navigation layer */
-#define _RAISE_L1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_PGDN
+#define _RAISE_L1_5_ KC_PGUP, KC_BSPC, KC_UP,   KC_DEL,  KC_PGDN
 #define _RAISE_L2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
-#define _RAISE_L3_5_ KC_UNDO, KC_CUT, KC_COPY, KC_PSTE, KC_AGAIN
+#define _RAISE_L3_5_ CP_UNDO, CP_CUT,  CP_COPY, CP_PSTE, CP_PSTV
 #define _RAISE_R1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
 #define _RAISE_R2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
-#define _RAISE_R3_5_ KC_PSCR, LSAG(DE_V), CW_TOGG, OSM_AGR, KC_INS
+#define _RAISE_R3_5_ KC_PSCR, NO_MODS, CW_TOGG, OSM_AGR, CP_REDO
 //
-#define _RAISE_L1_6_ _ADD_L_1_, _RAISE_L1_5_
-#define _RAISE_L2_6_ _ADD_L_2_, _RAISE_L2_5_
-#define _RAISE_L3_6_ _ADD_L_3_, _RAISE_L3_5_
-#define _RAISE_R1_6_ _RAISE_R1_5_, _ADD_R_1_
-#define _RAISE_R2_6_ _RAISE_R2_5_, _ADD_R_2_
-#define _RAISE_R3_6_ _RAISE_R3_5_, _ADD_R_3_
+#define _RAISE_L1_6_ XXXXXXX,      _RAISE_L1_5_
+#define _RAISE_L2_6_ XXXXXXX,      _RAISE_L2_5_
+#define _RAISE_L3_6_ XXXXXXX,      _RAISE_L3_5_
+#define _RAISE_R1_6_ _RAISE_R1_5_, XXXXXXX
+#define _RAISE_R2_6_ _RAISE_R2_5_, XXXXXXX
+#define _RAISE_R3_6_ _RAISE_R3_5_, XXXXXXX
 //
 #define _RAISE_L4_2_ LSFT_T(KC_VOLD), ATT(KC_MUTE)
-#define _RAISE_L4_3_ KC_MPRV, _RAISE_L4_2_
-#define _RAISE_R4_2_ KC_TRNS, RSFT_T(KC_VOLU)
-#define _RAISE_R4_3_ _RAISE_R4_2_, KC_MNXT
+#define _RAISE_L4_3_ KC_MPRV,         _RAISE_L4_2_
+#define _RAISE_R4_2_ KC_TRNS,         RSFT_T(KC_VOLU)
+#define _RAISE_R4_3_ _RAISE_R4_2_,    KC_MNXT
 //
 #define _RAISE_3x5_ _RAISE_L1_5_, _RAISE_R1_5_, _RAISE_L2_5_, _RAISE_R2_5_, _RAISE_L3_5_, _RAISE_R3_5_
 #define _RAISE_3x6_ _RAISE_L1_6_, _RAISE_R1_6_, _RAISE_L2_6_, _RAISE_R2_6_, _RAISE_L3_6_, _RAISE_R3_6_
@@ -419,21 +425,21 @@ enum userspace_custom_keycodes {
 /* Pointer layer */
 #    define _POINT_L1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, KC_WH_U
 #    define _POINT_L2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
-#    define _POINT_L3_5_ S_C_TAB, KC_CUT, KC_COPY, KC_PSTE, XXXXXXX
+#    define _POINT_L3_5_ S_C_TAB, CP_CUT,  CP_COPY, CP_PSTE, CP_PSTV
 #    define _POINT_R1_5_ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #    define _POINT_R2_5_ OSM_MEH, OSM_CTL, OSM_SFT, OSM_ALT, OSM_GUI
 #    define _POINT_R3_5_ KC_ACL0, KC_ACL1, KC_ACL2, OSM_AGR, C___TAB
 //
-#    define _POINT_L1_6_ _ADD_L_1_, _POINT_L1_5_
-#    define _POINT_L2_6_ _ADD_L_2_, _POINT_L2_5_
-#    define _POINT_L3_6_ _ADD_L_3_, _POINT_L3_5_
-#    define _POINT_R1_6_ _POINT_R1_5_, _ADD_R_1_
-#    define _POINT_R2_6_ _POINT_R2_5_, _ADD_R_2_
-#    define _POINT_R3_6_ _POINT_R3_5_, _ADD_R_3_
+#    define _POINT_L1_6_ XXXXXXX,      _POINT_L1_5_
+#    define _POINT_L2_6_ XXXXXXX,      _POINT_L2_5_
+#    define _POINT_L3_6_ XXXXXXX,      _POINT_L3_5_
+#    define _POINT_R1_6_ _POINT_R1_5_, XXXXXXX
+#    define _POINT_R2_6_ _POINT_R2_5_, XXXXXXX
+#    define _POINT_R3_6_ _POINT_R3_5_, XXXXXXX
 //
-#    define _POINT_L4_2_ KC_BTN1, KC_BTN2
-#    define _POINT_L4_3_ XXXXXXX, _POINT_L4_2_
-#    define _POINT_R4_2_ KC_BTN3, KC_BTN1
+#    define _POINT_L4_2_ KC_BTN1,      KC_BTN2
+#    define _POINT_L4_3_ XXXXXXX,      _POINT_L4_2_
+#    define _POINT_R4_2_ KC_BTN3,      KC_BTN1
 #    define _POINT_R4_3_ _POINT_R4_2_, XXXXXXX
 //
 #    define _POINT_3x5_ _POINT_L1_5_, _POINT_R1_5_, _POINT_L2_5_, _POINT_R2_5_, _POINT_L3_5_, _POINT_R3_5_
@@ -441,24 +447,24 @@ enum userspace_custom_keycodes {
 #endif // MOUSEKEY_ENABLE
 
 /* Attic: Adjustments and missing stuff */
-#define _ATTIC_L1_5_ QK_BOOT, EE_CLR, DL_ASET, DL_ARTS, KC_APP
-#define _ATTIC_L2_5_ DL_GAME, DL_PREV, DL_NEXT, DL_BASE, NO_MODS
+#define _ATTIC_L1_5_ QK_BOOT, EE_CLR,  DL_ASET, DL_ARTS, KC_INS
+#define _ATTIC_L2_5_ DL_GAME, DL_PREV, DL_NEXT, DL_BASE, KC_APP
 #define _ATTIC_L3_5_ RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD
 #define _ATTIC_R1_5_ DE_IEXL, DE_LSAQ, DE_LDAQ, DE_RDAQ, DE_RSAQ
 #define _ATTIC_R2_5_ DE_IQUE, DE_MDOT, DE_SLQU, DE_LSQU, DE_RSQU
 #define _ATTIC_R3_5_ DE_NDSH, DE_MDSH, DE_DLQU, DE_LDQU, DE_RDQU
 //
-#define _ATTIC_L1_6_ QK_BOOT, _ATTIC_L1_5_
-#define _ATTIC_L2_6_ KC_NO, _ATTIC_L2_5_
-#define _ATTIC_L3_6_ EE_CLR, _ATTIC_L3_5_
+#define _ATTIC_L1_6_ QK_BOOT,      _ATTIC_L1_5_
+#define _ATTIC_L2_6_ XXXXXXX,      _ATTIC_L2_5_
+#define _ATTIC_L3_6_ EE_CLR,       _ATTIC_L3_5_
 #define _ATTIC_R1_6_ _ATTIC_R1_5_, QK_BOOT
-#define _ATTIC_R2_6_ _ATTIC_R2_5_, KC_NO
+#define _ATTIC_R2_6_ _ATTIC_R2_5_, XXXXXXX
 #define _ATTIC_R3_6_ _ATTIC_R3_5_, EE_CLR
 //
 #define _ATTIC_L4_2_ LSFT_T(KC_BRID), KC_TRNS
-#define _ATTIC_L4_3_ KC_LSFT, _ATTIC_L4_2_
-#define _ATTIC_R4_2_ KC_TRNS, RSFT_T(KC_BRIU)
-#define _ATTIC_R4_3_ _ATTIC_R4_2_, KC_RSFT
+#define _ATTIC_L4_3_ KC_LSFT,         _ATTIC_L4_2_
+#define _ATTIC_R4_2_ KC_TRNS,         RSFT_T(KC_BRIU)
+#define _ATTIC_R4_3_ _ATTIC_R4_2_,    KC_RSFT
 //
 #define _ATTIC_3x5_ _ATTIC_L1_5_, _ATTIC_R1_5_, _ATTIC_L2_5_, _ATTIC_R2_5_, _ATTIC_L3_5_, _ATTIC_R3_5_
 #define _ATTIC_3x6_ _ATTIC_L1_6_, _ATTIC_R1_6_, _ATTIC_L2_6_, _ATTIC_R2_6_, _ATTIC_L3_6_, _ATTIC_R3_6_

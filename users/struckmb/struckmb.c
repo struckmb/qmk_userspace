@@ -1,7 +1,7 @@
 #include "struckmb.h"
 
+// Return after running through all individual hooks
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Return after running through all individual hooks
     if (keycode <= NO_MODS && record->event.pressed) {
         switch (keycode) {
             case NO_MODS:
@@ -26,65 +26,65 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
 #ifdef OS_DETECTION_ENABLE
-    switch (detected_host_os()) {
-        case OS_MACOS:
-            switch (keycode) {
-                case KC_CUT:
-                    if (record->event.pressed) {
-                        tap_code16(G(KC_X));
-                    }
-                    return false;
-                case KC_COPY:
-                    if (record->event.pressed) {
-                        tap_code16(G(KC_C));
-                    }
-                    return false;
-                case KC_PSTE:
-                    if (record->event.pressed) {
-                        tap_code16(G(KC_V));
-                    }
-                    return false;
-                case KC_BRIU:
-                    if (record->event.pressed) {
-                        register_code16(KC_BRMU);
-                    } else {
-                        unregister_code16(KC_BRMU);
-                    }
-                    return false;
-                case KC_BRID:
-                    if (record->event.pressed) {
-                        register_code16(KC_BRMD);
-                    } else {
-                        unregister_code16(KC_BRMD);
-                    }
-                    return false;
-            }
-            break;
+    bool macos = detected_host_os() == OS_MACOS;
+#else
+    bool macos = false;
+#endif // OS_DETECTION_ENABLE
 
-        case OS_LINUX:
-        case OS_WINDOWS:
-            switch (keycode) {
-                case KC_CUT:
-                    if (record->event.pressed) {
-                        tap_code16(S(KC_DEL));
-                    }
-                    return false;
-                case KC_COPY:
-                    if (record->event.pressed) {
-                        tap_code16(C(KC_INS));
-                    }
-                    return false;
-                case KC_PSTE:
-                    if (record->event.pressed) {
-                        tap_code16(S(KC_INS));
-                    }
-                    return false;
+    switch (keycode) {
+        case CP_CUT:
+            if (record->event.pressed) {
+                tap_code16(macos ? G(DE_X) : S(KC_DEL));
             }
-            break;
-        default:
-            break;
+            return false;
+        case CP_COPY:
+            if (record->event.pressed) {
+                tap_code16(macos ? G(DE_C) : C(KC_INS));
+            }
+            return false;
+        case CP_PSTE:
+            if (record->event.pressed) {
+                tap_code16(macos ? G(DE_V) : S(KC_INS));
+            }
+            return false;
+        case CP_PSTV:
+            if (record->event.pressed) {
+                tap_code16(macos ? LSAG(DE_V) : LCS(DE_V));
+            }
+            return false;
+        case CP_UNDO:
+            if (record->event.pressed) {
+                tap_code16(macos ? G(DE_Z) : C(DE_Z));
+            }
+            return false;
+        case CP_REDO:
+            if (record->event.pressed) {
+                tap_code16(macos ? LSG(DE_Z) : LCS(DE_Z));
+            }
+            return false;
+#ifdef OS_DETECTION_ENABLE
+        case KC_BRIU:
+            if (macos) {
+                if (record->event.pressed) {
+                    if (detected_host_os() == OS_MACOS)
+                        register_code16(KC_BRMU);
+                } else {
+                    unregister_code16(KC_BRMU);
+                }
+            }
+            return false;
+        case KC_BRID:
+            if (macos) {
+                if (record->event.pressed) {
+                    if (detected_host_os() == OS_MACOS)
+                        register_code16(KC_BRMD);
+                } else {
+                    unregister_code16(KC_BRMD);
+                }
+            }
+            return false;
+#endif // OS_DETECTION_ENABLE
     }
-#endif /* ifdef OS_DETECTION_ENABLE */
 
     return
     //     process_record_keymap(keycode, record) &&
