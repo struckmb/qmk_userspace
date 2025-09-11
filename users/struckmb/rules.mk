@@ -1,6 +1,6 @@
 
 # Common compilation flags
-LTO_ENABLE = yes
+LTO_ENABLE ?= yes
 
 # These should be enabled in all boards
 MOUSEKEY_ENABLE = yes   # Mouse emulation keys

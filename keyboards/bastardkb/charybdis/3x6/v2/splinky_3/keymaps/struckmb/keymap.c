@@ -25,6 +25,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef MAC_LAYER_ENABLE
     [LAYER_MC_THUMBS] = LAYOUT_split_3x6_3_wrapper(_3x6_TRNS_, _THUMBS_3_2_MAC),
 #endif // MAC_LAYER_ENABLE
+#ifdef GAME_ENABLE
+    [LAYER_GAME] = LAYOUT_split_3x6_3_wrapper(_GAME_3x6_, _GAME_L4_3_, _GAME_R4_2_),
+#endif // GAME_ENABLE
 
     [LAYER_SYMBL] = LAYOUT_split_3x6_3_wrapper(_SYMBL_3x6_, _SYMBL_L4_3_, _SYMBL_R4_2_), //
     [LAYER_LOWER] = LAYOUT_split_3x6_3_wrapper(_LOWER_3x6_, _LOWER_L4_3_, _LOWER_R4_2_), //

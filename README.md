@@ -23,6 +23,8 @@ All base layers share the same thumb cluster:
                 ⎋ │ ↵ │ ⇥ │ │./,│Spc│ ⎋
                ─R─ ─G─┴LOW┘ └RSE┴─── ─L─
 ```
+The dot and comma key is mainly used for 5 column keyboards where I replaced dot and comma by some of the "umlauts".
+The selected base layer is still active after a power cut or reset.
 
 ## QWERTY (german adaption)
 ```
@@ -82,6 +84,45 @@ All base layers share the same thumb cluster:
      ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       y │ x │ c │ v │ b         n │ m │ , │ . │ ß │
      ─M─┴───┴───┴───┴───       ───┴───┴(ä)┴(ü)┴─M─
+```
+
+# Special Layers ()
+These are not used for normal writing. They are not persisted and gone after a restart.
+
+## Game Layer
+```
+      q │ w │ e │ r │ t         6 │ 7 │ 8 │ 9 │Tab
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
+      a │ s │ d │ f │ g         ← │ ↓ │ ↑ │ → │ 5
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
+      y │ x │ c │ v │ b         0 │ 1 │ 2 │ 3 │ 4
+              ┌───┬───┬───┐ ┌───┬───┬───┐
+              │Esc│Ent│Ctl│ │Sft│Spc│Alt│
+              └───┴───┴───┘ └───┴───┴───┘
+```
+
+## ASETNIOP Layer
+```
+        │   │   │   │             │   │   │   │
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
+        │   │   │   │    [TBD]    │   │   │   │
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
+        │   │   │   │             │   │   │   │
+              ┌───┬───┬───┐ ┌───┬───┬───┐
+              │   │   │   │ │   │   │   │
+              └───┴───┴───┘ └───┴───┴───┘
+```
+
+## ARTSEN.IO Layer
+```
+        │   │   │   │             │   │   │   │
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
+        │   │   │   │    [TBD]    │   │   │   │
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
+        │   │   │   │             │   │   │   │
+              ┌───┬───┬───┐ ┌───┬───┬───┐
+              │   │   │   │ │   │   │   │
+              └───┴───┴───┘ └───┴───┴───┘
 ```
 
 

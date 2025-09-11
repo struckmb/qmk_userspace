@@ -15,25 +15,28 @@ enum userspace_layers {
 #endif // QWERTY_ENABLE
 #ifdef NOTED_ENABLE
     LAYER_NOTED,
-#endif /* ifdef NOTED_ENABLE */
+#endif // NOTED_ENABLE
 #ifdef BONE_ENABLE
     LAYER_BONE,
-#endif /* ifdef BONE_ENABLE */
+#endif // BONE_ENABLE
 #ifdef NEO2_ENABLE
     LAYER_NEO2,
-#endif /* ifdef NEO2_ENABLE */
+#endif // NEO2_ENABLE
 #ifdef COLEMAK_DH_ENABLE
     LAYER_COLEMAK_DH,
-#endif /* ifdef COLEMAK_DH_ENABLE */
+#endif // COLEMAK_DH_ENABLE
+#ifdef GAME_ENABLE
+    LAYER_GAME,
+#endif // GAME_ENABLE
 #ifdef DVORAK_DE_ENABLE
     LAYER_DVORAK_DE,
-#endif /* ifdef DVORAK_DE_ENABLE */
+#endif // DVORAK_DE_ENABLE
 #ifdef MAC_LAYER_ENABLE
     LAYER_MC_THUMBS,
 #endif // MAC_LAYER_ENABLE
 #ifdef ASETNIOP_ENABLE
     LAYER_ASETNIOP,
-#endif /* ifdef ASETNIOP_ENABLE */
+#endif // ASETNIOP_ENABLE
 #ifdef ARTSENIO_ENABLE
     // ARTSENIO layers
     LAYER_ARTSENIO,
@@ -141,6 +144,9 @@ enum userspace_custom_keycodes {
 #ifndef DVORAK_DE_ENABLE
 #    define LAYER_DVORAK_DE 0
 #endif // ifndef DVORAK_DE_ENABLE
+#ifndef GAME_ENABLE
+#    define LAYER_GAME 0
+#endif /* ifndef GAME_ENABLE */
 #ifndef ARTSENIO_ENABLE
 #    define LAYER_ARTSENIO 0
 #else // artsenio specific layer keys
@@ -155,6 +161,7 @@ enum userspace_custom_keycodes {
 // sticky layers (withstands reset):
 #define DL_BASE PDF(0)
 // non-sticky layers (return to saved after reset):
+#define DL_GAME DF(LAYER_GAME)
 #define DL_ARTS DF(LAYER_ARTSENIO)
 #define DL_ASET DF(LAYER_ASETNIOP)
 
@@ -340,6 +347,30 @@ enum userspace_custom_keycodes {
 //
 #    define _DVORAK_DE_3x6_ _DVORAK_DE_L1_6_, _DVORAK_DE_R1_6_, _DVORAK_DE_L2_6_, _DVORAK_DE_R2_6_, _DVORAK_DE_L3_6_, _DVORAK_DE_R3_6_
 #endif // DVORAK_DE_ENABLE
+
+#ifdef GAME_ENABLE
+// GAME layout
+#    define _GAME_L1_5_ DE_Q, DE_W, DE_E, DE_R, DE_T
+#    define _GAME_L2_5_ DE_A, DE_S, DE_D, DE_F, DE_G
+#    define _GAME_L3_5_ DE_Y, DE_X, DE_C, DE_V, DE_B
+#    define _GAME_R1_5_ KC_6, KC_7, KC_8, KC_9, KC_TAB
+#    define _GAME_R2_5_ KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_5
+#    define _GAME_R3_5_ KC_0, KC_1, KC_2, KC_3, KC_4
+//
+#    define _GAME_L1_6_ KC_NO, _GAME_L1_5_
+#    define _GAME_R1_6_ _GAME_R1_5_, KC_NO
+#    define _GAME_L2_6_ KC_NO, _GAME_L2_5_
+#    define _GAME_R2_6_ _GAME_R2_5_, KC_NO
+#    define _GAME_L3_6_ KC_NO, _GAME_L3_5_
+#    define _GAME_R3_6_ _GAME_R3_5_, KC_NO
+//
+#    define _GAME_L4_2_ KC_ENT, KC_LCTL
+#    define _GAME_L4_3_ KC_ESC, _GAME_L4_2_
+#    define _GAME_R4_2_ KC_LSFT, KC_SPC
+#    define _GAME_R4_3_ _GAME_R4_2_, KC_LALT
+//
+#    define _GAME_3x6_ _GAME_L1_6_, _GAME_R1_6_, _GAME_L2_6_, _GAME_R2_6_, _GAME_L3_6_, _GAME_R3_6_
+#endif // GAME_ENABLE
 
 /* Symbols layer */
 #define _SYMBL_L1_5_ DE_AT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
