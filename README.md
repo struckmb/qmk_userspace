@@ -13,15 +13,15 @@ First and last column keys on base layers for 6x3 keyboards,
      ───┼─                                     ─┼─────
      Σ/⎋│           (...other keys...)          │Σ/(X)
      ───┼─                                     ─┼─────
-     M/▤│                                       │M/ ↵
+      G │                                       │ C/▤
 ```
 
 All base layers share the same thumb cluster:
 (If the keyboard only has 2 keys on one side, the outermost key (marked with *) is missing)
 ```
                 *                     *
-                ⎋ │ ↵ │ ⇥ │ │ ⌦ │Spc│Rpt
-               ───┴─G─┴LOW┘ └RSE┴───┴───
+                ⎋ │ ↵ │ ⇥ │ │./,│Spc│ ⎋
+               ─R─ ─G─┴LOW┘ └RSE┴─── ─L─
 ```
 
 ## QWERTY (german adaption)
@@ -31,17 +31,7 @@ All base layers share the same thumb cluster:
       a │ s │ d │ f │ g         h │ j │ k │ l │ ö │(ä)
      ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       y │ x │ c │ v │ b         n │ m │ , │ . │ ß │
-     ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
-```
-
-## BONE
-```
-      j │ d │ u │ a │ x         p │ h │ l │ m │ w │(ß)
-     ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-      c │ t │ i │ e │ o         b │ n │ r │ s │ g │(q)
-     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
-      f │ v │ ü │ ä │ ö         y │ z │ , │ . │ k │
-     ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
+     ─M─┴───┴───┴───┴───       ───┴───┴(ä)┴(ü)┴─M─
 ```
 
 ## NOTED
@@ -51,7 +41,27 @@ All base layers share the same thumb cluster:
       c │ s │ i │ e │ o         d │ t │ n │ r │ h │(ß)
      ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       v │ x │ ü │ ä │ ö         w │ g │ , │ . │ k │
-     ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
+     ─M─┴───┴───┴───┴───       ───┴───┴(j)┴(ß)┴─M─
+```
+
+## BONE
+```
+      j │ d │ u │ a │ x         p │ h │ l │ m │ w │(ß)
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
+      c │ t │ i │ e │ o         b │ n │ r │ s │ g │(q)
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
+      f │ v │ ü │ ä │ ö         y │ z │ , │ . │ k │
+     ─M─┴───┴───┴───┴───       ───┴───┴(q)┴(ß)┴─M─
+```
+
+## NEO2
+```
+      x │ v │ l │ c │ w         k │ h │ g │ f │ q │(ß)
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
+      u │ i │ a │ e │ o         s │ n │ r │ t │ d │(y)
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
+      ü │ ö │ ä │ p │ z         b │ m │ , │ . │ j │
+     ─M─┴───┴───┴───┴───       ───┴───┴(y)┴(ß)┴─M─
 ```
 
 ## Colemak (Mod DH, german adaption)
@@ -61,18 +71,29 @@ All base layers share the same thumb cluster:
       a │ r │ s │ t │ g         m │ n │ e │ i │ o │(ä)
      ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
       z │ x │ c │ d │ v         k │ h │ , │ . │ ß │
-     ─M─┴───┴───┴───┴───       ───┴───┴───┴───┴─M─
+     ─M─┴───┴───┴───┴───       ───┴───┴(ä)┴(ü)┴─M─
 ```
+
+## DVORADVORAKgerman adaption)
+```
+      q │ w │ e │ r │ t         z │ u │ i │ o │ p │(ü)
+     ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
+      a │ s │ d │ f │ g         h │ j │ k │ l │ ö │(ä)
+     ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
+      y │ x │ c │ v │ b         n │ m │ , │ . │ ß │
+     ─M─┴───┴───┴───┴───       ───┴───┴(ä)┴(ü)┴─M─
+```
+
 
 # Additional Layers
 
 ## Symbols
 ```
- Bsp│ @ │ _ │ [ │ ] │ ^         ! │ < │ > │ = │ & │(ſ)
+ Bsp│ @ │ _ │ [ │ ] │ ^         ! │ < │ > │ = │ & │ ſ
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │ \ │ / │ { │ } │ *         ? │ ( │ ) │ - │ : │(§)
+    │ \ │ / │ { │ } │ *         ? │ ( │ ) │ - │ : │ §
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │ # │ $ │ | │ ~ │ ´         + │ % │ " │ ' │ ; │(…)
+    │ # │ $ │ | │ ~ │ ´         + │ % │ " │ ' │ ; │ …
                ───┌───┬───┐ ┌───┬───┐───
                 ° │ § │G+ˇ│ │ … │Spc│ ſ
                ───└───┴───┘ └───┴───┘───
@@ -80,24 +101,24 @@ All base layers share the same thumb cluster:
 
 ## Lower (Function keys and numbers)
 ```
- Bsp│F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ + │ #
+ Bsp│F1 │F2 │F3 │F4 │ £         / │ 7 │ 8 │ 9 │ + │ $
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-  ( │F5 │F6 │F7 │F8 │ €         . │ 4 │ 5 │ 6 │ - │ )
+  ¥ │F5 │F6 │F7 │F8 │ €         . │ 4 │ 5 │ 6 │ - │ #
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │F9 │F10│F11│F12│ ¢         0 │ 1 │ 2 │ 3 │ , │ ¥
+  ( │F9 │F10│F11│F12│ ¢         0 │ 1 │ 2 │ 3 │ , │ )
                ───┌───┬───┐ ┌───┬───┐───
-                ¥ │Sft│(v)│ │Bsp│Spc│ $
+                ¥ │Sft│(v)│ │App│Spc│ $
                ───└───┴───┘ └ATT┴─S─┘───
 ```
 
 ## Raise (Navigation and control keys)
 (the home row modifiers on the right are sticky)
 ```
-    │PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│
+ Bsp│PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│ Ps
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │
+ Ins│Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │ SL
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Udo│Cut│Cpy│Pst│Pst*      PSc│MDX│CWT│AGr│Rdo│
+    │Udo│Cut│Cpy│Pst│All       PSc│MDX│CpW│AGr│Rdo│
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─S─┴ATT┘ └───┴─S─┘───
@@ -109,7 +130,7 @@ All base layers share the same thumb cluster:
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │Bt4│Ms←│Ms↓│Ms→│Bt5       Meh│ C │ S │ A │ G │
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Tb←│Cut│Cpy│Pst│Pst*      Slo│Med│Fst│AGr│Tb→│
+    │Tb←│Cut│Cpy│Pst│All       Slo│Med│Fst│AGr│Tb→│
                ───┌───┬───┐ ┌───┬───┐───
                CSC│Bt1│Bt2│ │Bt3│Bt1│CSC
                ───└───┴───┘ └───┴─S─┘───
@@ -117,15 +138,16 @@ All base layers share the same thumb cluster:
 
 ## Attic (Adjustments and missing stuff)
 ```
- QBt│QBt│ECl│LAs│LAr│Ins        ¡ │ ‹ │ « │ » │ › │QBt
+    │QBt│ECl│LAs│LAr│Ins        ¡ │ ‹ │ « │ » │ › │QBt
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │LyG│Ly←│Ly→│BsL│APP        ¿ │ • │ ‚ │ ‘ │ ’ │
+    │M/A│Ly←│Ly→│BsL│MDX        ¿ │ • │ ‚ │ ‘ │ ’ │Pwr
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │RGB│R_S│R_H│R_V│R_M       n-–│m-—│ „ │ “ │ ” │ECl
                ───┌───┬───┐ ┌───┬───┐───
                LSf│Br-│(v)│ │(v)│Br+│RSf
                ───└─S─┴───┘ └───┴─S─┘───
-``
+```
+
 # Portfolio
 Currently my board contains the following beauties:
 1. Redox (03/2021) (ready assembled)

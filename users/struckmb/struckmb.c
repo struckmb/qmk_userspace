@@ -8,18 +8,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 clear_oneshot_mods();
                 return false;
             case DL_PREV:
-                if (get_highest_layer(default_layer_state) > 0) {
-                    set_single_persistent_default_layer(get_highest_layer(default_layer_state) - 1);
-                } else {
-                    set_single_persistent_default_layer(LAYER_SYMBL - 1);
+                if (LAYER_MAX > 0) {
+                    uint8_t current_default_layer = get_highest_layer(default_layer_state);
+                    if (current_default_layer > 0) {
+                        set_single_persistent_default_layer(current_default_layer - 1);
+                    } else  {
+                        set_single_persistent_default_layer(LAYER_MAX);
+                    }
                 }
                 return false;
             case DL_NEXT:
-                // uint8_t next_default_layer = get_highest_layer(default_layer_state) + 1;
-                if (get_highest_layer(default_layer_state) + 1 < LAYER_SYMBL) {
-                    set_single_persistent_default_layer(get_highest_layer(default_layer_state) + 1);
-                } else {
-                    set_single_persistent_default_layer(0);
+                if (LAYER_MAX > 0) {
+                    uint8_t next_default_layer = get_highest_layer(default_layer_state) + 1;
+                    if (next_default_layer > LAYER_MAX) {
+                        set_single_persistent_default_layer(0);
+                    } else {
+                        set_single_persistent_default_layer(next_default_layer);
+                    }
                 }
                 return false;
         }
@@ -47,9 +52,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(macos ? G(DE_V) : S(KC_INS));
             }
             return false;
-        case CP_PSTV:
+        case SEL_ALL:
             if (record->event.pressed) {
-                tap_code16(macos ? LSAG(DE_V) : LCS(DE_V));
+                tap_code16(macos ? G(DE_A) : C(DE_A));
             }
             return false;
         case CP_UNDO:
@@ -62,29 +67,94 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(macos ? LSG(DE_Z) : LCS(DE_Z));
             }
             return false;
+    }
+
 #ifdef OS_DETECTION_ENABLE
+    if (macos) switch (keycode) {
+        case DE_IEXL:
+            if (record->event.pressed) {
+                tap_code16(A(DE_5));
+            }
+            return false;
+        case DE_IQUE:
+            if (record->event.pressed) {
+                tap_code16(A(DE_6));
+            }
+            return false;
+        case DE_MDOT:
+            if (record->event.pressed) {
+                tap_code16(A(DE_DOT));
+            }
+            return false;
+        case DE_NDSH:
+            if (record->event.pressed) {
+                tap_code16(A(DE_N));
+            }
+            return false;
+        case DE_MDSH:
+            if (record->event.pressed) {
+                tap_code16(A(DE_4));
+            }
+            return false;
+        case DE_LSAQ:
+            if (record->event.pressed) {
+                tap_code16(A(DE_B));
+            }
+            return false;
+        case DE_LDAQ:
+            if (record->event.pressed) {
+                tap_code16(A(DE_V));
+            }
+            return false;
+        case DE_RDAQ:
+            if (record->event.pressed) {
+                tap_code16(A(DE_X));
+            }
+            return false;
+        case DE_RSAQ:
+            if (record->event.pressed) {
+                tap_code16(A(DE_Y));
+            }
+            return false;
+        case DE_SLQU:
+            if (record->event.pressed) {
+                tap_code16(DE_COMM);
+            }
+            return false;
+        case DE_LSQU:
+        case DE_RSQU:
+            if (record->event.pressed) {
+                tap_code16(A(DE_D));
+            }
+            return false;
+        case DE_DLQU:
+            if (record->event.pressed) {
+                tap_code16(DE_COMM);
+                tap_code16(DE_COMM);
+            }
+            return false;
+        case DE_LDQU:
+        case DE_RDQU:
+            if (record->event.pressed) {
+                tap_code16(A(DE_S));
+            }
+            return false;
         case KC_BRIU:
-            if (macos) {
-                if (record->event.pressed) {
-                    if (detected_host_os() == OS_MACOS)
-                        register_code16(KC_BRMU);
-                } else {
-                    unregister_code16(KC_BRMU);
-                }
+            if (record->event.pressed) {
+                register_code16(KC_BRMU);
+            } else {
+                unregister_code16(KC_BRMU);
             }
             return false;
         case KC_BRID:
-            if (macos) {
-                if (record->event.pressed) {
-                    if (detected_host_os() == OS_MACOS)
-                        register_code16(KC_BRMD);
-                } else {
-                    unregister_code16(KC_BRMD);
-                }
+            if (record->event.pressed) {
+                register_code16(KC_BRMD);
+            } else {
+                unregister_code16(KC_BRMD);
             }
             return false;
-#endif // OS_DETECTION_ENABLE
     }
+#endif // OS_DETECTION_ENABLE
 
     return
     //     process_record_keymap(keycode, record) &&

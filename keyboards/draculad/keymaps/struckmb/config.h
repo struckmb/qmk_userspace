@@ -17,6 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define QWERTY_ENABLE
 #define NOTED_ENABLE
+#define MAC_LAYER_ENABLE
+#ifdef LAYER_STATE_8BIT
+#      undef LAYER_STATE_8BIT
+#      define LAYER_STATE_16BIT
+#endif // LAYER_STATE_8BIT
 
 // comment that out if your trackball is on the left side
 #define TRACKBALL_RIGHT
@@ -27,7 +32,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif // TRACKBALL_RIGHT
 #define POINTING_DEVICE_ROTATION_90
 
-#ifdef COMBO_ENABLE
-#    define EXTRA_SHORT_COMBOS
-// #    define COMBO_SHOULD_TRIGGER
-#endif // COMBO_ENABLE
+
+#ifdef RGBLIGHT_ENABLE
+    #undef RGBLIGHT_ANIMATIONS // disable ALL animations
+    // #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // (636k)  Enable rainbow mood animation mode.
+    // #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // (670k)  Enable rainbow swirl animation mode.
+    #define RGBLIGHT_EFFECT_STATIC_GRADIENT // (264k)  Enable static gradient mode.
+    // #define RGBLIGHT_EFFECT_TWINKLE         // (1574k) Enable twinkle animation mode.
+    // #define RGBLIGHT_EFFECT_CHRISTMAS       // (922k)  Enable christmas animation mode.
+    // #define RGBLIGHT_EFFECT_BREATHING       // (904k)  Enable breathing animation mode.
+    // #define RGBLIGHT_EFFECT_RGB_TEST        // (596k)  Enable RGB test animation mode.
+#endif
+

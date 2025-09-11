@@ -8,7 +8,7 @@
 // #define COLEMAK_DH_ENABLE
 // #define DVORAK_DE_ENABLE
 
-// // some additionl layers can be added
+// // some other layers can be added
 // #define GAME_ENABLE (left hand qwerty + right hand arrows and numbers)
 // #define ASETNIOP_ENABLE (corded writing)
 // #define ARTSENIO_ENABLE (one handed writing)
@@ -23,6 +23,7 @@
 #endif // MOUSEKEY_ENABLE
 
 #ifdef COMBO_ENABLE
+#    define EXTRA_SHORT_COMBOS
 #    define COMBO_SHOULD_TRIGGER
 #endif // COMBO_ENABLE
 
