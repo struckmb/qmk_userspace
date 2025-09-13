@@ -76,13 +76,13 @@ The selected base layer is still active after a power cut or reset.
      ─M─┴───┴───┴───┴───       ───┴───┴(ä)┴(ü)┴─M─
 ```
 
-## DVORADVORAKgerman adaption)
+## DVORAK (german adaption)
 ```
-      q │ w │ e │ r │ t         z │ u │ i │ o │ p │(ü)
-     ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-      a │ s │ d │ f │ g         h │ j │ k │ l │ ö │(ä)
+      ü │ , │ . │ p │ y         f │ g │ c │ t │ z │(ß)
+     ───┼(ä)┼(l)┼───┼───       ───┼───┼───┼───┼─── ───
+      a │ o │ e │ i │ u         h │ d │ r │ n │ s │(l)
      ─G─┼─A─┼─S─┼─C─┼(Σ)       (Σ)┼─C─┼─S─┼─A─┼─G─ ───
-      y │ x │ c │ v │ b         n │ m │ , │ . │ ß │
+  ä │ ö │ q │ j │ k │ x         b │ m │ w │ v │ ß │
      ─M─┴───┴───┴───┴───       ───┴───┴(ä)┴(ü)┴─M─
 ```
 
@@ -148,7 +148,7 @@ These are not used for normal writing. They are not persisted and gone after a r
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
   ( │F9 │F10│F11│F12│ ¢         0 │ 1 │ 2 │ 3 │ , │ )
                ───┌───┬───┐ ┌───┬───┐───
-                ¥ │Sft│(v)│ │App│Spc│ $
+                ¥ │*X*│(v)│ │App│Spc│ $
                ───└───┴───┘ └ATT┴─S─┘───
 ```
 
@@ -157,9 +157,9 @@ These are not used for normal writing. They are not persisted and gone after a r
 ```
  Bsp│PUp│BSp│ ↑ │Del│PDn       Prv│Ply│Nxt│Stp│Ejt│ Ps
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- Ins│Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │ SL
+ MDX│Hme│ ← │ ↓ │ → │End     * Meh│ C │ S │ A │ G │ SL
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │Udo│Cut│Cpy│Pst│All       PSc│MDX│CpW│AGr│Rdo│
+    │Udo│Cut│Cpy│Pst│All       PSc│Ins│CpW│AGr│Rdo│
                ───┌───┬───┐ ┌───┬───┐───
                Prv│V -│V ×│ │(v)│V +│Nxt
                ───└─S─┴ATT┘ └───┴─S─┘───
@@ -179,13 +179,13 @@ These are not used for normal writing. They are not persisted and gone after a r
 
 ## Attic (Adjustments and missing stuff)
 ```
-    │QBt│ECl│LAs│LAr│Ins        ¡ │ ‹ │ « │ » │ › │QBt
+ QBt│QBt│Ly↓│Ly↑│BsL│MAC        ¡ │ ‹ │ « │ » │ › │QBt
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
-    │M/A│Ly←│Ly→│BsL│MDX        ¿ │ • │ ‚ │ ‘ │ ’ │Pwr
+ ECl│ECl│   │   │   │           ¿ │ • │ ‚ │ ‘ │ ’ │Pwr
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
     │RGB│R_S│R_H│R_V│R_M       n-–│m-—│ „ │ “ │ ” │ECl
                ───┌───┬───┐ ┌───┬───┐───
-               LSf│Br-│(v)│ │(v)│Br+│RSf
+MDX            M/A│Br-│(v)│ │(v)│Br+│RSf
                ───└─S─┴───┘ └───┴─S─┘───
 ```
 

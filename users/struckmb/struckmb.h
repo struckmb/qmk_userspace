@@ -343,7 +343,7 @@ enum userspace_custom_keycodes {
 #    define _DVORAK_DE_L3_6_ DE_ADIA, MS(DE_ODIA), DE_Q, DE_J, DE_K, DE_X
 #    define _DVORAK_DE_R1_6_ DE_F, DE_G, DE_C, DE_T, DE_Z, _BASE_R_1_(DE_SS)
 #    define _DVORAK_DE_R2_6_ DE_H, __HRM__DVORAK_DE_R2_4_, _BASE_R_2_(DE_L)
-#    define _DVORAK_DE_R3_6_ DE_B, DE_M, DE_W, DE_V, MS(DE_HASH), _BASE_R_3_(KC_ENT)
+#    define _DVORAK_DE_R3_6_ DE_B, DE_M, DE_W, DE_V, MS(DE_SS), _BASE_R_3_(KC_ENT)
 //
 #    define _DVORAK_DE_3x6_ _DVORAK_DE_L1_6_, _DVORAK_DE_R1_6_, _DVORAK_DE_L2_6_, _DVORAK_DE_R2_6_, _DVORAK_DE_L3_6_, _DVORAK_DE_R3_6_
 #endif // DVORAK_DE_ENABLE
