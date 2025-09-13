@@ -139,9 +139,6 @@ void render_layer(uint8_t col, uint8_t row, uint8_t top_layer, bool portrait) {
             oled_write("Fn/Num ", false);
             break;
         case LAYER_RAISE:
-#ifdef MAC_LAYER_ENABLE
-        case LAYER_MC_RAISE:
-#endif // MAC_LAYER_ENABLE
             oled_write("Nav/Ed ", false);
             break;
 #ifdef MOUSEKEY_ENABLE

@@ -22,9 +22,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef DVORAK_DE_ENABLE
     [LAYER_DVORAK_DE] = LAYOUT_split_3x6_3_wrapper(_DVORAK_DE_3x6_, _THUMBS_3_2_),
 #endif /* ifdef DVORAK_DE_ENABLE */
-#ifdef MAC_LAYER_ENABLE
-    [LAYER_MC_THUMBS] = LAYOUT_split_3x6_3_wrapper(_3x6_TRNS_, _THUMBS_3_2_MAC),
-#endif // MAC_LAYER_ENABLE
 #ifdef GAME_ENABLE
     [LAYER_GAME] = LAYOUT_split_3x6_3_wrapper(_GAME_3x6_, _GAME_L4_3_, _GAME_R4_2_),
 #endif // GAME_ENABLE
@@ -32,9 +29,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LAYER_SYMBL] = LAYOUT_split_3x6_3_wrapper(_SYMBL_3x6_, _SYMBL_L4_3_, _SYMBL_R4_2_), //
     [LAYER_LOWER] = LAYOUT_split_3x6_3_wrapper(_LOWER_3x6_, _LOWER_L4_3_, _LOWER_R4_2_), //
     [LAYER_RAISE] = LAYOUT_split_3x6_3_wrapper(_RAISE_3x6_, _RAISE_L4_3_, _RAISE_R4_2_), //
-#ifdef MAC_LAYER_ENABLE
-    [LAYER_MC_RAISE] = LAYOUT_split_3x6_3_wrapper(_RAISE_3x6_MAC, _RAISE_L4_3_, _RAISE_R4_2_),
-#endif // MAC_LAYER_ENABLE
 #ifdef MOUSEKEY_ENABLE
     // [LAYER_POINTER] = LAYOUT_split_3x6_3_wrapper(_POINT_3x6_, _PL4_3_, _PR4_2_),
     [LAYER_POINTER] = LAYOUT_split_3x6_3_wrapper(                          //

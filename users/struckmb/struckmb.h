@@ -31,9 +31,6 @@ enum userspace_layers {
 #ifdef DVORAK_DE_ENABLE
     LAYER_DVORAK_DE,
 #endif // DVORAK_DE_ENABLE
-#ifdef MAC_LAYER_ENABLE
-    LAYER_MC_THUMBS,
-#endif // MAC_LAYER_ENABLE
 #ifdef ASETNIOP_ENABLE
     LAYER_ASETNIOP,
 #endif // ASETNIOP_ENABLE
@@ -50,9 +47,6 @@ enum userspace_layers {
     LAYER_SYMBL,
     LAYER_LOWER,
     LAYER_RAISE,
-#ifdef MAC_LAYER_ENABLE
-    LAYER_MC_RAISE,
-#endif // MAC_LAYER_ENABLE
 #ifdef MOUSEKEY_ENABLE
     LAYER_POINTER,
 #endif // MOUSEKEY_ENABLE
@@ -440,27 +434,6 @@ enum userspace_custom_keycodes {
 //
 #define _RAISE_3x5_ _RAISE_L1_5_, _RAISE_R1_5_, _RAISE_L2_5_, _RAISE_R2_5_, _RAISE_L3_5_, _RAISE_R3_5_
 #define _RAISE_3x6_ _RAISE_L1_6_, _RAISE_R1_6_, _RAISE_L2_6_, _RAISE_R2_6_, _RAISE_L3_6_, _RAISE_R3_6_
-
-#ifdef MAC_LAYER_ENABLE
-#define TG_LMAC TG(LAYER_MC_THUMBS)
-#define _THUMBS_L2_MAC _0L4_2_
-#define _THUMBS_L3_MAC MC_RESC, _THUMBS_L2_MAC
-#define _THUMBS_R2_MAC MC_RDOT, KC_SPC
-#define _THUMBS_2R_MAC KC_SPC, MC_RDOT
-#define _THUMBS_R3_MAC _THUMBS_R2_MAC, LOW_ESC
-#define _5_TRNS_ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-#define _6_TRNS_ KC_TRNS, _5_TRNS_
-#define _3x5_TRNS_ _5_TRNS_, _5_TRNS_, _5_TRNS_, _5_TRNS_, _5_TRNS_, _5_TRNS_
-#define _3x6_TRNS_ _6_TRNS_, _6_TRNS_, _6_TRNS_, _6_TRNS_, _6_TRNS_, _6_TRNS_
-#define _RAISE_MAC_5L G(DE_Z), G(DE_X),  G(DE_C), G(DE_V), G(DE_A)
-#define _RAISE_MAC_5R KC_PSCR, NO_MODS, CW_TOGG, OSM_AGR, G(S(DE_Z))
-#define _RAISE_MAC_6L _ADD_L_3_, _RAISE_MAC_5L
-#define _RAISE_MAC_6R _RAISE_MAC_5R, _ADD_R_3_
-#define _RAISE_3x5_MAC _RAISE_L1_5_, _RAISE_R1_5_, _RAISE_L2_5_, _RAISE_R2_5_, _RAISE_MAC_5L, _RAISE_MAC_5R
-#define _RAISE_3x6_MAC _RAISE_L1_6_, _RAISE_R1_6_, _RAISE_L2_6_, _RAISE_R2_6_, _RAISE_MAC_6L, _RAISE_MAC_6R
-#else
-#define TG_LMAC KC_NO
-#endif // MAC_LAYER_ENABLE
 
 #ifdef MOUSEKEY_ENABLE
 /* Pointer layer */
