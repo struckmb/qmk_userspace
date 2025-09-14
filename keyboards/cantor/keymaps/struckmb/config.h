@@ -2,3 +2,4 @@
 #define QWERTY_ENABLE
 #define NOTED_ENABLE
 #define BONE_ENABLE
+#define DVORAK_DE_ENABLE

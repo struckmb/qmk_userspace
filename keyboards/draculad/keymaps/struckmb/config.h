@@ -17,7 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define QWERTY_ENABLE
 #define NOTED_ENABLE
-#define MAC_LAYER_ENABLE
+// #define BONE_ENABLE
+// #define NEO2_ENABLE
+// #define COLEMAK_DH_ENABLE
+#define DVORAK_DE_ENABLE
+
 #ifdef LAYER_STATE_8BIT
 #      undef LAYER_STATE_8BIT
 #      define LAYER_STATE_16BIT

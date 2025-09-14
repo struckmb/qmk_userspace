@@ -132,14 +132,14 @@ void render_layer(uint8_t col, uint8_t row, uint8_t top_layer, bool portrait) {
             oled_write("AS Mse ", false);
             break;
 #endif // ARTSENIO_ENABLE
-        case LAYER_SYMBL:
-            oled_write("Symbols", false);
+        case LAYER_RAISE:
+            oled_write("Nav/Ed ", false);
             break;
         case LAYER_LOWER:
             oled_write("Fn/Num ", false);
             break;
-        case LAYER_RAISE:
-            oled_write("Nav/Ed ", false);
+        case LAYER_SYMBL:
+            oled_write("Symbols", false);
             break;
 #ifdef MOUSEKEY_ENABLE
         case LAYER_POINTER:
