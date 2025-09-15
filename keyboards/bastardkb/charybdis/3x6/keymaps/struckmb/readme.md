@@ -3,13 +3,15 @@
 The POINTER layer is altered to meet charybdis' needs and special keys:
 
 ## Pointer (Mouse, only if enabled)
+
 * CSC: CTL(/GUI)+Shift+Click
+
 ```
- (⌥)│vMv│SD-│DD-│DD+│SD+          │Snp│Drg│DrT│   │(⌥)
+ (⌥)│   │SD-│DD-│DD+│SD+          │Snp│Drg│DrT│   │(⌥)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
  (⌃)│Bt4│DrT│Drg│Snp│Bt5       Meh│Sft│ ⌃ │ ⌥ │ ⌘ │(⌃)
  ─── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ───
- (⌘)│Tb←│Cut│Cpy│Pst│^M^          │   │CSC│AGr│Tb→│(⌘)
+ (⌘)│Tb←│Cut│Cpy│Pst│             │   │CSC│AGr│Tb→│(⌘)
               ┌───┬───┬───┐ ┌───┬───┐
               │CSC│Bt1│Bt2│ │Bt3│Bt1│
               └───┴───┴───┘ └───┴─⇧─┘
