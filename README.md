@@ -200,11 +200,11 @@ These are not used for normal writing. They are not persisted and gone after a r
 ### attic (adjustments and missing stuff)
 
 ```
- QBt │ QBt │LARTS│LASET│LGAME│ ModX         ¡  │  ‹  │  «  │  »  │  ›  │ QBt
+ QBt │ QBt │LARTS│LASET│LGAME│ MDX          ¡  │  ‹  │  «  │  »  │  ›  │ QBt
 ───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
- Rst │ MDX │ Ly↓ │ Ly↑ │ BsL │ RGB          ¿  │  •  │  ‚  │  ‘  │  ’  │ Pwr
+ ECl │ ECl │ Ly↓ │ Ly↑ │ BsL │ UGl          ¿  │  •  │  ‚  │  ‘  │  ’  │ ECl
 ───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
- ECl │ ECl │ R_S │ R_H │ R_V │ R_M         n-– │ m-— │  „  │  “  │  ”  │ ECl
+ Rst │U_Spd│U_Sat│U_Hue│U_Val│U_Mod        n-– │ m-— │  „  │  “  │  ”  │ Pwr
                     ─────┌─────┬─────┐ ┌─────┬─────┐─────
                          │ Br- │ (v) │ │ (v) │ Br+ │ RSf
                     ─────└──S──┴─────┘ └─────┴──S──┘─────

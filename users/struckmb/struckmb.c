@@ -12,7 +12,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     uint8_t current_default_layer = get_highest_layer(default_layer_state);
                     if (current_default_layer > 0) {
                         set_single_persistent_default_layer(current_default_layer - 1);
-                    } else  {
+                    } else {
                         set_single_persistent_default_layer(LAYER_MAX);
                     }
                 }
@@ -64,104 +64,104 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case CP_REDO:
             if (record->event.pressed) {
-                tap_code16(macos ? LSG(DE_Z) : LCS(DE_Z));
+                tap_code16(macos ? LSG(DE_Z) : LCTL(LSFT(DE_Z)));
             }
             return false;
     }
 
 #ifdef OS_DETECTION_ENABLE
     if (macos) switch (keycode) {
-        case DE_IEXL:
-            if (record->event.pressed) {
-                tap_code16(A(DE_5));
-            }
-            return false;
-        case DE_IQUE:
-            if (record->event.pressed) {
-                tap_code16(A(DE_6));
-            }
-            return false;
-        case DE_MDOT:
-            if (record->event.pressed) {
-                tap_code16(A(DE_DOT));
-            }
-            return false;
-        case DE_NDSH:
-            if (record->event.pressed) {
-                tap_code16(A(DE_N));
-            }
-            return false;
-        case DE_MDSH:
-            if (record->event.pressed) {
-                tap_code16(A(DE_4));
-            }
-            return false;
-        case DE_LSAQ:
-            if (record->event.pressed) {
-                tap_code16(A(DE_B));
-            }
-            return false;
-        case DE_LDAQ:
-            if (record->event.pressed) {
-                tap_code16(A(DE_V));
-            }
-            return false;
-        case DE_RDAQ:
-            if (record->event.pressed) {
-                tap_code16(A(DE_X));
-            }
-            return false;
-        case DE_RSAQ:
-            if (record->event.pressed) {
-                tap_code16(A(DE_Y));
-            }
-            return false;
-        case DE_SLQU:
-            if (record->event.pressed) {
-                tap_code16(DE_COMM);
-            }
-            return false;
-        case DE_LSQU:
-        case DE_RSQU:
-            if (record->event.pressed) {
-                tap_code16(A(DE_D));
-            }
-            return false;
-        case DE_DLQU:
-            if (record->event.pressed) {
-                tap_code16(DE_COMM);
-                tap_code16(DE_COMM);
-            }
-            return false;
-        case DE_LDQU:
-        case DE_RDQU:
-            if (record->event.pressed) {
-                tap_code16(A(DE_S));
-            }
-            return false;
-        case KC_BRIU:
-            if (record->event.pressed) {
-                register_code16(KC_BRMU);
-            } else {
-                unregister_code16(KC_BRMU);
-            }
-            return false;
-        case KC_BRID:
-            if (record->event.pressed) {
-                register_code16(KC_BRMD);
-            } else {
-                unregister_code16(KC_BRMD);
-            }
-            return false;
-    }
+            case DE_IEXL:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_5));
+                }
+                return false;
+            case DE_IQUE:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_6));
+                }
+                return false;
+            case DE_MDOT:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_DOT));
+                }
+                return false;
+            case DE_NDSH:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_N));
+                }
+                return false;
+            case DE_MDSH:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_4));
+                }
+                return false;
+            case DE_LSAQ:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_B));
+                }
+                return false;
+            case DE_LDAQ:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_V));
+                }
+                return false;
+            case DE_RDAQ:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_X));
+                }
+                return false;
+            case DE_RSAQ:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_Y));
+                }
+                return false;
+            case DE_SLQU:
+                if (record->event.pressed) {
+                    tap_code16(DE_COMM);
+                }
+                return false;
+            case DE_LSQU:
+            case DE_RSQU:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_D));
+                }
+                return false;
+            case DE_DLQU:
+                if (record->event.pressed) {
+                    tap_code16(DE_COMM);
+                    tap_code16(DE_COMM);
+                }
+                return false;
+            case DE_LDQU:
+            case DE_RDQU:
+                if (record->event.pressed) {
+                    tap_code16(A(DE_S));
+                }
+                return false;
+            case KC_BRIU:
+                if (record->event.pressed) {
+                    register_code16(KC_BRMU);
+                } else {
+                    unregister_code16(KC_BRMU);
+                }
+                return false;
+            case KC_BRID:
+                if (record->event.pressed) {
+                    register_code16(KC_BRMD);
+                } else {
+                    unregister_code16(KC_BRMD);
+                }
+                return false;
+        }
 #endif // OS_DETECTION_ENABLE
 
     return
-    //     process_record_keymap(keycode, record) &&
-    // #ifdef ENCODER_ENABLE
-    //            process_record_encoder(keycode, record) &&
-    // #endif // ENCODER_ENABLE
-    true;
+        //     process_record_keymap(keycode, record) &&
+        // #ifdef ENCODER_ENABLE
+        //            process_record_encoder(keycode, record) &&
+        // #endif // ENCODER_ENABLE
+        true;
 }
 
 #ifdef QUICK_TAP_TERM

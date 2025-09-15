@@ -4,12 +4,12 @@
 
 // Oled screen
 #ifdef OLED_ENABLE
-#include "bs-oled.h"
+#    include "bs-oled.h"
 #endif // OLED_ENABLE
 
 /// Enumeration of layers
 enum userspace_layers {
-    // base layers
+// base layers
 #ifdef QWERTY_ENABLE
     LAYER_QWERTY,
 #endif // QWERTY_ENABLE
@@ -79,30 +79,30 @@ enum userspace_layers {
 
 // find highest base layer or fail
 #ifdef DVORAK_DE_ENABLE
-#define LAYER_MAX LAYER_DVORAK_DE
+#    define LAYER_MAX LAYER_DVORAK_DE
 #else
-#ifdef COLEMAK_DH_ENABLE
-#define LAYER_MAX LAYER_COLEMAK_DH
-#else
-#ifdef NEO2_ENABLE
-#define LAYER_MAX LAYER_NEO2
-#else
-#ifdef BONE_ENABLE
-#define LAYER_MAX LAYER_BONE
-#else
-#ifdef NOTED_ENABLE
-#define LAYER_MAX LAYER_NOTED
-#else
-#ifdef QWERTY_ENABLE
-#define LAYER_MAX LAYER_QWERTY
-#else
-#fail // at least one base layer has to be enabled!
-#endif // QWERTY_ENABLE
-#endif // NOTED_ENABLE
-#endif // BONE_ENABLE
-#endif // NEO2_ENABLE
-#endif // COLEMAK_DH_ENABLE
-#endif // DVORAK_DE_ENABLE
+#    ifdef COLEMAK_DH_ENABLE
+#        define LAYER_MAX LAYER_COLEMAK_DH
+#    else
+#        ifdef NEO2_ENABLE
+#            define LAYER_MAX LAYER_NEO2
+#        else
+#            ifdef BONE_ENABLE
+#                define LAYER_MAX LAYER_BONE
+#            else
+#                ifdef NOTED_ENABLE
+#                    define LAYER_MAX LAYER_NOTED
+#                else
+#                    ifdef QWERTY_ENABLE
+#                        define LAYER_MAX LAYER_QWERTY
+#                    else
+#                        fail // at least one base layer has to be enabled!
+#                    endif    // QWERTY_ENABLE
+#                endif        // NOTED_ENABLE
+#            endif            // BONE_ENABLE
+#        endif                // NEO2_ENABLE
+#    endif                    // COLEMAK_DH_ENABLE
+#endif                        // DVORAK_DE_ENABLE
 
 // Custom macro keycode ranges
 enum userspace_custom_keycodes {
@@ -117,22 +117,22 @@ enum userspace_custom_keycodes {
     CP_UNDO,
     CP_REDO,
     NO_MODS,
-// #ifdef ARTSENIO_ENABLE
-//     /* AR_START, AR_END, // Dummy key codes for combo definitions */
-//     AR_A,
-//     AR_S,
-//     AR_E,
-//     AR_O,
-// #endif // ARTSENIO_ENABLE
-// #ifdef ASETNIOP_ENABLE
-//     /* AS_START, AS_END, // Dummy key codes for combo definitions */
-// #endif // ASETNIOP_ENABLE
-// #ifdef X__ENCODER_ENABLE
-//     // Encoder button(s)
-//     BS_ENC0,
-//     BS_ENC1,
-// #endif // X__ENCODER_ENABLE
-       // use for keymap specific codes
+    // #ifdef ARTSENIO_ENABLE
+    //     /* AR_START, AR_END, // Dummy key codes for combo definitions */
+    //     AR_A,
+    //     AR_S,
+    //     AR_E,
+    //     AR_O,
+    // #endif // ARTSENIO_ENABLE
+    // #ifdef ASETNIOP_ENABLE
+    //     /* AS_START, AS_END, // Dummy key codes for combo definitions */
+    // #endif // ASETNIOP_ENABLE
+    // #ifdef X__ENCODER_ENABLE
+    //     // Encoder button(s)
+    //     BS_ENC0,
+    //     BS_ENC1,
+    // #endif // X__ENCODER_ENABLE
+    // use for keymap specific codes
     KEYMAP_SAFE_RANGE
 };
 
@@ -357,12 +357,12 @@ enum userspace_custom_keycodes {
 #endif // GAME_ENABLE
 
 /* Raise: Control + Navigation layer */
-#define _RAISE_L1_5_ KC_PGUP, KC_BSPC, KC_UP  , KC_DEL,  KC_PGDN
+#define _RAISE_L1_5_ KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_PGDN
 #define _RAISE_L2_5_ KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
-#define _RAISE_L3_5_ CP_UNDO, CP_CUT , CP_COPY, CP_PSTE, SEL_ALL
+#define _RAISE_L3_5_ CP_UNDO, CP_CUT, CP_COPY, CP_PSTE, SEL_ALL
 #define _RAISE_R1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
-#define _RAISE_R2_5_ OS_MEH , OS_LCTL, OS_LSFT, OS_LALT, OS_LGUI
-#define _RAISE_R3_5_ KC_PSCR, KC_INS , CW_TOGG, OS_RALT, CP_REDO
+#define _RAISE_R2_5_ OS_MEH, OS_LCTL, OS_LSFT, OS_LALT, OS_LGUI
+#define _RAISE_R3_5_ KC_PSCR, KC_INS, CW_TOGG, OS_RALT, CP_REDO
 //
 #define _RAISE_L1_6_ _ADD_L_1_, _RAISE_L1_5_
 #define _RAISE_L2_6_ KC_INS, _RAISE_L2_5_
@@ -388,7 +388,7 @@ enum userspace_custom_keycodes {
 #define _LOWER_R3_5_ DE_0, DE_1, DE_2, DE_3, DE_COMM
 //
 #define _LOWER_L1_6_ _ADD_L_1_, _LOWER_L1_5_
-#define _LOWER_L2_6_ DE_YEN , _LOWER_L2_5_
+#define _LOWER_L2_6_ DE_YEN, _LOWER_L2_5_
 #define _LOWER_L3_6_ KC_TRNS, _LOWER_L3_5_
 #define _LOWER_R1_6_ _LOWER_R1_5_, DE_DLR
 #define _LOWER_R2_6_ _LOWER_R2_5_, DE_HASH
@@ -427,23 +427,23 @@ enum userspace_custom_keycodes {
 
 #ifdef MOUSEKEY_ENABLE
 /* Pointer layer */
-#    define _POINT_L1_5_ KC_WH_D, KC_WH_L, KC_MS_U, KC_WH_R, KC_WH_U
-#    define _POINT_L2_5_ KC_BTN4, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN5
-#    define _POINT_L3_5_ S_C_TAB, CP_CUT,  CP_COPY, CP_PSTE, SEL_ALL
+#    define _POINT_L1_5_ MS_WHLD, MS_WHLL, MS_UP, MS_WHLR, MS_WHLU
+#    define _POINT_L2_5_ MS_BTN4, MS_LEFT, MS_DOWN, MS_RGHT, MS_BTN5
+#    define _POINT_L3_5_ S_C_TAB, CP_CUT, CP_COPY, CP_PSTE, SEL_ALL
 #    define _POINT_R1_5_ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #    define _POINT_R2_5_ _RAISE_R2_5_
-#    define _POINT_R3_5_ KC_ACL0, KC_ACL1, KC_ACL2, OS_RALT, C___TAB
+#    define _POINT_R3_5_ MS_ACL0, MS_ACL1, MS_ACL2, OS_RALT, C___TAB
 //
-#    define _POINT_L1_6_ XXXXXXX,      _POINT_L1_5_
-#    define _POINT_L2_6_ XXXXXXX,      _POINT_L2_5_
-#    define _POINT_L3_6_ XXXXXXX,      _POINT_L3_5_
+#    define _POINT_L1_6_ XXXXXXX, _POINT_L1_5_
+#    define _POINT_L2_6_ XXXXXXX, _POINT_L2_5_
+#    define _POINT_L3_6_ XXXXXXX, _POINT_L3_5_
 #    define _POINT_R1_6_ _POINT_R1_5_, XXXXXXX
 #    define _POINT_R2_6_ _POINT_R2_5_, XXXXXXX
 #    define _POINT_R3_6_ _POINT_R3_5_, XXXXXXX
 //
-#    define _POINT_L4_2_ KC_BTN1,      KC_BTN2
-#    define _POINT_R4_2_ KC_BTN3,      KC_BTN1
-#    define _POINT_L4_3_ XXXXXXX,      _POINT_L4_2_
+#    define _POINT_L4_2_ MS_BTN1, MS_BTN2
+#    define _POINT_R4_2_ MS_BTN3, MS_BTN1
+#    define _POINT_L4_3_ XXXXXXX, _POINT_L4_2_
 #    define _POINT_R4_3_ _POINT_R4_2_, XXXXXXX
 //
 #    define _POINT_3x5_ _POINT_L1_5_, _POINT_R1_5_, _POINT_L2_5_, _POINT_R2_5_, _POINT_L3_5_, _POINT_R3_5_
@@ -452,24 +452,23 @@ enum userspace_custom_keycodes {
 
 /* Attic: Adjustments and missing stuff */
 #define _ATTIC_L1_5_ QK_BOOT, DL_ARTS, DL_ASET, DL_GAME, NO_MODS
-#define _ATTIC_L2_5_ QK_RBT , DL_PREV, DL_NEXT, DL_BASE, RGB_TOG
-#define _ATTIC_L3_5_ EE_CLR , RGB_SAI, RGB_HUI, RGB_VAI, RGB_MOD
+#define _ATTIC_L2_5_ EE_CLR, DL_PREV, DL_NEXT, DL_BASE, UG_TOGG
+#define _ATTIC_L3_5_ UG_SPDU, UG_SATU, UG_HUEU, UG_VALU, UG_NEXT
 #define _ATTIC_R1_5_ DE_IEXL, DE_LSAQ, DE_LDAQ, DE_RDAQ, DE_RSAQ
 #define _ATTIC_R2_5_ DE_IQUE, DE_MDOT, DE_SLQU, DE_LSQU, DE_RSQU
 #define _ATTIC_R3_5_ DE_NDSH, DE_MDSH, DE_DLQU, DE_LDQU, DE_RDQU
 //
 #define _ATTIC_L1_6_ QK_BOOT, _ATTIC_L1_5_
-#define _ATTIC_L2_6_ KC_NO,   _ATTIC_L2_5_
-#define _ATTIC_L3_6_ EE_CLR,  _ATTIC_L3_5_
+#define _ATTIC_L2_6_ EE_CLR, _ATTIC_L2_5_
+#define _ATTIC_L3_6_ QK_RBT, _ATTIC_L3_5_
 #define _ATTIC_R1_6_ _ATTIC_R1_5_, QK_BOOT
-#define _ATTIC_R2_6_ _ATTIC_R2_5_, KC_PWR
-#define _ATTIC_R3_6_ _ATTIC_R3_5_, EE_CLR
+#define _ATTIC_R2_6_ _ATTIC_R2_5_, EE_CLR
+#define _ATTIC_R3_6_ _ATTIC_R3_5_, KC_PWR
 //
 #define _ATTIC_L4_2_ LSFT_T(KC_BRID), KC_TRNS
-#define _ATTIC_L4_3_ KC_LSFT,         _ATTIC_L4_2_
-#define _ATTIC_R4_2_ KC_TRNS,         RSFT_T(KC_BRIU)
-#define _ATTIC_R4_3_ _ATTIC_R4_2_,    KC_RSFT
+#define _ATTIC_L4_3_ KC_LSFT, _ATTIC_L4_2_
+#define _ATTIC_R4_2_ KC_TRNS, RSFT_T(KC_BRIU)
+#define _ATTIC_R4_3_ _ATTIC_R4_2_, KC_RSFT
 //
 #define _ATTIC_3x5_ _ATTIC_L1_5_, _ATTIC_R1_5_, _ATTIC_L2_5_, _ATTIC_R2_5_, _ATTIC_L3_5_, _ATTIC_R3_5_
 #define _ATTIC_3x6_ _ATTIC_L1_6_, _ATTIC_R1_6_, _ATTIC_L2_6_, _ATTIC_R2_6_, _ATTIC_L3_6_, _ATTIC_R3_6_
-

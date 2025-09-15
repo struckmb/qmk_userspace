@@ -1,11 +1,20 @@
 #! /bin/bash
 
 KEYBOARD=splitkb/kyria/rev1
-KEYMAP=struckmb_wip
+KEYMAP=struckmb
 SIDE=left
 
-while getopts 'k:m:s:' opt; do
+while getopts 'bcdk:m:s:' opt; do
     case "$opt" in
+    b)
+        KEYBOARD=bastardkb/charybdis/3x6/elitec
+        ;;
+    c)
+        KEYBOARD=cantor
+        ;;
+    d)
+        KEYBOARD=draculad
+        ;;
     k)
         KEYBOARD=${OPTARG}
         ;;
@@ -18,10 +27,10 @@ while getopts 'k:m:s:' opt; do
     esac
 done
 
-echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
-
 if [ "$KEYBOARD" = "cantor" ]; then
+    echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
     qmk flash -kb $KEYBOARD -km ${KEYMAP} -bl "dfu-util-split-${SIDE}"
 else
+    echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
     qmk flash -kb $KEYBOARD -km ${KEYMAP}
 fi
