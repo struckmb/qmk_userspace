@@ -1,2 +1,3 @@
 
+CONVERT_TO = rp2040_ce
 LTO_ENABLE = no
