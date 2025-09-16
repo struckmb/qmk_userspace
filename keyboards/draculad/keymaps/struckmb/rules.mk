@@ -1,5 +1,7 @@
 
+MOUSEKEY_ENABLE = no
 OS_DETECTION_ENABLE = no
+WPM_ENABLE = no       # Get WPM reports as you type
 
 # only uncomment on the side you have your trackball on
 POINTING_DEVICE_ENABLE = no
@@ -17,7 +19,6 @@ endif
 
 # QUANTUM_LIB_SRC += i2c_master.c
 OLED_DRIVER_ENABLE = yes
-MOUSEKEY_ENABLE = no
 
 # Hardware settings
 ifneq (,$(findstring draculad,$(KEYBOARD)))
