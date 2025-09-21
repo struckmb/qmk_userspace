@@ -20,31 +20,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define BONE_ENABLE
 // #define NEO2_ENABLE
 // #define COLEMAK_DH_ENABLE
-#define DVORAK_DE_ENABLE
+// #define DVORAK_DE_ENABLE
 
-#ifdef LAYER_STATE_8BIT
-#      undef LAYER_STATE_8BIT
-#      define LAYER_STATE_16BIT
-#endif // LAYER_STATE_8BIT
+// If more than 4 layers are activated, uncomment the following block
+/* #ifdef LAYER_STATE_8BIT
+ * #    undef LAYER_STATE_8BIT
+ * #    define LAYER_STATE_16BIT
+ * #endif // LAYER_STATE_8BIT
+ */
 
+#ifdef OLED_ENABLE
+#    define OLED_PORTRAIT
+#endif // OLED_ENABLE
+
+#ifdef POINTING_DEVICE_ENABLE
+#    define POINTING_DEVICE_ROTATION_90
+#    define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 // comment that out if your trackball is on the left side
-#define TRACKBALL_RIGHT
-
-#ifdef TRACKBALL_RIGHT
-#    define PIMORONI_TRACKBALL_INVERT_X
-#    define PIMORONI_TRACKBALL_INVERT_Y
-#endif // TRACKBALL_RIGHT
-#define POINTING_DEVICE_ROTATION_90
-
+#    define TRACKBALL_RIGHT
+#    ifdef TRACKBALL_RIGHT
+#        define PIMORONI_TRACKBALL_INVERT_X
+#        define PIMORONI_TRACKBALL_INVERT_Y
+#    endif // TRACKBALL_RIGHT
+#endif     // ifdef POINTING_DEVICE_ENABLE
 
 #ifdef RGBLIGHT_ENABLE
-    #undef RGBLIGHT_ANIMATIONS // disable ALL animations
-    // #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // (636k)  Enable rainbow mood animation mode.
-    // #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // (670k)  Enable rainbow swirl animation mode.
-    #define RGBLIGHT_EFFECT_STATIC_GRADIENT // (264k)  Enable static gradient mode.
-    // #define RGBLIGHT_EFFECT_TWINKLE         // (1574k) Enable twinkle animation mode.
-    // #define RGBLIGHT_EFFECT_CHRISTMAS       // (922k)  Enable christmas animation mode.
-    // #define RGBLIGHT_EFFECT_BREATHING       // (904k)  Enable breathing animation mode.
-    // #define RGBLIGHT_EFFECT_RGB_TEST        // (596k)  Enable RGB test animation mode.
+// #    undef RGBLIGHT_ANIMATIONS // disable ALL animations
+#    define RGBLIGHT_EFFECT_STATIC_GRADIENT // (264k)  Enable static gradient mode.
+// o
+// #define RGBLIGHT_EFFECT_RAINBOW_MOOD    // (636k)  Enable rainbow mood animation mode.
+// #define RGBLIGHT_EFFECT_RAINBOW_SWIRL   // (670k)  Enable rainbow swirl animation mode.
+// #define RGBLIGHT_EFFECT_BREATHING       // (904k)  Enable breathing animation mode.
+// #define RGBLIGHT_EFFECT_CHRISTMAS       // (922k)  Enable christmas animation mode.
+// #define RGBLIGHT_EFFECT_TWINKLE         // (1574k) Enable twinkle animation mode.
+// #define RGBLIGHT_EFFECT_RGB_TEST        // (596k)  Enable RGB test animation mode.
 #endif
-

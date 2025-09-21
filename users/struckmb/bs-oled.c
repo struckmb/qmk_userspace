@@ -27,15 +27,17 @@
  */
 
 // Allow default to be overwritten by keymap if they return false
-__attribute__ ((weak)) bool oled_task_keymap(void) {return true;}
+__attribute__((weak)) bool oled_task_keymap(void) {
+    return true;
+}
 
 // Do sane defaults for regular oled rendering
 bool oled_task_user(void) {
     if (is_oled_on() && oled_task_keymap()) {
         if (is_keyboard_master()) {
-            render_status_lite(0, 0, false);
+            render_status_lite(0, 0);
         } else {
-            render_qmk_logo(0, 0);
+            render_kb_logo(0, 0);
         }
     }
     return false;
@@ -45,23 +47,20 @@ bool oled_task_user(void) {
 |*---RENDERING FUNCTIONS---*|
 \*-------------------------*/
 void render_qmk_logo(uint8_t col, uint8_t row) {
-    static const char PROGMEM qmk_logo[] = {
-        0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
-        0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
-        0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0};
+    static const char PROGMEM qmk_logo[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4, 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4, 0};
     oled_set_cursor(col, row);
     oled_write_P(qmk_logo, false);
 }
 void render_qmk_small_logo(uint8_t col, uint8_t row) {
-    static const char PROGMEM qmk_logo[] = {
-        0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0xa0,0xa1,0xa2,0xa3,0xa4,
-        0xa5,0xa6,0xa7,0xa8,0xa9,0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0};
+    static const char PROGMEM qmk_logo[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0};
     oled_set_cursor(col, row);
     oled_write_P(qmk_logo, false);
 }
+__attribute__((weak)) void render_kb_logo(uint8_t col, uint8_t row) {
+    render_qmk_logo(col, row);
+}
 
-void render_keymap(uint8_t col, uint8_t row, uint8_t def_layer, bool portrait) {
-    oled_set_cursor(col, row);
+void render_keymap(uint8_t def_layer, bool portrait) {
     oled_write("Base: ", false);
     if (portrait) oled_write("\n  ", false);
     switch (def_layer) {
@@ -95,23 +94,22 @@ void render_keymap(uint8_t col, uint8_t row, uint8_t def_layer, bool portrait) {
             oled_write("DVORAK", false);
             break;
 #endif /* ifdef DVORAK_DE_ENABLE */
-#       ifdef ASETNIOP_ENABLE
+#ifdef ASETNIOP_ENABLE
         case LAYER_ASETNIOP:
             oled_write("ASET++", false);
             break;
-#       endif // ASETNIOP_ENABLE
-#       ifdef ARTSENIO_ENABLE
+#endif // ASETNIOP_ENABLE
+#ifdef ARTSENIO_ENABLE
         case LAYER_ARTSENIO:
             oled_write("ARTSEN", false);
             break;
-#       endif // ARTSENIO_ENABLE
+#endif // ARTSENIO_ENABLE
         default:
             oled_write(" N/A! ", false);
     }
 }
 
-void render_layer(uint8_t col, uint8_t row, uint8_t top_layer, bool portrait) {
-    oled_set_cursor(col, row);
+void render_layer(uint8_t top_layer, bool portrait) {
     oled_write("Layr: ", false);
     if (portrait) oled_write("\n  ", false);
     switch (top_layer) {
@@ -154,17 +152,16 @@ void render_layer(uint8_t col, uint8_t row, uint8_t top_layer, bool portrait) {
     }
 }
 
-void render_modifiers(uint8_t col, uint8_t row, uint8_t mods, uint8_t osms, bool portrait) {
+void render_modifiers(uint8_t mods, uint8_t osms, bool portrait) {
     bool capsLock = host_keyboard_led_state().caps_lock || is_caps_word_on();
     // Write the modifier state
-    oled_set_cursor(col, row);
     oled_write("Mods: ", false);
     if (portrait) oled_write("\n  ", false);
-    oled_write((mods & MOD_MASK_SHIFT  ) ? "S" : " ", (osms & MOD_MASK_SHIFT  ));
-    oled_write((mods & MOD_MASK_CTRL   ) ? "C" : " ", (osms & MOD_MASK_CTRL   ));
+    oled_write((mods & MOD_MASK_SHIFT) ? "S" : " ", (osms & MOD_MASK_SHIFT));
+    oled_write((mods & MOD_MASK_CTRL) ? "C" : " ", (osms & MOD_MASK_CTRL));
     oled_write((mods & MOD_BIT(KC_RALT)) ? "R" : " ", (osms & MOD_BIT(KC_RALT)));
-    oled_write((mods & MOD_MASK_ALT    ) ? "A" : " ", (osms & MOD_MASK_ALT    ));
-    oled_write((mods & MOD_MASK_GUI    ) ? "M" : " ", (osms & MOD_MASK_GUI    ));
+    oled_write((mods & MOD_MASK_ALT) ? "A" : " ", (osms & MOD_MASK_ALT));
+    oled_write((mods & MOD_MASK_GUI) ? "M" : " ", (osms & MOD_MASK_GUI));
     if (portrait) {
         oled_write("\n  ", false);
         oled_write(capsLock ? " CAPS " : "      ", capsLock);
@@ -173,23 +170,35 @@ void render_modifiers(uint8_t col, uint8_t row, uint8_t mods, uint8_t osms, bool
     }
 }
 
-void render_status_lite(uint8_t row, uint8_t col, bool portrait) {
-    uint8_t oneshotMods  = get_oneshot_mods();
-    uint8_t skipLength  = portrait ? 3 : 1;
+void render_status_lite(uint8_t col, uint8_t row) {
+#ifdef OLED_PORTRAIT
+    bool    portrait  = true;
+    uint8_t offset    = row + 4;
+    char   *separator = "\n\n";
+    render_qmk_small_logo(col, row);
+#else
+    bool    portrait  = false;
+    uint8_t offset    = row;
+    char   *separator = "\n";
+#endif // ifdef OLED_PORTRAIT
 
     // Line 1/1-2: Layout
-    render_keymap(col, row, get_highest_layer(default_layer_state), portrait);
+    oled_set_cursor(col, offset);
+    render_keymap(get_highest_layer(default_layer_state), portrait);
     // Line 2/3-4: Layer State
-    render_layer(col,  row + skipLength, get_highest_layer(layer_state), portrait);
+    // oled_set_cursor(col, row);
+    oled_write(separator, false);
+    render_layer(get_highest_layer(layer_state), portrait);
     // Line 3/5-6: Modifiers
-    render_modifiers(col, row + (2 * skipLength), get_mods() | oneshotMods, oneshotMods, portrait);
+    // oled_set_cursor(col, row);
+    oled_write(separator, false);
+    uint8_t oneshotMods = get_oneshot_mods();
+    render_modifiers(get_mods() | oneshotMods, oneshotMods, portrait);
 
 #ifdef WPM_ENABLE
     // Last line: WPM and layout
-    oled_set_cursor(col, row + (3 * skipLength));
+    oled_write(separator, false);
     oled_write("WPM: ", false);
-    // if (portrait) oled_write("\n  ", false);
-
     oled_write(get_u8_str(get_current_wpm(), ' '), false);
 #endif // WPM_ENABLE
 }
