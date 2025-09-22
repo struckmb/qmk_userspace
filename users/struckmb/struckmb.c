@@ -149,15 +149,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         true;
 }
 
-#ifdef MOUSEKEY_ENABLE
-#    ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-void pointing_device_init_user(void) {
-    set_auto_mouse_layer(LAYER_POINTER); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
-    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
-}
-#    endif // ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#endif     // ifdef MOUSEKEY_ENABLE
-
 #ifdef QUICK_TAP_TERM
 #    ifdef QUICK_TAP_TERM_PER_KEY
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
