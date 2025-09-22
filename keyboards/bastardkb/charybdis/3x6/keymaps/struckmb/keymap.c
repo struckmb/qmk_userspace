@@ -29,15 +29,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LAYER_RAISE] = LAYOUT_split_3x6_3_wrapper(_RAISE_3x6_, _RAISE_L4_3_, _RAISE_R4_2_), //
     [LAYER_LOWER] = LAYOUT_split_3x6_3_wrapper(_LOWER_3x6_, _LOWER_L4_3_, _LOWER_R4_2_), //
     [LAYER_SYMBL] = LAYOUT_split_3x6_3_wrapper(_SYMBL_3x6_, _SYMBL_L4_3_, _SYMBL_R4_2_), //
-#ifdef MOUSEKEY_ENABLE
-    // [LAYER_POINTER] = LAYOUT_split_3x6_3_wrapper(_POINT_3x6_, _POINT_L4_3_, _POINT_R4_2_),
+#ifdef POINTING_DEVICE_ENABLE
     [LAYER_POINTER] = LAYOUT_split_3x6_3_wrapper(                             //
-        _ADD_L_1_, KC_NO, S_D_RMOD, DPI_RMOD, DPI_MOD, S_D_MOD, _POINT_R1_6_, //
+        _ADD_L_1_, KC_NO, KC_NO, S_D_MOD, DPI_MOD, KC_NO, _POINT_R1_6_,       //
         _ADD_L_2_, MS_BTN4, DRG_TOG, DRGSCRL, SNIPING, MS_BTN5, _POINT_R2_6_, //
         _POINT_L3_6_, S_C_TAB, SNIPING, DRGSCRL, DRG_TOG, C___TAB, _ADD_R_3_, //
         _POINT_L4_3_, _POINT_R4_2_),
-#endif                                                                                   /* ifdef MOUSEKEY_ENABLE */
-    [LAYER_ATTIC] = LAYOUT_split_3x6_3_wrapper(_ATTIC_3x6_, _ATTIC_L4_3_, _ATTIC_R4_2_), //
+#endif // ifdef POINTING_DEVICE_ENABLE
+    [LAYER_ATTIC] = LAYOUT_split_3x6_3_wrapper(_ATTIC_3x6_, _ATTIC_L4_3_, _ATTIC_R4_2_) //
 };
 
 #ifdef POINTING_DEVICE_ENABLE
