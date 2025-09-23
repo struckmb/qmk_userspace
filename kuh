@@ -1,0 +1,52 @@
+#! /bin/bash
+
+KB_KYRIA=splitkb/kyria/rev1
+KB_CHARYBDIS=bastardkb/charybdis/3x6/v2/splinky_2
+
+CMD=qmk
+ACTION=compile
+KEYBOARD=
+KEYMAP=struckmb
+SIDE=left
+
+while getopts 'fk:lm:rs:t' opt; do
+    case "$opt" in
+    f)
+        ACTION=flash
+        ;;
+    k)
+        if [ "$OPTARG" = "bastardkb" ]; then
+            KEYBOARD=$KB_CHARYBDIS
+        elif [ "$OPTARG" = "charybdis" ]; then
+            KEYBOARD=$KB_CHARYBDIS
+        elif [ "$OPTARG" = "kyria" ]; then
+            KEYBOARD=$KB_KYRIA
+        else
+            KEYBOARD=${OPTARG}
+        fi
+        ;;
+    l)
+        SIDE=left
+        ;;
+    m)
+        KEYMAP=${OPTARG}
+        ;;
+    r)
+        SIDE=right
+        ;;
+    t)
+        CMD=echo\ qmk
+        ;;
+    esac
+done
+
+if [ -z "$KEYBOARD" ]; then
+    echo userspace-compile
+    $CMD userspace-compile
+elif [ "$KEYBOARD" = "cantor" -a "$ACTION" = "flash" ]; then
+    echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
+    $CMD $ACTION -kb $KEYBOARD -km ${KEYMAP} -bl "dfu-util-split-${SIDE}"
+else
+    echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
+    $CMD $ACTION -kb $KEYBOARD -km ${KEYMAP}
+fi
