@@ -2,8 +2,9 @@
 
 # Make My Board!
 
-KB_KYRIA=splitkb/kyria/rev1
 KB_CHARYBDIS=bastardkb/charybdis/3x6/v2/splinky_2
+KB_KYRIA=splitkb/kyria/rev1
+KB_REDOX=redox/rev1
 
 CMD=qmk
 ACTION=compile
@@ -23,6 +24,8 @@ while getopts 'fk:lm:rs:t' opt; do
             KEYBOARD=$KB_CHARYBDIS
         elif [ "$OPTARG" = "kyria" ]; then
             KEYBOARD=$KB_KYRIA
+        elif [ "$OPTARG" = "redox" ]; then
+            KEYBOARD=$KB_REDOX
         else
             KEYBOARD=${OPTARG}
         fi
@@ -52,7 +55,7 @@ else
     echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
     $CMD $ACTION -kb $KEYBOARD -km ${KEYMAP}
     if [ "$KEYBOARD" = "cantor" ]; then
-        rm "cantor_$KEYMAP*"
+        rm cantor_$KEYMAP*
         echo "removed unusable firmware (use flash and select correct side)"
     fi
 fi
