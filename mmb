@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# Make My Board!
+
 KB_KYRIA=splitkb/kyria/rev1
 KB_CHARYBDIS=bastardkb/charybdis/3x6/v2/splinky_2
 
@@ -49,4 +51,8 @@ elif [ "$KEYBOARD" = "cantor" -a "$ACTION" = "flash" ]; then
 else
     echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
     $CMD $ACTION -kb $KEYBOARD -km ${KEYMAP}
+    if [ "$KEYBOARD" = "cantor" ]; then
+        rm "cantor_$KEYMAP*"
+        echo "removed unusable firmware (use flash and select correct side)"
+    fi
 fi
