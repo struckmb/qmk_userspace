@@ -385,8 +385,8 @@ enum userspace_custom_keycodes {
 #define _LOWER_L2_5_ HRML(KC_F5, KC_F6, KC_F7, KC_F8), DE_EURO
 #define _LOWER_L3_5_ KC_F9, KC_F10, KC_F11, KC_F12, DE_CENT
 #define _LOWER_R1_5_ DE_SLSH, DE_7, DE_8, DE_9, DE_PLUS
-#define _LOWER_R2_5_ DE_DOT, HRMR(DE_4, DE_5, DE_6, DE_MINS)
-#define _LOWER_R3_5_ DE_COLN, DE_1, DE_2, DE_3, DE_COMM
+#define _LOWER_R2_5_ DE_COLN, HRMR(DE_4, DE_5, DE_6, DE_MINS)
+#define _LOWER_R3_5_ DE_DOT, DE_1, DE_2, DE_3, DE_COMM
 //
 #define _LOWER_L1_6_ _ADD_L_1_, _LOWER_L1_5_
 #define _LOWER_L2_6_ DE_YEN, _LOWER_L2_5_
