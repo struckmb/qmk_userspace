@@ -362,11 +362,11 @@ enum userspace_custom_keycodes {
 #define _RAISE_L3_5_ CP_UNDO, CP_CUT, CP_COPY, CP_PSTE, SEL_ALL
 #define _RAISE_R1_5_ KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_EJCT
 #define _RAISE_R2_5_ OS_MEH, OS_LCTL, OS_LSFT, OS_LALT, OS_LGUI
-#define _RAISE_R3_5_ KC_PSCR, KC_INS, CW_TOGG, OS_RALT, CP_REDO
+#define _RAISE_R3_5_ KC_PSCR, KC_INS, CW_TOGG, OS_RALT, KC_APP
 //
 #define _RAISE_L1_6_ _ADD_L_1_, _RAISE_L1_5_
 #define _RAISE_L2_6_ KC_INS, _RAISE_L2_5_
-#define _RAISE_L3_6_ _ADD_L_3_, _RAISE_L3_5_
+#define _RAISE_L3_6_ CP_REDO, _RAISE_L3_5_
 #define _RAISE_R1_6_ _RAISE_R1_5_, KC_PAUS
 #define _RAISE_R2_6_ _RAISE_R2_5_, KC_SCRL
 #define _RAISE_R3_6_ _RAISE_R3_5_, KC_TRNS
@@ -386,7 +386,7 @@ enum userspace_custom_keycodes {
 #define _LOWER_L3_5_ KC_F9, KC_F10, KC_F11, KC_F12, DE_CENT
 #define _LOWER_R1_5_ DE_SLSH, DE_7, DE_8, DE_9, DE_PLUS
 #define _LOWER_R2_5_ DE_COLN, HRMR(DE_4, DE_5, DE_6, DE_MINS)
-#define _LOWER_R3_5_ DE_DOT, DE_1, DE_2, DE_3, DE_COMM
+#define _LOWER_R3_5_ DE_0, DE_1, DE_2, DE_3, DE_COMM
 //
 #define _LOWER_L1_6_ _ADD_L_1_, _LOWER_L1_5_
 #define _LOWER_L2_6_ DE_YEN, _LOWER_L2_5_
@@ -396,8 +396,8 @@ enum userspace_custom_keycodes {
 #define _LOWER_R3_6_ _LOWER_R3_5_, KC_TRNS
 //
 #define _LOWER_L4_2_ DE_YEN, KC_TRNS
-#define _LOWER_R4_2_ ATT(KC_APP), DE_0
-#define _LOWER_R4R2_ DE_0, ATT(KC_APP)
+#define _LOWER_R4_2_ ATT(DE_DOT), KC_SPC
+#define _LOWER_R4R2_ KC_SPC, ATT(DE_DOT)
 #define _LOWER_L4_3_ DE_DLR, _LOWER_L4_2_
 #define _LOWER_R4_3_ _LOWER_R4_2_, DE_DLR
 //

@@ -152,7 +152,7 @@ These are not used for normal writing. They are not persisted and gone after a r
 ───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
  Ins │ Hme │  ←  │  ↓  │  →  │ End       * Meh │  C  │  S  │  A  │  G  │ SLk
 ───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-     │ Udo │ Cut │ Cpy │ Pst │ All         PSc │ Ins │ CpW │ AGr │ Rdo │ APP
+ Rdo │ Udo │ Cut │ Cpy │ Pst │ All         PSc │ Ins │ CpW │ AGr │ APP │
                     ─────┌─────┬─────┐ ┌─────┬─────┐─────
                      Prv │ V - │ V × │ │ (v) │ V + │ Nxt
                     ─────└──S──┴─ATT─┘ └─────┴──S──┘─────
@@ -164,11 +164,11 @@ These are not used for normal writing. They are not persisted and gone after a r
  Bsp │ F1  │  F2 │ F3  │ F4  │  £           /  │  7  │  8  │  9  │  +  │  $
 ───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
   ¥  │ F5  │ F6  │ F7  │ F8  │  €           :  │  4  │  5  │  6  │  -  │  #
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-     │ F9  │ F10 │ F11 │ F12 │  ¢           .  │  1  │  2  │  3  │  ,  │
+───── ──G──┼──A──┼──S──┼──C──┼─────       ─────┼──C──┼──S──┼──A──┼──G── ─────
+     │ F9  │ F10 │ F11 │ F12 │  ¢           0  │  1  │  2  │  3  │  ,  │
                     ─────┌─────┬─────┐ ┌─────┬─────┐─────
-                      $  │  ¥  │ (v) │ │ App │  0  │  $
-                    ─────└─────┴─────┘ └─ATT─┴──S──┘─────
+                      $  │  ¥  │ (v) │ │  .  │ Spc │  $
+                    ─────└─────┴─────┘ └─ATT─┴─────┘─────
 ```
 
 ### Symbols
@@ -215,10 +215,11 @@ These are not used for normal writing. They are not persisted and gone after a r
 Currently my board contains the following beauties:
 
 1. Redox (03/2021) (ready assembled)
-1. Kyria rev.2 (05/2021)
-1. dracuLad w/ Pimorini (08/2022)
-1. Iris rev.6 (08/2022)
-1. Paintbrush (10/2022)
-1. [never worked: Aurora sweep (wireless) (03/2023)]
-1. Cantor (11/2023)
-1. Corne (wireless) (01/2025)
+2. Kyria rev.2 (05/2021)
+3. dracuLad w/ Pimorini (08/2022)
+4. Iris rev.6 (08/2022)
+5. Paintbrush (10/2022)
+6. [never worked: Aurora sweep (wireless) (03/2023)]
+7. Cantor (11/2023)
+8. Bastard Keyboards Charybdis mini (10/2024)
+9. Corne (wireless) (01/2025)
