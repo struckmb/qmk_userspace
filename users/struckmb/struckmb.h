@@ -164,7 +164,7 @@ enum userspace_custom_keycodes {
 // Base layers
 #define _BASE_L_1_ LALT_T(KC_BSPC)
 #define _BASE_L_2_ SYM(KC_ESC)
-#define _BASE_L_3_ KC_LGUI
+#define _BASE_L_3_ KC_LSFT
 // in R1 and R2 kc depends on layout
 #define _BASE_R_1_(kc) LALT_T(kc)
 #define _BASE_R_2_(kc) SYM(kc)
@@ -172,9 +172,9 @@ enum userspace_custom_keycodes {
 // Additional layers
 #define _ADD_L_1_ KC_BSPC
 #define _ADD_L_2_ KC_ESC
-#define _ADD_L_3_ KC_LGUI
+#define _ADD_L_3_ KC_LSFT
 #define _ADD_R_1_ KC_LALT
-#define _ADD_R_2_ KC_NO
+#define _ADD_R_2_ KC_LGUI
 #define _ADD_R_3_ KC_RCTL
 
 /* THUMBS for base layers */
