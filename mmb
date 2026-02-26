@@ -12,10 +12,22 @@ KEYBOARD=
 KEYMAP=struckmb
 SIDE=left
 
-while getopts 'fk:lm:rs:t' opt; do
+while getopts 'fhk:lm:rs:t' opt; do
     case "$opt" in
     f)
         ACTION=flash
+        ;;
+    h)
+        echo """
+            -f      flash
+            -h      show this help
+            -k <kb> compile for keyboard <kb>
+            -l      compile for left side (default)
+            -m <km> use keymap <km> (default: struckmb)
+            -r      compile for right side
+            -t      test (just output commands)
+"""
+        exit
         ;;
     k)
         if [ "$OPTARG" = "bastardkb" ]; then
