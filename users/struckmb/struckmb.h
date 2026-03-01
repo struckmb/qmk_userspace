@@ -405,7 +405,7 @@ enum userspace_custom_keycodes {
 #define _LOWER_3x6_ _LOWER_L1_6_, _LOWER_R1_6_, _LOWER_L2_6_, _LOWER_R2_6_, _LOWER_L3_6_, _LOWER_R3_6_
 
 /* Symbols layer */
-#define _SYMBL_L1_5_ DE_AT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
+#define _SYMBL_L1_5_ DE_SECT, DE_UNDS, DE_LBRC, DE_RBRC, DE_CIRC
 #define _SYMBL_L2_5_ DE_BSLS, DE_SLSH, DE_LCBR, DE_RCBR, DE_ASTR
 #define _SYMBL_L3_5_ DE_HASH, DE_DLR, DE_PIPE, DE_TILD, DE_ACUT
 #define _SYMBL_R1_5_ DE_EXLM, DE_LABK, DE_RABK, DE_EQL, DE_AMPR
@@ -416,10 +416,10 @@ enum userspace_custom_keycodes {
 #define _SYMBL_L2_6_ _ADD_L_2_, _SYMBL_L2_5_
 #define _SYMBL_L3_6_ _ADD_L_3_, _SYMBL_L3_5_
 #define _SYMBL_R1_6_ _SYMBL_R1_5_, DE_SLNG
-#define _SYMBL_R2_6_ _SYMBL_R2_5_, DE_SECT
+#define _SYMBL_R2_6_ _SYMBL_R2_5_, DE_AT
 #define _SYMBL_R3_6_ _SYMBL_R3_5_, DE_ELLP
 //
-#define _SYMBL_L4_2_ DE_SECT, G(DE_CIRC)
+#define _SYMBL_L4_2_ DE_AT, G(DE_CIRC)
 #define _SYMBL_R4_2_ DE_ELLP, KC_SPC
 #define _SYMBL_R4R2_ KC_SPC, DE_ELLP
 #define _SYMBL_L4_3_ DE_DEG, _SYMBL_L4_2_
