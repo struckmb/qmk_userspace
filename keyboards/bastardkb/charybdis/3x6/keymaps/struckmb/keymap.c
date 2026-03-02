@@ -1,5 +1,5 @@
 #include "struckmb.h"
-#include "keyOverride.c"
+#include "sruckinc.c"
 
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT(__VA_ARGS__)
 

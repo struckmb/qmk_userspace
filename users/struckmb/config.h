@@ -28,7 +28,8 @@
 #endif // COMBO_ENABLE
 
 // Tap-hold settings
-#define TAPPING_TERM 175
+#define TAPPING_TERM 250
+#define TAPPING_TERM_PER_KEY
 #define QUICK_TAP_TERM 125
 #define QUICK_TAP_TERM_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS
