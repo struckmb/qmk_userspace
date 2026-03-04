@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0
 
 #include "struckmb.h"
-#include "sruckinc.c"
+#include "struckinc.c"
 
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT_split_3x6_3(__VA_ARGS__)
 
