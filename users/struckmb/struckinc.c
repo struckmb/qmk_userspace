@@ -21,7 +21,7 @@ const key_override_t *key_overrides[]  = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case _BASE_L_2_:
-#    ifdef QWERTY_ENABLE
+#    if defined(QWERTY_ENABLE) || defined (COLEMAK_DH_ENABLE)
         case _BASE_R_2_(DE_ADIA):
 #    endif
 #    ifdef NOTED_ENABLE
@@ -32,9 +32,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #    endif
 #    ifdef NEO2_ENABLE
         case _BASE_R_2_(DE_Y):
-#    endif
-#    ifdef COLEMAK_DH_ENABLE
-        case _BASE_R_2_(DE_ADIA):
 #    endif
 #    ifdef DVORAK_DE_ENABLE
         case _BASE_R_2_(DE_L):
