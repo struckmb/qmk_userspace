@@ -1,73 +1,105 @@
-#! /bin/sh
+#!/bin/sh
 
 # Make My Board!
 
-KB_CHARYBDIS=bastardkb/charybdis/3x6/v2/splinky_2
-KB_KYRIA=splitkb/kyria/rev1
-KB_REDOX=redox/rev1
+KB_CHARYBDIS="bastardkb/charybdis/3x6/v2/splinky_2"
+KB_KYRIA="splitkb/kyria/rev1"
+KB_REDOX="redox/rev1"
 
-CMD=qmk
-ACTION=compile
-KEYBOARD=
-KEYMAP=struckmb
-SIDE=left
+CMD="qmk"
+ACTION="compile"
+KEYBOARD=""
+KEYMAP="struckmb"
+SIDE="left"
+CLEAN_ONLY="false"
 
-while getopts 'fhk:lm:rs:t' opt; do
+show_help() {
+    cat << EOF
+
+Verwendung: $(basename "$0") [Optionen]
+
+Optionen:
+    -c      Clean: Führt 'qmk clean' aus und löscht alle .hex, .bin, .uf2 Dateien
+    -f      Flashen der Firmware nach dem Kompilieren
+    -h      Zeigt diese Hilfe an
+    -k <kb> Bestimmt die Tastatur (z.B. charybdis, kyria, redox oder eigener Pfad)
+    -l      Kompiliert für die LINKE Seite (Standard)
+    -m <km> Verwendet eine eigene Keymap (Standard: struckmb)
+    -r      Kompiliert für die RECHTE Seite
+    -t      Testmodus (Gibt die Befehle nur im Terminal aus)
+
+EOF
+}
+
+clean_firmware() {
+    echo "Führe QMK Clean aus..."
+    $CMD clean
+
+    if [ "$CMD" = "qmk" ]; then
+        echo "Räume Firmware-Dateien im aktuellen Verzeichnis auf..."
+        rm -f ./*.hex ./*.bin ./*.uf2
+    fi
+    echo "--> Aufräumen beendet."
+}
+
+# 1. Erst alle Optionen sammeln (damit -t auch vor -c oder -k wirkt)
+while getopts 'cfhk:lm:rs:t' opt; do
     case "$opt" in
-    f)
-        ACTION=flash
-        ;;
-    h)
-        echo """
-            -f      flash
-            -h      show this help
-            -k <kb> compile for keyboard <kb>
-            -l      compile for left side (default)
-            -m <km> use keymap <km> (default: struckmb)
-            -r      compile for right side
-            -t      test (just output commands)
-"""
-        exit
-        ;;
+    c) CLEAN_ONLY="true" ;;
+    f) ACTION="flash" ;;
+    h) show_help; exit 0 ;;
     k)
-        if [ "$OPTARG" = "bastardkb" ]; then
-            KEYBOARD=$KB_CHARYBDIS
-        elif [ "$OPTARG" = "charybdis" ]; then
-            KEYBOARD=$KB_CHARYBDIS
+        if [ "$OPTARG" = "bastardkb" ] || [ "$OPTARG" = "charybdis" ]; then
+            KEYBOARD="$KB_CHARYBDIS"
         elif [ "$OPTARG" = "kyria" ]; then
-            KEYBOARD=$KB_KYRIA
+            KEYBOARD="$KB_KYRIA"
         elif [ "$OPTARG" = "redox" ]; then
-            KEYBOARD=$KB_REDOX
+            KEYBOARD="$KB_REDOX"
         else
-            KEYBOARD=${OPTARG}
+            KEYBOARD="$OPTARG"
         fi
         ;;
-    l)
-        SIDE=left
-        ;;
-    m)
-        KEYMAP=${OPTARG}
-        ;;
-    r)
-        SIDE=right
-        ;;
-    t)
-        CMD=echo\ qmk
-        ;;
+    l) SIDE="left" ;;
+    m) KEYMAP="$OPTARG" ;;
+    r) SIDE="right" ;;
+    t) CMD="echo qmk" ;;
+    *) show_help; exit 1 ;;
     esac
 done
 
+# 2. Clean-Befehl ausführen (Testmodus -t funktioniert nun unabhängig von der Argumentenreihenfolge)
+if [ "$CLEAN_ONLY" = "true" ]; then
+    clean_firmware
+    if [ -z "$KEYBOARD" ]; then
+        exit 0
+    fi
+fi
+
+# 3. Validierung
 if [ -z "$KEYBOARD" ]; then
-    echo userspace-compile
-    $CMD userspace-compile
-elif [ "$KEYBOARD" = "cantor" -a "$ACTION" = "flash" ]; then
+    echo "Fehler: Es wurde keine Tastatur angegeben!" >&2
+    show_help
+    exit 1
+fi
+
+# 4. Hauptlogik
+if [ "$KEYBOARD" = "cantor" ] && [ "$ACTION" = "flash" ]; then
     echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
-    $CMD $ACTION -kb $KEYBOARD -km ${KEYMAP} -bl "dfu-util-split-${SIDE}"
+    $CMD "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}" -bl "dfu-util-split-${SIDE}"
 else
     echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
-    $CMD $ACTION -kb $KEYBOARD -km ${KEYMAP}
+
+    # Ausführen und Status prüfen
+    if $CMD "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}"; then
+        echo "--> QMK Befehl erfolgreich ausgeführt!"
+    else
+        echo "--> Fehler beim QMK Befehl!" >&2
+        exit 1
+    fi
+
     if [ "$KEYBOARD" = "cantor" ]; then
-        rm cantor_$KEYMAP*
+        rm -f cantor_"${KEYMAP}"*
         echo "removed unusable firmware (use flash and select correct side)"
     fi
 fi
+

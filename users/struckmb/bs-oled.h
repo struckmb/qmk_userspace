@@ -20,13 +20,13 @@
 // Contain the main oled writer here
 bool oled_task_user(void);
 // Some generic rendering functions
-void render_kb_logo(uint8_t row, uint8_t col);
-void render_qmk_logo(uint8_t row, uint8_t col);
-void render_qmk_small_logo(uint8_t row, uint8_t col);
-void nender_layer(uint8_t top_layer, bool small);
+void render_kb_logo(uint8_t col, uint8_t row);
+void render_qmk_logo(uint8_t col, uint8_t row);
+void render_qmk_small_logo(uint8_t col, uint8_t row);
+void render_layer(uint8_t top_layer, bool small);
 void render_modifiers(uint8_t mods, uint8_t osms, bool small);
 #ifdef ENCODER_ENABLED
 void render_encoder(uint8_t index, uint8_t layer);
 #endif // ENCODER_ENABLED
 void render_keymap(uint8_t def_layer, bool small);
-void render_status_lite(uint8_t row, uint8_t col);
+void render_status_lite(uint8_t col, uint8_t row);

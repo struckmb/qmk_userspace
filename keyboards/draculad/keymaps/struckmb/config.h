@@ -35,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef POINTING_DEVICE_ENABLE
 #    define POINTING_DEVICE_ROTATION_90
-x// comment out the next line if your trackball is on the left side
+x // comment out the next line if your trackball is on the left side
 #    define TRACKBALL_RIGHT
 #    ifdef TRACKBALL_RIGHT
 #        define PIMORONI_TRACKBALL_INVERT_X

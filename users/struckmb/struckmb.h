@@ -96,13 +96,13 @@ enum userspace_layers {
 #                    ifdef QWERTY_ENABLE
 #                        define LAYER_MAX LAYER_QWERTY
 #                    else
-#                        fail // at least one base layer has to be enabled!
-#                    endif    // QWERTY_ENABLE
-#                endif        // NOTED_ENABLE
-#            endif            // BONE_ENABLE
-#        endif                // NEO2_ENABLE
-#    endif                    // COLEMAK_DH_ENABLE
-#endif                        // DVORAK_DE_ENABLE
+#                        fail "ERROR: At least one base layer has to be enabled!"
+#                    endif // QWERTY_ENABLE
+#                endif     // NOTED_ENABLE
+#            endif         // BONE_ENABLE
+#        endif             // NEO2_ENABLE
+#    endif                 // COLEMAK_DH_ENABLE
+#endif                     // DVORAK_DE_ENABLE
 
 // Custom macro keycode ranges
 enum userspace_custom_keycodes {
@@ -145,6 +145,7 @@ enum userspace_custom_keycodes {
 #else
 #    define MS(kc) kc
 #endif
+
 // some specials
 #define GUI_ENT LGUI_T(KC_ENT)
 #define SFT_SPC RSFT_T(KC_SPC)
