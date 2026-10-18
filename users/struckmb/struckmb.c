@@ -1,205 +1,58 @@
 #include "struckmb.h"
 
-// Return after running through all individual hooks
+// Zentrale Combo-Definitionen (Gültig für JEDE deiner QMK-Tastaturen)
+const uint16_t PROGMEM j_combo[]  = {DE_L, DE_F, COMBO_END};
+const uint16_t PROGMEM ss_combo[] = {DE_DOT, DE_K, COMBO_END};
+const uint16_t PROGMEM os_shift[] = {DE_T, DE_N, COMBO_END};
+const uint16_t PROGMEM os_ctrl[]  = {DE_COMM, DE_DOT, COMBO_END};
+const uint16_t PROGMEM os_gui[]   = {DE_N, DE_R, COMBO_END};
+const uint16_t PROGMEM os_alt[]   = {DE_G, DE_COMM, COMBO_END};
+
+// Zentrales Combo-Verzeichnis
+combo_t key_combos[COMBO_COUNT] = {
+    //
+    COMBO(j_combo, DE_J),           //
+    COMBO(ss_combo, DE_SS),         //
+    COMBO(os_shift, OSM(MOD_LSFT)), //
+    COMBO(os_ctrl, OSM(MOD_LCTL)),  //
+    COMBO(os_gui, OSM(MOD_LGUI)),   //
+    COMBO(os_alt, OSM(MOD_LALT))    //
+};
+
+// Zentrale Makro-Ausführung (Fehlerfrei umgeschrieben ohne String-Verschmelzung)
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (keycode <= NO_MODS && record->event.pressed) {
+    if (record->event.pressed) {
         switch (keycode) {
-            case NO_MODS:
-                clear_oneshot_mods();
+            case MAC_GT: // GUI + TAB
+                register_code(KC_LGUI);
+                tap_code(KC_TAB);
+                unregister_code(KC_LGUI);
                 return false;
-            case DL_PREV:
-                if (LAYER_MAX > 0) {
-                    uint8_t current_default_layer = get_highest_layer(default_layer_state);
-                    if (current_default_layer > 0) {
-                        set_single_persistent_default_layer(current_default_layer - 1);
-                    } else {
-                        set_single_persistent_default_layer(LAYER_MAX);
-                    }
-                }
+            case MAC_AST: // ALT + SHIFT + TAB
+                register_code(KC_LALT);
+                register_code(KC_LSFT);
+                tap_code(KC_TAB);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LALT);
                 return false;
-            case DL_NEXT:
-                if (LAYER_MAX > 0) {
-                    uint8_t next_default_layer = get_highest_layer(default_layer_state) + 1;
-                    if (next_default_layer > LAYER_MAX) {
-                        set_single_persistent_default_layer(0);
-                    } else {
-                        set_single_persistent_default_layer(next_default_layer);
-                    }
-                }
+            case MAC_CST: // CTRL + SHIFT + TAB
+                register_code(KC_LCTL);
+                register_code(KC_LSFT);
+                tap_code(KC_TAB);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LCTL);
                 return false;
-        }
-    }
-
-#ifdef OS_DETECTION_ENABLE
-    bool macos = detected_host_os() == OS_MACOS;
-#else
-    bool macos = false;
-#endif // OS_DETECTION_ENABLE
-
-    switch (keycode) {
-        case SEL_ALL:
-            if (record->event.pressed) {
-                tap_code16(macos ? G(DE_A) : C(DE_A));
-            }
-            return false;
-        case CP_UNDO:
-            if (record->event.pressed) {
-                tap_code16(macos ? G(DE_Z) : C(DE_Z));
-            }
-            return false;
-        case CP_REDO:
-            if (record->event.pressed) {
-                tap_code16(macos ? LSG(DE_Z) : LCTL(LSFT(DE_Z)));
-            }
-            return false;
-    }
-
-#ifdef OS_DETECTION_ENABLE
-    if (macos) switch (keycode) {
-            case DE_IEXL:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_5));
-                }
+            case MAC_CT: // CTRL + TAB
+                register_code(KC_LCTL);
+                tap_code(KC_TAB);
+                unregister_code(KC_LCTL);
                 return false;
-            case DE_IQUE:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_6));
-                }
-                return false;
-            case DE_MDOT:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_DOT));
-                }
-                return false;
-            case DE_NDSH:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_N));
-                }
-                return false;
-            case DE_MDSH:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_4));
-                }
-                return false;
-            case DE_LSAQ:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_B));
-                }
-                return false;
-            case DE_LDAQ:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_V));
-                }
-                return false;
-            case DE_RDAQ:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_X));
-                }
-                return false;
-            case DE_RSAQ:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_Y));
-                }
-                return false;
-            case DE_SLQU:
-                if (record->event.pressed) {
-                    tap_code16(DE_COMM);
-                }
-                return false;
-            case DE_LSQU:
-            case DE_RSQU:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_D));
-                }
-                return false;
-            case DE_DLQU:
-                if (record->event.pressed) {
-                    tap_code16(DE_COMM);
-                    tap_code16(DE_COMM);
-                }
-                return false;
-            case DE_LDQU:
-            case DE_RDQU:
-                if (record->event.pressed) {
-                    tap_code16(A(DE_S));
-                }
-                return false;
-            case KC_BRIU:
-                if (record->event.pressed) {
-                    register_code16(KC_BRMU);
-                } else {
-                    unregister_code16(KC_BRMU);
-                }
-                return false;
-            case KC_BRID:
-                if (record->event.pressed) {
-                    register_code16(KC_BRMD);
-                } else {
-                    unregister_code16(KC_BRMD);
-                }
+            case MAC_AT: // ALT + TAB
+                register_code(KC_LALT);
+                tap_code(KC_TAB);
+                unregister_code(KC_LALT);
                 return false;
         }
-#endif // OS_DETECTION_ENABLE
-
-    return
-        //     process_record_keymap(keycode, record) &&
-        // #ifdef ENCODER_ENABLE
-        //            process_record_encoder(keycode, record) &&
-        // #endif // ENCODER_ENABLE
-        true;
-}
-
-#ifdef QUICK_TAP_TERM
-#    ifdef QUICK_TAP_TERM_PER_KEY
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case SFT_SPC:
-            return 0; // no repeat
-        default:
-            return QUICK_TAP_TERM;
     }
+    return true;
 }
-#    endif // QUICK_TAP_TERM_PER_KEY
-#endif     // QUICK_TAP_TERM
-
-#ifdef HOLD_ON_OTHER_KEY_PRESS
-#    ifdef HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case GUI_ENT:
-            // Immediately select the hold action when another key is pressed.
-            return true;
-        default:
-            // Do not select the hold action when another key is pressed.
-            return false;
-    }
-}
-#    endif // HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-#endif     // HOLD_ON_OTHER_KEY_PRESS
-
-#ifdef CAPS_WORD_ENABLE
-bool caps_word_press_user(uint16_t keycode) {
-    // adapt caps word to german layout
-    switch (keycode) {
-        // Keycodes that continue Caps Word, with shift applied.
-        case KC_A ... KC_Z:
-        case DE_ADIA:
-        case DE_ODIA:
-        case DE_UDIA:
-        case DE_MINS:
-            add_weak_mods(MOD_BIT(KC_LSFT)); // Apply shift to next key.
-            return true;
-
-        // Keycodes that continue Caps Word, without shifting.
-        case KC_1 ... KC_0:
-        case KC_BSPC:
-        case KC_DEL:
-        case DE_UNDS:
-        case DE_SS:
-            return true;
-
-        default:
-            return false; // Deactivate Caps Word.
-    }
-}
-#endif /* ifdef CAPS_WORD_ENABLE */
