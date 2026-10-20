@@ -1,58 +1,38 @@
 #include "struckmb.h"
 
-// Zentrale Combo-Definitionen (Gültig für JEDE deiner QMK-Tastaturen)
-const uint16_t PROGMEM j_combo[]  = {DE_L, DE_F, COMBO_END};
-const uint16_t PROGMEM ss_combo[] = {DE_DOT, DE_K, COMBO_END};
-const uint16_t PROGMEM os_shift[] = {DE_T, DE_N, COMBO_END};
-const uint16_t PROGMEM os_ctrl[]  = {DE_COMM, DE_DOT, COMBO_END};
-const uint16_t PROGMEM os_gui[]   = {DE_N, DE_R, COMBO_END};
-const uint16_t PROGMEM os_alt[]   = {DE_G, DE_COMM, COMBO_END};
+#ifdef CAPS_WORD_ENABLE
+bool caps_word_press_user(uint16_t keycode) {
+    // adapt caps word to german layout
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case DE_ADIA:
+        case DE_ODIA:
+        case DE_UDIA:
+        case DE_MINS:
+            add_weak_mods(MOD_BIT(KC_LSFT)); // Apply shift to next key.
+            return true;
 
-// Zentrales Combo-Verzeichnis
-combo_t key_combos[COMBO_COUNT] = {
-    //
-    COMBO(j_combo, DE_J),           //
-    COMBO(ss_combo, DE_SS),         //
-    COMBO(os_shift, OSM(MOD_LSFT)), //
-    COMBO(os_ctrl, OSM(MOD_LCTL)),  //
-    COMBO(os_gui, OSM(MOD_LGUI)),   //
-    COMBO(os_alt, OSM(MOD_LALT))    //
-};
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case DE_UNDS:
+        case DE_SS:
+            return true;
 
-// Zentrale Makro-Ausführung (Fehlerfrei umgeschrieben ohne String-Verschmelzung)
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-            case MAC_GT: // GUI + TAB
-                register_code(KC_LGUI);
-                tap_code(KC_TAB);
-                unregister_code(KC_LGUI);
-                return false;
-            case MAC_AST: // ALT + SHIFT + TAB
-                register_code(KC_LALT);
-                register_code(KC_LSFT);
-                tap_code(KC_TAB);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_LALT);
-                return false;
-            case MAC_CST: // CTRL + SHIFT + TAB
-                register_code(KC_LCTL);
-                register_code(KC_LSFT);
-                tap_code(KC_TAB);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_LCTL);
-                return false;
-            case MAC_CT: // CTRL + TAB
-                register_code(KC_LCTL);
-                tap_code(KC_TAB);
-                unregister_code(KC_LCTL);
-                return false;
-            case MAC_AT: // ALT + TAB
-                register_code(KC_LALT);
-                tap_code(KC_TAB);
-                unregister_code(KC_LALT);
-                return false;
-        }
+        default:
+            return false; // Deactivate Caps Word.
     }
-    return true;
 }
+#endif /* ifdef CAPS_WORD_ENABLE */
+
+#ifdef COMBO_ENABLE
+// Definition aller Combos
+const uint16_t PROGMEM j_combo[]     = {DE_L, DE_F, COMBO_END};
+const uint16_t PROGMEM sz_combo[]    = {DE_DOT, DE_K, COMBO_END};
+const uint16_t PROGMEM thumb_combo[] = {LT(_NAVI, KC_ESC), LT(_NAVI, KC_TAB), COMBO_END};
+
+// Combo-Verzeichnis registrieren
+combo_t key_combos[COMBO_COUNT] = {COMBO(j_combo, DE_J), COMBO(sz_combo, DE_SS), COMBO(thumb_combo, OSL(_FUNC))};
+#endif // COMBO_ENABLE
