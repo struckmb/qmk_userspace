@@ -7,7 +7,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
 
     [_BASE] = DRACULAD_MAP(                                                     //
         BASE_L_TOP, BASE_R_TOP, BASE_L_MID, BASE_R_MID, BASE_L_BOT, BASE_R_BOT, //
-        KC_MUTE, KC_MPLY, BASE_L_THUMBS, KC_BSPC, KC_TRNS, BASE_R_THUMBS),
+        KC_MUTE, KC_MPLY, BASE_L_THUMBS, KC_TAB, KC_TRNS, BASE_R_THUMBS),
 
     [_SYMB] = DRACULAD_MAP(                                                     //
         SYMB_L_TOP, SYMB_R_TOP, SYMB_L_MID, SYMB_R_MID, SYMB_L_BOT, SYMB_R_BOT, //
@@ -22,3 +22,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
         KC_TRNS, KC_TRNS, FUNC_L_THUMBS, KC_TRNS, KC_TRNS, FUNC_R_THUMBS)
 
 };
+
+#ifdef POINTING_DEVICE_ENABLE
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    if (layer_state_is(_NAVI)) {
+        // Wandle Mausbewegung auf Navi-Layer in Scrollen um
+        mouse_report.v = mouse_report.y;
+        mouse_report.h = mouse_report.x;
+        // Lösche die normale Zeigerbewegung, damit der Cursor beim Scrollen stillsteht
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+    }
+    return mouse_report;
+}
+
+#endif // POINTING_DEVICE_ENABLE
