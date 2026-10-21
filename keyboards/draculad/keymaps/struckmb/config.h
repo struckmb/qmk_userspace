@@ -1,21 +1,30 @@
 #pragma once
 
-// #define OLED_DISABLE_TIMEOUT // Spart Platz, wenn kein automatischer Standby gebraucht wird
+#include_next "config.h"
 
-// Falls der Speicher immer noch hakt, kannst du die nächste Zeile einkommentieren:
-// #define OLED_FONT_END 127    // Lädt nur die erste Hälfte des Zeichensatzes (spart ca. 500 Bytes)
+// ==================================================================================
+// GENERAL SPLIT & OLED SETTINGS (Immer aktiv, wenn das Display läuft)
+// ==================================================================================
+#ifdef OLED_ENABLE
+// Aktiviert das vertikale Display-Profil im Userspace
+#    define OLED_LAYOUT_VERTICAL
 
-// --- Lokale Trackball-Konfiguration ---
+// Zwingend erforderlich, damit der Slave die Tastenanschläge für Bongo Cat sieht!
+#    define SPLIT_TRANSPORT_MIRROR
+
+// Font-Dimensionen für das vertikale Layout
+#    define OLED_FONT_WIDTH 6
+#    define OLED_FONT_HEIGHT 8
+#endif
+
+// ==================================================================================
+// TRACKBALL / POINTING DEVICE SETTINGS (Nur aktiv, wenn in rules.mk eingeschaltet)
+// ==================================================================================
 #ifdef POINTING_DEVICE_ENABLE
-#    define SPLIT_POINTING_ENABLE           // Zwingend erforderlich für Split-Mäuse/Trackballs!
-#    define PIMORONI_TRACKBALL_ADDRESS 0x0A // Standard I2C-Adresse
-#    define PIMORONI_TRACKBALL_SCALE 5      // Geschwindigkeit (höher = schneller)
+#    define SPLIT_POINTING_ENABLE
+#    define PIMORONI_TRACKBALL_ADDRESS 0x0A
 #    define POINTING_DEVICE_COMBINED
-#    define POINTING_DEVICE_RIGHT // Trackball sitzt auf der rechten Hälfte
-#    define POINTING_DEVICE_HIRES_SCROLL_ENABLE
-#    define POINTING_DEVICE_HIRES_SCROLL_MULTIPLIER 75
-// Falls die Richtung nach dem Flashen noch invertiert sein sollte,
-// kannst du alternativ diese beiden Zeilen nutzen:
-// #   define PIMORONI_TRACKBALL_INVERT_X
-// #   define PIMORONI_TRACKBALL_INVERT_Y
+#    define POINTING_DEVICE_RIGHT
+#    define PIMORONI_TRACKBALL_SCALE 5
+#    define PIMORONI_TRACKBALL_ROTATE
 #endif

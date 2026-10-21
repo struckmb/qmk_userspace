@@ -3,7 +3,7 @@
 COMBO_ENABLE = yes
 
 # no OLED support yet
-OLED_ENABLE = no
+OLED_ENABLE = yes
 
 BACKLIGHT_ENABLE = no
 RGBLIGHT_ENABLE = no

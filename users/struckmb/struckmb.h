@@ -31,7 +31,7 @@ enum custom_layers { _BASE = 0, _SYMB, _NAVI, _FUNC };
 #define BASE_R_MID LT(_SYMB, DE_D), RCTL_T(DE_T), RSFT_T(DE_N), LALT_T(DE_R), RGUI_T(DE_H)
 #define BASE_L_BOT DE_V, DE_X, DE_UDIA, DE_ADIA, DE_ODIA
 #define BASE_R_BOT DE_W, DE_G, DE_COMM, DE_DOT, DE_K
-#define BASE_L_THUMBS LT(_NAVI, KC_ESC), KC_ENT
+#define BASE_L_THUMBS LT(_NAVI, KC_ESC), LGUI_T(KC_ENT)
 #define BASE_R_THUMBS KC_SPC, LT(_NAVI, KC_TAB)
 #define EMPTY__THUMBS KC_TRNS, KC_TRNS
 
@@ -88,3 +88,8 @@ enum custom_layers { _BASE = 0, _SYMB, _NAVI, _FUNC };
 #define FUNC_R_BOT DE_NDSH, DE_MDSH, DE_DLQU, DE_LDQU, DE_RDQU
 #define FUNC_L_THUMBS KC_TRNS, KC_TRNS
 #define FUNC_R_THUMBS KC_TRNS, TG(_NAVI)
+
+#ifdef OLED_ENABLE
+bool            oled_task_user(void);
+oled_rotation_t oled_init_user(oled_rotation_t rotation);
+#endif

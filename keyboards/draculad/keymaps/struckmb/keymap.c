@@ -23,18 +23,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
 
 };
 
-#ifdef POINTING_DEVICE_ENABLE
+#ifdef XXX_OLED_ENABLE
 
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    if (layer_state_is(_NAVI)) {
-        // Wandle Mausbewegung auf Navi-Layer in Scrollen um
-        mouse_report.v = mouse_report.y;
-        mouse_report.h = mouse_report.x;
-        // Lösche die normale Zeigerbewegung, damit der Cursor beim Scrollen stillsteht
-        mouse_report.x = 0;
-        mouse_report.y = 0;
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_master()) {
+        return is_keyboard_left() ? OLED_ROTATION_270 : OLED_ROTATION_90;
+    } else {
+        return is_keyboard_left() ? OLED_ROTATION_180 : OLED_ROTATION_0;
     }
-    return mouse_report;
 }
 
-#endif // POINTING_DEVICE_ENABLE
+#endif // OLED_ENABLE
