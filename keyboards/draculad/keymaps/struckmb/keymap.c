@@ -5,9 +5,13 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
 
-    [_BASE] = DRACULAD_MAP(                                                     //
-        BASE_L_TOP, BASE_R_TOP, BASE_L_MID, BASE_R_MID, BASE_L_BOT, BASE_R_BOT, //
-        KC_MUTE, KC_MPLY, BASE_L_THUMBS, KC_TAB, KC_TRNS, BASE_R_THUMBS),
+    [_NOTED] = DRACULAD_MAP(                                                          //
+        NOTED_L_TOP, NOTED_R_TOP, NOTED_L_MID, NOTED_R_MID, NOTED_L_BOT, NOTED_R_BOT, //
+        KC_MUTE, KC_MPLY, BASE_L_THUMBS, BASE_ML_THUMB, KC_TRNS, BASE_R_THUMBS),
+
+    [_QWERTZ] = DRACULAD_MAP(                                                               //
+        QWERTZ_L_TOP, QWERTZ_R_TOP, QWERTZ_L_MID, QWERTZ_R_MID, QWERTZ_L_BOT, QWERTZ_R_BOT, //
+        KC_MUTE, KC_MPLY, BASE_L_THUMBS, BASE_ML_THUMB, KC_TRNS, BASE_R_THUMBS),
 
     [_SYMB] = DRACULAD_MAP(                                                     //
         SYMB_L_TOP, SYMB_R_TOP, SYMB_L_MID, SYMB_R_MID, SYMB_L_BOT, SYMB_R_BOT, //
@@ -22,15 +26,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
         KC_TRNS, KC_TRNS, FUNC_L_THUMBS, KC_TRNS, KC_TRNS, FUNC_R_THUMBS)
 
 };
-
-#ifdef XXX_OLED_ENABLE
-
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (is_keyboard_master()) {
-        return is_keyboard_left() ? OLED_ROTATION_270 : OLED_ROTATION_90;
-    } else {
-        return is_keyboard_left() ? OLED_ROTATION_180 : OLED_ROTATION_0;
-    }
-}
-
-#endif // OLED_ENABLE
