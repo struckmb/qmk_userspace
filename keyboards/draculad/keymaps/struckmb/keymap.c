@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
 
     [_SYMB] = DRACULAD_MAP(                                                     //
         SYMB_L_TOP, SYMB_R_TOP, SYMB_L_MID, SYMB_R_MID, SYMB_L_BOT, SYMB_R_BOT, //
-        KC_TRNS, KC_TRNS, SYMB_L_THUMBS, KC_TRNS, KC_TRNS, SYMB_R_THUMBS),
+        KC_TRNS, KC_TRNS, SYMB_L_THUMBS, SYMB_ML_THUMB, KC_TRNS, SYMB_R_THUMBS),
 
     [_NAVI] = DRACULAD_MAP(                                                     //
         NAVI_L_TOP, NAVI_R_TOP, NAVI_L_MID, NAVI_R_MID, NAVI_L_BOT, NAVI_R_BOT, //
