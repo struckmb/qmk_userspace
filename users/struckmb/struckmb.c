@@ -24,44 +24,36 @@ bool caps_word_press_user(uint16_t keycode) {
 
 #ifdef COMBO_ENABLE
 // --- GLOBALE SYSTEM COMBOS ---
-const uint16_t PROGMEM thumb_combo[] = {LT(_NAVI, KC_ESC), LT(_NAVI, KC_TAB), COMBO_END};
-
+#    ifdef LAST_COL_COMBOS
 // --- NOTED LAYER COMBOS ---
 const uint16_t PROGMEM j_noted_combo[]  = {DE_L, DE_F, COMBO_END};
 const uint16_t PROGMEM sz_noted_combo[] = {LALT_T(DE_R), RGUI_T(DE_H), COMBO_END};
 
-// --- QWERTZ LAYER COMBOS ---
+// --- QWERT LAYER COMBOS ---
 const uint16_t PROGMEM ue_qwertz_combo[] = {DE_O, DE_P, COMBO_END};
 const uint16_t PROGMEM ae_qwertz_combo[] = {LALT_T(DE_L), RGUI_T(DE_ODIA), COMBO_END};
+#    endif // LAST_COL_COMBOS
+const uint16_t PROGMEM thumb_combo[] = {LT(_NAVI, KC_ESC), LT(_NAVI, KC_TAB), COMBO_END};
 
 // Combo-Verzeichnis registrieren (Index 0 bis 4)
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(thumb_combo, OSL(_FUNC)),  // Index 0
-    COMBO(j_noted_combo, DE_J),      // Index 1
-    COMBO(sz_noted_combo, DE_SS),    // Index 2
-    COMBO(ue_qwertz_combo, DE_UDIA), // Index 3
-    COMBO(ae_qwertz_combo, DE_ADIA)  // Index 4
-};
+#    ifdef LAST_COL_COMBOS
+    COMBO(j_noted_combo, DE_J),      // Index 0
+    COMBO(sz_noted_combo, DE_SS),    // Index 1
+    COMBO(ue_qwertz_combo, DE_UDIA), // Index 2
+    COMBO(ae_qwertz_combo, DE_ADIA), // Index 3
+#    endif                           // LAST_COL_COMBOS
+    COMBO(thumb_combo, OSL(_FUNC))};
 
+#    ifdef LAST_COL_COMBOS
 // Intelligenter Filter: Schränkt Combos strikt auf ihre jeweiligen Base-Layer ein
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     uint8_t current_base = get_highest_layer(default_layer_state);
-
-    switch (combo_index) {
-        // NOTED-Combos: Dürfen nur auslösen, wenn _NOTED die Basisebene ist
-        case 1 ... 2: // j_noted_combo sz_noted_combo
-            return (current_base == _NOTED);
-
-        // QWERTZ-Combos: Dürfen nur auslösen, wenn _QWERTZ die Basisebene ist
-        case 3 ... 4: // ue_qwertz_combo ae_qwertz_combo
-            return (current_base == _QWERTZ);
-
-        // Globale System-Combos: Dürfen immer auslösen
-        default:
-            return true;
-    }
+    if (combo_index < 2) return (current_base == _NOTED);
+    return combo_index > 3 || current_base == _QWERT;
 }
-#endif
+#    endif // LAST_COL_COMBOS
+#endif     // COMBO_ENABLE
 
 #ifdef OLED_ENABLE
 // Globale Variablen für Animationen im OLED-Scope
@@ -101,7 +93,7 @@ bool oled_task_user(void) {
         oled_write_ln_P(PSTR("=========\n"), false);
 
         oled_write_ln_P(PSTR("  BASE   "), true);
-        oled_write_ln_P(default_layer == _QWERTZ ? PSTR(" QWERTZ") : PSTR(" NOTED "), false);
+        oled_write_ln_P(default_layer == _QWERT ? PSTR(" QWERT") : PSTR(" NOTED "), false);
 
         switch (layer) {
             case _SYMB:
@@ -113,6 +105,11 @@ bool oled_task_user(void) {
             case _FUNC:
                 oled_write_ln_P(PSTR("  > Func\n"), false);
                 break;
+#        ifdef POINTING_DEVICE_ENABLE
+            case _PNTR:
+                oled_write_ln_P(PSTR(" > Point\n"), false);
+                break;
+#        endif // POINTING_DEVICE_ENABLE
             default:
                 oled_write_ln_P(PSTR("        \n"), false);
                 break;
@@ -158,17 +155,15 @@ bool oled_task_user(void) {
 
         oled_write_ln_P(PSTR("  [=====]\n  [=====]\n   U   U"), false);
     }
-#    else  // OLED_LAYOUT_VERTICAL
+#    else // OLED_LAYOUT_VERTICAL
     if (is_keyboard_master()) {
         oled_write_ln_P(PSTR("== QMK KEYBOARD =="), false);
 
         oled_write_P(PSTR("Base:   "), false);
-        uint8_t default_layer_hz = get_highest_layer(default_layer_state);
-        oled_write_ln_P(default_layer == _QWERTZ ? PSTR("QWERTZ Layout") : PSTR("Noted Layout"), false);
+        oled_write_ln_P(default_layer == _QWERT ? PSTR("QWERT Layout") : PSTR("Noted Layout"), false);
 
         oled_write_P(PSTR("  └> "), false);
-        uint8_t layer_hz = get_highest_layer(layer_state);
-        switch (layer_hz) {
+        switch (layer) {
             case _SYMB:
                 oled_write_ln_P(PSTR("Symbols   "), false);
                 break;
@@ -178,18 +173,22 @@ bool oled_task_user(void) {
             case _FUNC:
                 oled_write_ln_P(PSTR("Function  "), false);
                 break;
+#        ifdef POINTING_DEVICE_ENABLE
+            case _PNTR:
+                oled_write_ln_P(PSTR("Pointer   "), false);
+                break;
+#        endif // POINTING_DEVICE_ENABLE
             default:
                 oled_write_ln_P(PSTR("None      "), false);
                 break;
         }
 
-        uint8_t mods_hz = get_mods();
         oled_write_P(PSTR("Mods: "), false);
-        if (mods_hz & MOD_MASK_CTRL) oled_write_P(PSTR(" CTL"), false);
-        if (mods_hz & MOD_MASK_SHIFT) oled_write_P(PSTR(" SFT"), false);
-        if (mods_hz & MOD_MASK_ALT) oled_write_P(PSTR(" ALT"), false);
-        if (mods_hz & MOD_MASK_GUI) oled_write_P(PSTR(" GUI"), false);
-        if (!mods_hz) oled_write_P(PSTR(" N/A"), false);
+        if (mods & MOD_MASK_CTRL) oled_write_P(PSTR(" CTL"), false);
+        if (mods & MOD_MASK_SHIFT) oled_write_P(PSTR(" SFT"), false);
+        if (mods & MOD_MASK_ALT) oled_write_P(PSTR(" ALT"), false);
+        if (mods & MOD_MASK_GUI) oled_write_P(PSTR(" GUI"), false);
+        if (!mods) oled_write_P(PSTR(" N/A"), false);
         if (caps_active) {
             oled_write_ln_P(caps_lock ? PSTR("     [CapsLOCK]     ") : PSTR("     [CapsWord]     "), true);
         } else {
@@ -211,7 +210,7 @@ bool oled_task_user(void) {
             oled_write_raw_P(bongo_cat_idle, 256);
         }
     }
-#    endif // OLED_LAYOUT_VERTICAL
+#    endif     // OLED_LAYOUT_VERTICAL
     return false;
 }
 #endif // OLED_ENABLE
@@ -221,10 +220,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LY_TOGG:
             if (record->event.pressed) {
                 uint8_t current_default = get_highest_layer(default_layer_state);
-                if (current_default == _QWERTZ) {
+                if (current_default == _QWERT) {
                     set_single_persistent_default_layer(_NOTED);
                 } else {
-                    set_single_persistent_default_layer(_QWERTZ);
+                    set_single_persistent_default_layer(_QWERT);
                 }
             }
             return false;

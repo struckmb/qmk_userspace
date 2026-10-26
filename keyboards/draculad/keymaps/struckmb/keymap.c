@@ -1,7 +1,7 @@
 #include "struckmb.h"
 
 // draculad specific wrapper
-#define DRACULAD_MAP(l_top, r_top, l_mid, r_mid, l_bot, r_bot, enc_l, enc_r, l_th, ex_l, ex_r, r_th) LAYOUT(l_top, r_top, l_mid, r_mid, l_bot, r_bot, enc_l, enc_r, l_th, ex_l, ex_r, r_th)
+#define DRACULAD_MAP(...) LAYOUT(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
 
@@ -9,8 +9,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
         NOTED_L_TOP, NOTED_R_TOP, NOTED_L_MID, NOTED_R_MID, NOTED_L_BOT, NOTED_R_BOT, //
         KC_MUTE, KC_MPLY, BASE_L_THUMBS, BASE_ML_THUMB, KC_TRNS, BASE_R_THUMBS),
 
-    [_QWERTZ] = DRACULAD_MAP(                                                               //
-        QWERTZ_L_TOP, QWERTZ_R_TOP, QWERTZ_L_MID, QWERTZ_R_MID, QWERTZ_L_BOT, QWERTZ_R_BOT, //
+    [_QWERT] = DRACULAD_MAP(                                                          //
+        QWERT_L_TOP, QWERT_R_TOP, QWERT_L_MID, QWERT_R_MID, QWERT_L_BOT, QWERT_R_BOT, //
         KC_MUTE, KC_MPLY, BASE_L_THUMBS, BASE_ML_THUMB, KC_TRNS, BASE_R_THUMBS),
 
     [_SYMB] = DRACULAD_MAP(                                                     //

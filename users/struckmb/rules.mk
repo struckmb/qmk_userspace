@@ -3,7 +3,7 @@ CAPS_WORD_ENABLE = yes
 COMBO_ENABLE = yes
 INTROSPECTION_KEYMAP_C = $(USER_PATH)/struckmb.c
 
-OLED_ENABLE = yes
+# OLED_ENABLE = yes
 
 # Erlaubt fortgeschrittene Hold-Tap-Filter-Regeln in der config.h
 TAP_DANCE_ENABLE = no

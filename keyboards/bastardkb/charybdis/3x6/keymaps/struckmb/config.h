@@ -1,12 +1,4 @@
 
-#define QWERTY_ENABLE
-#define NOTED_ENABLE
-#define BONE_ENABLE
-#define NEO2_ENABLE
-#define COLEMAK_DH_ENABLE
-#define DVORAK_DE_ENABLE
-// #define GAME_ENABLE
-
 /* Charybdis-specific features. */
 
 #ifdef POINTING_DEVICE_ENABLE

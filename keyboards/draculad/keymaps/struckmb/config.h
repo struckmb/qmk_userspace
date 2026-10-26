@@ -1,6 +1,7 @@
 #pragma once
 
 #include_next "config.h"
+#define LAST_COL_COMBOS
 
 // ==================================================================================
 // GENERAL SPLIT & OLED SETTINGS (Immer aktiv, wenn das Display läuft)

@@ -1,8 +1,6 @@
 
 # It's a tiny 3x5+3/2 keyboard so use combos
 COMBO_ENABLE = yes
-
-# no OLED support yet
 OLED_ENABLE = yes
 
 BACKLIGHT_ENABLE = no
