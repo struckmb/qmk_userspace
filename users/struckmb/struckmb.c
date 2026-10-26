@@ -87,11 +87,12 @@ bool oled_task_user(void) {
     uint8_t default_layer = get_highest_layer(default_layer_state);
     uint8_t layer         = get_highest_layer(layer_state);
     uint8_t mods          = get_mods();
+    bool    caps_lock     = host_keyboard_led_state().caps_lock;
     bool    caps_active =
 #    ifdef CAPS_WORD_ENABLE
         is_caps_word_on() ||
 #    endif
-        host_keyboard_led_state().caps_lock;
+        caps_lock;
 
 #    ifdef OLED_LAYOUT_VERTICAL
     if (is_keyboard_master()) {
@@ -119,7 +120,7 @@ bool oled_task_user(void) {
 
         oled_write_ln_P(PSTR(" [MODS]  "), true);
         oled_write_ln_P(mods & MOD_MASK_CTRL ? PSTR(" *CTRL") : PSTR("  ctrl"), false);
-        oled_write_ln_P(caps_active || (mods & MOD_MASK_SHIFT) ? PSTR(" *SHIFT  ") : PSTR("  shift  "), caps_active);
+        oled_write_ln_P(caps_lock ? PSTR("*CAPSLCK*") : caps_active || (mods & MOD_MASK_SHIFT) ? PSTR(" *SHIFT  ") : PSTR("  shift  "), caps_active);
         oled_write_ln_P(mods & MOD_MASK_ALT ? PSTR(" *ALT") : PSTR("  alt"), false);
         oled_write_ln_P(mods & MOD_MASK_GUI ? PSTR(" *GUI") : PSTR("  gui"), false);
 
@@ -190,7 +191,7 @@ bool oled_task_user(void) {
         if (mods_hz & MOD_MASK_GUI) oled_write_P(PSTR(" GUI"), false);
         if (!mods_hz) oled_write_P(PSTR(" N/A"), false);
         if (caps_active) {
-            oled_write_ln_P(PSTR("     [CapsWord ACTIVE]     "), true);
+            oled_write_ln_P(caps_lock ? PSTR("     [CapsLOCK]     ") : PSTR("     [CapsWord]     "), true);
         } else {
             oled_write_ln_P(PSTR(""), false);
         }
