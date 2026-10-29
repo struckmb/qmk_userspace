@@ -12,6 +12,10 @@
         [
             "draculad",
             "struckmb"
+        ],
+        [
+            "splitkb/kyria/rev1/base",
+            "struckmb"
         ]
     ]
 }

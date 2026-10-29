@@ -24,20 +24,6 @@ enum custom_layers {
 };
 enum custom_keycodes { LY_TOGG = SAFE_RANGE };
 
-// ==================================================================================
-// DIE GLOBALEN DAUMEN-BAUSTEINE
-// ==================================================================================
-#define EMPTY__THUMBS KC_TRNS, KC_TRNS
-#define BASE_L_THUMBS LT(_NAVI, KC_ESC), LGUI_T(KC_ENT)
-#define BASE_ML_THUMB LT(_NAVI, KC_TAB)
-#define BASE_R_THUMBS KC_SPC, LT(_NAVI, KC_TAB)
-
-#define _BASE_L_TOP_ LALT_T(KC_BSPC)
-#define _BASE_L_MID_ LT(_SYMB, KC_ESC)
-#define _BASE_L_BOT_ KC_LSFT
-#define _BASE_R_TOP_(kc) LALT_T(kc)
-#define _BASE_R_MID_(kc) LT(_SYMB, kc)
-#define _BASE_R_BOT_ RCTL_T(KC_APP)
 #ifdef POINTING_DEVICE_ENABLE
 #    define PTR(kc) LT(_PNTR, kc)
 #else
@@ -48,6 +34,24 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE };
 #else
 #    define _BASE_CENTER_(kc) kc
 #endif
+
+// ==================================================================================
+// DIE GLOBALEN DAUMEN-BAUSTEINE
+// ==================================================================================
+#define EMPTY__THUMBS KC_TRNS, KC_TRNS
+#define BASE_LA_THUMB LT(_FUNC, KC_ESC)
+#define BASE_L_THUMBS LGUI_T(KC_ENT), LT(_NAVI, KC_TAB)
+#define BASE_R_THUMBS LT(_NAVI, KC_ESC), KC_SPC
+#define BASE_RA_THUMB LT(_FUNC, KC_TAB)
+#define BASE_LI_THUMBS LT(_NAVI, KC_TAB), LGUI_T(KC_ENT)
+#define BASE_RI_THUMBS KC_SPC, LT(_NAVI, KC_ESC)
+
+#define _BASE_L_TOP_ LALT_T(KC_BSPC)
+#define _BASE_L_MID_ LT(_SYMB, KC_ESC)
+#define _BASE_L_BOT_ KC_LSFT
+#define _BASE_R_TOP_(kc) LALT_T(kc)
+#define _BASE_R_MID_(kc) LT(_SYMB, kc)
+#define _BASE_R_BOT_ RCTL_T(KC_APP)
 
 // ==================================================================================
 // DIE TASTEN-ZEILEN (3x5 ANORDNUNG)
@@ -103,9 +107,12 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE };
 #define NAVI_L_TOP KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_PGDN
 #define NAVI_L_MID KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
 #define NAVI_L_BOT KC_CAPS, KC_INS, CW_TOGG, KC_MENU, KC_PSCR
-#define NAVI_R_TOP DE_MINS, DE_7, DE_8, DE_9, DE_SLSH
-#define NAVI_R_MID DE_PLUS, RCTL_T(DE_4), RSFT_T(DE_5), LALT_T(DE_6), RGUI_T(DE_ASTR)
+#define NAVI_R_TOP DE_ASTR, DE_7, DE_8, DE_9, DE_SLSH
+#define NAVI_R_MID DE_PLUS, RCTL_T(DE_4), RSFT_T(DE_5), LALT_T(DE_6), RGUI_T(DE_MINS)
 #define NAVI_R_BOT DE_COLN, DE_1, DE_2, DE_3, DE_SCLN
+#define NAVI_R6_TOP NAVI_R_TOP, DE_COMM
+#define NAVI_R6_MID NAVI_R_MID, DE_DOT
+#define NAVI_R6_BOT NAVI_R_BOT, DE_EQL
 #define NAVI_L_THUMBS TG(_NAVI), DE_COMM
 #define NAVI_R_THUMBS DE_0, DE_DOT
 

@@ -1,5 +1,22 @@
 #include "struckmb.h"
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LY_TOGG:
+            if (record->event.pressed) {
+                uint8_t current_default = get_highest_layer(default_layer_state);
+                if (current_default == _QWERT) {
+                    set_single_persistent_default_layer(_NOTED);
+                } else {
+                    set_single_persistent_default_layer(_QWERT);
+                }
+            }
+            return false;
+        default:
+            return true;
+    }
+}
+
 #ifdef CAPS_WORD_ENABLE
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
@@ -214,21 +231,3 @@ bool oled_task_user(void) {
     return false;
 }
 #endif // OLED_ENABLE
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LY_TOGG:
-            if (record->event.pressed) {
-                uint8_t current_default = get_highest_layer(default_layer_state);
-                if (current_default == _QWERT) {
-                    set_single_persistent_default_layer(_NOTED);
-                } else {
-                    set_single_persistent_default_layer(_QWERT);
-                }
-            }
-            return false;
-
-        default:
-            return true;
-    }
-}
