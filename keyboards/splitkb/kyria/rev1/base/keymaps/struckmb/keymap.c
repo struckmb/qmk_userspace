@@ -2,50 +2,42 @@
 
 #define KYRIA_MAP(...) LAYOUT(__VA_ARGS__)
 
-#define KYRIA_BASE_THUMBS KC_TRNS, BASE_LA_THUMB, BASE_L_THUMBS, KC_TRNS, KC_TRNS, KC_TRNS, BASE_R_THUMBS, KC_TRNS
+#define KYRIA_THUMBS(l, r) KC_TRNS, l, KC_TRNS, KC_TRNS, r, KC_TRNS
 
-#define KYRIA_SYMB_THUMBS KC_TRNS, SYMB_L_THUMBS, SYMB_ML_THUMB, KC_TRNS, KC_TRNS, KC_TRNS, SYMB_R_THUMBS, KC_TRNS
-
-#define KYRIA_NAVI_THUMBS KC_TRNS, NAVI_L_THUMBS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, NAVI_R_THUMBS, KC_TRNS
-
-#define KYRIA_FUNC_THUMBS KC_TRNS, FUNC_L_THUMBS, KC_TRNS, KC_TRNS, KC_TRNS, FUNC_R_THUMBS, KC_TRNS, KC_TRNS
-
-#define KYRIA_BASE_EXTRAS DE_LBRC, KC_CAPS, MO(_FUNC), DE_RBRC
-#define KYRIA_TRANSPARENT_EXTRAS KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
-#define KYRIA_ROW(left, right) KC_NO, left, right, KC_NO
-#define KYRIA_XROW(left, right) KC_NO, left, KYRIA_TRANSPARENT_EXTRAS, right, KC_NO
+#define KYRIA_BASE_EXTRAS(l, r) l, DE_LBRC, KC_CAPS, MO(_NUMS), DE_RBRC, r
+#define KYRIA_FUNC_EXTRAS(l, r) l, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, r
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NOTED] = KYRIA_MAP(                              //
         NOTED_L6_TOP, NOTED_R6_TOP,                    //
         NOTED_L6_MID, NOTED_R6_MID,                    //
-        NOTED_L6_BOT, KYRIA_BASE_EXTRAS, NOTED_R6_BOT, //
-        KYRIA_BASE_THUMBS),
+        KYRIA_BASE_EXTRAS(NOTED_L6_BOT, NOTED_R6_BOT), //
+        KYRIA_THUMBS(BASE_L3_TMB, BASE_R3_TMB)),
 
     [_QWERT] = KYRIA_MAP(                              //
         QWERT_L6_TOP, QWERT_R6_TOP,                    //
         QWERT_L6_MID, QWERT_R6_MID,                    //
-        QWERT_L6_BOT, KYRIA_BASE_EXTRAS, QWERT_R6_BOT, //
-        KYRIA_BASE_THUMBS),
+        KYRIA_BASE_EXTRAS(QWERT_L6_BOT, QWERT_R6_BOT), //
+        KYRIA_THUMBS(BASE_L3_TMB, BASE_R3_TMB)),
 
-    [_SYMB] = KYRIA_MAP(                                    //
-        SYMB_L6_TOP, SYMB_R6_TOP,                           //
-        SYMB_L6_MID, SYMB_R6_MID,                           //
-        SYMB_L6_BOT, KYRIA_TRANSPARENT_EXTRAS, SYMB_R6_BOT, //
-        KYRIA_SYMB_THUMBS),
+    [_SYMB] = KYRIA_MAP(                             //
+        SYMB_L6_TOP, SYMB_R6_TOP,                    //
+        SYMB_L6_MID, SYMB_R6_MID,                    //
+        KYRIA_FUNC_EXTRAS(SYMB_L6_BOT, SYMB_R6_BOT), //
+        KYRIA_THUMBS(SYMB_L3_TMB, SYMB_R3_TMB)),
 
-    [_NAVI] = KYRIA_MAP(                    //
-        KYRIA_ROW(NAVI_L_TOP, NAVI_R_TOP),  //
-        KYRIA_ROW(NAVI_L_MID, NAVI_R_MID),  //
-        KYRIA_XROW(NAVI_L_BOT, NAVI_R_BOT), //
-        KYRIA_NAVI_THUMBS),
+    [_NAVI] = KYRIA_MAP(                             //
+        NAVI_L6_TOP, NAVI_R6_TOP,                    //
+        NAVI_L6_MID, NAVI_R6_MID,                    //
+        KYRIA_FUNC_EXTRAS(NAVI_L6_BOT, NAVI_R6_BOT), //
+        KYRIA_THUMBS(NAVI_L3_TMB, NAVI_R3_TMB)),
 
-    [_FUNC] = KYRIA_MAP(                    //
-        KYRIA_ROW(FUNC_L_TOP, FUNC_R_TOP),  //
-        KYRIA_ROW(FUNC_L_MID, FUNC_R_MID),  //
-        KYRIA_XROW(FUNC_L_BOT, FUNC_R_BOT), //
-        KYRIA_FUNC_THUMBS)};
+    [_NUMS] = KYRIA_MAP(                             //
+        NUMS_L6_TOP, NUMS_R6_TOP,                    //
+        NUMS_L6_MID, NUMS_R6_MID,                    //
+        KYRIA_FUNC_EXTRAS(NUMS_L6_BOT, NUMS_R6_BOT), //
+        KYRIA_THUMBS(NUMS_L3_TMB, NUMS_R3_TMB))};
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {

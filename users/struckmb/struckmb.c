@@ -1,6 +1,87 @@
 #include "struckmb.h"
 
+typedef struct {
+    uint16_t keycode;
+    uint16_t tap_keycode;
+    uint8_t  modifier;
+    uint8_t  row;
+    uint8_t  col;
+    uint32_t pressed_at;
+    bool     pressed;
+    bool     holding;
+} tap_hold_key_t;
+
+static tap_hold_key_t navi_tap_hold_keys[] = {
+    {TC_MDOT, DE_MDOT, MOD_BIT(KC_LCTL), 0, 0, 0, false, false},
+    {TS_SRQU, DE_SLQU, MOD_BIT(KC_LSFT), 0, 0, 0, false, false},
+    {TA_LSQU, DE_LSQU, MOD_BIT(KC_LALT), 0, 0, 0, false, false},
+    {TG_RSQU, DE_RSQU, MOD_BIT(KC_LGUI), 0, 0, 0, false, false},
+};
+
+static void activate_tap_hold(tap_hold_key_t *key) {
+    if (!key->holding) {
+        key->holding = true;
+        register_mods(key->modifier);
+    }
+}
+
+static bool process_tap_hold_key(uint16_t keycode, keyrecord_t *record) {
+    if (!record->event.pressed) {
+        for (uint8_t i = 0; i < ARRAY_SIZE(navi_tap_hold_keys); i++) {
+            tap_hold_key_t *key = &navi_tap_hold_keys[i];
+            if (key->pressed && key->row == record->event.key.row && key->col == record->event.key.col) {
+                if (key->holding) {
+                    unregister_mods(key->modifier);
+                } else {
+                    tap_code16(key->tap_keycode);
+                }
+                key->pressed = false;
+                key->holding = false;
+                return false;
+            }
+        }
+    }
+
+    for (uint8_t i = 0; i < ARRAY_SIZE(navi_tap_hold_keys); i++) {
+        tap_hold_key_t *key = &navi_tap_hold_keys[i];
+        if (record->event.pressed && key->pressed && key->keycode != keycode) {
+            activate_tap_hold(key);
+        }
+    }
+
+    for (uint8_t i = 0; i < ARRAY_SIZE(navi_tap_hold_keys); i++) {
+        tap_hold_key_t *key = &navi_tap_hold_keys[i];
+        if (key->keycode != keycode) {
+            continue;
+        }
+
+        if (record->event.pressed) {
+            key->pressed_at = timer_read32();
+            key->row        = record->event.key.row;
+            key->col        = record->event.key.col;
+            key->pressed    = true;
+            key->holding    = false;
+        }
+        return false;
+    }
+
+    return true;
+}
+
+void matrix_scan_user(void) {
+    for (uint8_t i = 0; i < ARRAY_SIZE(navi_tap_hold_keys); i++) {
+        tap_hold_key_t *key = &navi_tap_hold_keys[i];
+        if (key->pressed && !key->holding && timer_elapsed32(key->pressed_at) >= TAPPING_TERM) {
+            activate_tap_hold(key);
+        }
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_tap_hold_key(keycode, record)) {
+        return false;
+    }
+
     switch (keycode) {
         case LY_TOGG:
             if (record->event.pressed) {
@@ -24,7 +105,6 @@ bool caps_word_press_user(uint16_t keycode) {
         case DE_ADIA:
         case DE_ODIA:
         case DE_UDIA:
-        case DE_MINS:
             add_weak_mods(MOD_BIT(KC_LSFT));
             return true;
         case KC_1 ... KC_0:
@@ -40,8 +120,6 @@ bool caps_word_press_user(uint16_t keycode) {
 #endif
 
 #ifdef COMBO_ENABLE
-// --- GLOBALE SYSTEM COMBOS ---
-#    ifdef LAST_COL_COMBOS
 // --- NOTED LAYER COMBOS ---
 const uint16_t PROGMEM j_noted_combo[]  = {DE_L, DE_F, COMBO_END};
 const uint16_t PROGMEM sz_noted_combo[] = {LALT_T(DE_R), RGUI_T(DE_H), COMBO_END};
@@ -49,28 +127,19 @@ const uint16_t PROGMEM sz_noted_combo[] = {LALT_T(DE_R), RGUI_T(DE_H), COMBO_END
 // --- QWERT LAYER COMBOS ---
 const uint16_t PROGMEM ue_qwertz_combo[] = {DE_O, DE_P, COMBO_END};
 const uint16_t PROGMEM ae_qwertz_combo[] = {LALT_T(DE_L), RGUI_T(DE_ODIA), COMBO_END};
-#    endif // LAST_COL_COMBOS
-const uint16_t PROGMEM thumb_combo[] = {LT(_NAVI, KC_ESC), LT(_NAVI, KC_TAB), COMBO_END};
 
-// Combo-Verzeichnis registrieren (Index 0 bis 4)
 combo_t key_combos[COMBO_COUNT] = {
-#    ifdef LAST_COL_COMBOS
     COMBO(j_noted_combo, DE_J),      // Index 0
     COMBO(sz_noted_combo, DE_SS),    // Index 1
     COMBO(ue_qwertz_combo, DE_UDIA), // Index 2
-    COMBO(ae_qwertz_combo, DE_ADIA), // Index 3
-#    endif                           // LAST_COL_COMBOS
-    COMBO(thumb_combo, OSL(_FUNC))};
+    COMBO(ae_qwertz_combo, DE_ADIA)  // Index 3
+};
 
-#    ifdef LAST_COL_COMBOS
-// Intelligenter Filter: Schränkt Combos strikt auf ihre jeweiligen Base-Layer ein
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    uint8_t current_base = get_highest_layer(default_layer_state);
-    if (combo_index < 2) return (current_base == _NOTED);
-    return combo_index > 3 || current_base == _QWERT;
+    uint8_t current_layer = get_highest_layer(layer_state);
+    return (current_layer == _NOTED) ? combo_index < 2 : combo_index > 1;
 }
-#    endif // LAST_COL_COMBOS
-#endif     // COMBO_ENABLE
+#endif // COMBO_ENABLE
 
 #ifdef OLED_ENABLE
 // Globale Variablen für Animationen im OLED-Scope
@@ -119,8 +188,8 @@ bool oled_task_user(void) {
             case _NAVI:
                 oled_write_ln_P(PSTR("  > Navi\n"), false);
                 break;
-            case _FUNC:
-                oled_write_ln_P(PSTR("  > Func\n"), false);
+            case _NUMS:
+                oled_write_ln_P(PSTR("  > Nums\n"), false);
                 break;
 #        ifdef POINTING_DEVICE_ENABLE
             case _PNTR:
@@ -187,8 +256,8 @@ bool oled_task_user(void) {
             case _NAVI:
                 oled_write_ln_P(PSTR("Navigation"), false);
                 break;
-            case _FUNC:
-                oled_write_ln_P(PSTR("Function  "), false);
+            case _NUMS:
+                oled_write_ln_P(PSTR("Numbers   "), false);
                 break;
 #        ifdef POINTING_DEVICE_ENABLE
             case _PNTR:

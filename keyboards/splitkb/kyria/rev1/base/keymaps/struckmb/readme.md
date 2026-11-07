@@ -225,7 +225,7 @@ enum layers {
     _COLEMAK_DH,
     _NAV,
     _SYM,
-    _FUNCTION,
+    _NUMS,
     _ADJUST
 };
 ```
