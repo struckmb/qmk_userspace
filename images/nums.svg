@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 824 390" role="img" aria-labelledby="title desc">
+  <title id="title">NUMS-Ebene mit Haupt- und Daumentasten</title>
+  <desc id="desc">Dreireihige Zahlen- und Funktionstastenbelegung mit optionalen äußeren Spalten. Darunter die logischen Daumentasten.</desc>
+  <style>
+    text { font-family: system-ui, sans-serif; fill: #20232a; }
+    .hand { font-size: 13px; font-weight: 700; letter-spacing: .08em; fill: #566174; }
+    .key rect { fill: #f5f7fa; stroke: #667085; stroke-width: 1.5; rx: 7; }
+    .key .label { font-size: 19px; font-weight: 650; text-anchor: middle; }
+    .key .hint { font-size: 9px; text-anchor: middle; fill: #596579; }
+    .optional rect { fill: #fff7df; stroke: #b7791f; stroke-dasharray: 5 3; }
+    .optional .hint { fill: #805b16; }
+    .thumb rect { fill: #eaf2ff; stroke: #5576a8; }
+    .thumb.optional rect { fill: #fff7df; stroke: #b7791f; stroke-dasharray: 5 3; }
+    .pass-through rect { fill: #f1f2f4; stroke: #9aa1ab; stroke-dasharray: 3 3; }
+    .thumb-label { font-size: 14px; font-weight: 650; text-anchor: middle; }
+    .section { font-size: 12px; font-weight: 700; fill: #566174; }
+    .note { font-size: 11px; fill: #596579; }
+  </style>
+  <text class="hand" x="20" y="18">LINKE HAND · AUSSEN NACH INNEN</text>
+  <text class="hand" x="428" y="18">RECHTE HAND · INNEN NACH AUSSEN</text>
+  <g class="key optional" transform="translate(20 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">⌫</text></g>
+  <g class="key" transform="translate(84 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">F1</text></g>
+  <g class="key" transform="translate(148 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">F2</text></g>
+  <g class="key" transform="translate(212 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">F3</text></g>
+  <g class="key" transform="translate(276 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">F4</text></g>
+  <g class="key" transform="translate(340 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">F5</text></g>
+  <g class="key" transform="translate(428 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">*</text></g>
+  <g class="key" transform="translate(492 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">7</text></g>
+  <g class="key" transform="translate(556 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">8</text></g>
+  <g class="key" transform="translate(620 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">9</text></g>
+  <g class="key" transform="translate(684 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">/</text></g>
+  <g class="key optional" transform="translate(748 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">,</text></g>
+
+  <g class="key optional" transform="translate(20 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">Esc</text></g>
+  <g class="key" transform="translate(84 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">F6</text><text class="hint" x="28" y="48">GUI</text></g>
+  <g class="key" transform="translate(148 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">F7</text><text class="hint" x="28" y="48">Alt</text></g>
+  <g class="key" transform="translate(212 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">F8</text><text class="hint" x="28" y="48">Shift</text></g>
+  <g class="key" transform="translate(276 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">F9</text><text class="hint" x="28" y="48">Ctrl</text></g>
+  <g class="key" transform="translate(340 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">F10</text></g>
+  <g class="key" transform="translate(428 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">+</text></g>
+  <g class="key" transform="translate(492 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">4</text><text class="hint" x="28" y="48">Ctrl</text></g>
+  <g class="key" transform="translate(556 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">5</text><text class="hint" x="28" y="48">Shift</text></g>
+  <g class="key" transform="translate(620 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">6</text><text class="hint" x="28" y="48">Alt</text></g>
+  <g class="key" transform="translate(684 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">-</text><text class="hint" x="28" y="48">GUI</text></g>
+  <g class="key optional" transform="translate(748 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">.</text></g>
+
+  <g class="key optional" transform="translate(20 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">Shift</text></g>
+  <g class="key" transform="translate(84 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">F11</text></g>
+  <g class="key" transform="translate(148 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">F12</text></g>
+  <g class="key" transform="translate(212 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">F13</text></g>
+  <g class="key" transform="translate(276 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">F14</text></g>
+  <g class="key" transform="translate(340 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">F15</text></g>
+  <g class="key" transform="translate(428 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">:</text></g>
+  <g class="key" transform="translate(492 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">1</text></g>
+  <g class="key" transform="translate(556 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">2</text></g>
+  <g class="key" transform="translate(620 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">3</text></g>
+  <g class="key" transform="translate(684 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">;</text></g>
+  <g class="key optional" transform="translate(748 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">=</text></g>
+
+  <text class="section" x="20" y="238">Gestrichelt = optionale Rand-/3. Daumentaste</text>
+  <text class="section" x="20" y="270">DAUMEN · LOGISCHE REIHENFOLGE, PHYSISCHE ANORDNUNG VARIIERT</text>
+  <text class="note" x="20" y="298">Links außen → innen</text>
+  <text class="note" x="428" y="298">Rechts innen → außen</text>
+  <g class="key thumb" transform="translate(20 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">NAVI</text></g>
+  <g class="key thumb" transform="translate(148 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">,</text></g>
+  <g class="key thumb optional pass-through" transform="translate(276 307)"><rect width="120" height="48"/></g>
+  <g class="key thumb optional pass-through" transform="translate(428 307)"><rect width="120" height="48"/></g>
+  <g class="key thumb" transform="translate(556 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">0</text></g>
+  <g class="key thumb" transform="translate(684 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">.</text></g>
+</svg>

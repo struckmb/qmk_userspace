@@ -1,225 +1,81 @@
-# QMK Userspace
+# Layout-Übersicht
 
-This is a template repository which allows for an external set of QMK keymaps to be defined and compiled. This is useful for users who want to maintain their own keymaps without having to fork the main QMK repository.
+Die Grafiken zeigen Haupt- und Daumentasten in einer allgemeinen,
+geteilten Anordnung. Orange, gestrichelte Tasten markieren optionale äußere
+Spalten und optionale dritte Daumentasten. Auf den Grundebenen liegt die
+optionale Daumentaste außen; auf den zusätzlichen Ebenen liegt sie innen.
+Fehlt sie an der Tastatur, entfällt sie; die übrigen Tasten werden nicht
+verschoben. Grau gestrichelte Tasten sind nicht belegt oder geben die
+darunterliegende Ebene frei.
 
-These keymaps are using keymap_german_iso with some extensions for Linux systems.
-Symbols are 'translated', if a mac host is detected.
+`DE_*`-Keycodes bezeichnen Tasten des deutschen QWERTZ-Layouts. Die Darstellung
+unten zeigt die ausgegebenen Zeichen bzw. Funktionen; Modifikatortasten bei
+Tap-Hold-Belegungen sind zusätzlich erklärt.
 
-## Base Layers
+## Grundebenen
 
-First and last column keys on base layers for 6x3 keyboards,
-(X) is the corresponding key from the currently active base layer:
-
-```
-     A/⌫│                                       │A/(X)
-     ───┼─                                     ─┼─────
-     Σ/⎋│           (...other keys...)          │Σ/(X)
-     ───┼─                                     ─┼─────
-      G │                                       │ C/▤
-```
-
-All base layers share the same thumb cluster:
-(If the keyboard only has 2 keys on one side, the outermost key (marked with *) is missing)
-
-```
-                *                     *
-                ⎋ │ ↵ │ ⇥ │ │./,│Spc│ ⎋
-               ─R─ ─G─┴LOW┘ └RSE┴─── ─L─
-```
-
-The dot and comma key is mainly used for 5 column keyboards where I replaced dot and comma by some of the "umlauts".
-The selected base layer is still active after a power cut or reset.
-
-### QWERTY (German adaption)
-
-```
-      q  │  w  │  e  │  r  │  t          z  │  u  │  i  │  o  │  p  │ (ü)
-    ─────┼─────┼─────┼─────┼─────      ─────┼─────┼─────┼─────┼───── ─────
-      a  │  s  │  d  │  f  │  g          h  │  j  │  k  │  l  │  ö  │ (ä)
-    ──G──┼──A──┼──S──┼──C──┼─(Σ)─      ─(Σ)─┼──C──┼──S──┼──A──┼──G── ─────
-      y  │  x  │  c  │  v  │  b          n  │  m  │  ,  │  .  │  ß  │
-    ──M──┴─────┴─────┴─────┴─────      ─────┴─────┴─(ä)─┴─(ü)─┴──M── ─────
-```
+`NOTED` und `QWERT` sind die beiden auswählbaren Grundebenen. Die aktive
+Grundebene bleibt über einen Neustart hinweg gespeichert.
 
 ### NOTED
 
-```
-      z  │  y  │  u  │  a  │  q          p  │  b  │  m  │  l  │  f  │ (j)
-    ─────┼─────┼─────┼─────┼─────      ─────┼─────┼─────┼─────┼───── ─────
-      c  │  s  │  i  │  e  │  o          d  │  t  │  n  │  r  │  h  │ (ß)
-    ──G──┼──A──┼──S──┼──C──┼─(Σ)─      ─(Σ)─┼──C──┼──S──┼──A──┼──G── ─────
-      v  │  x  │  ü  │  ä  │  ö          w  │  g  │  ,  │  .  │  k  │
-    ──M──┴─────┴─────┴─────┴─────      ─────┴─────┴─(j)─┴─(ß)─┴──M── ─────
-```
+![NOTED-Ebene mit Haupt- und Daumentasten](images/noted.svg)
 
-### BONE
+### QWERT
 
-```
-      j  │  d  │  u  │  a  │  x          p  │  h  │  l  │  m  │  w  │ (ß)
-    ─────┼─────┼─────┼─────┼─────      ─────┼─────┼─────┼─────┼───── ─────
-      c  │  t  │  i  │  e  │  o          b  │  n  │  r  │  s  │  g  │ (q)
-    ──G──┼──A──┼──S──┼──C──┼─(Σ)─      ─(Σ)─┼──C──┼──S──┼──A──┼──G── ─────
-      f  │  v  │  ü  │  ä  │  ö          y  │  z  │  ,  │  .  │  k  │
-    ──M──┴─────┴─────┴─────┴─────      ─────┴─────┴─(q)─┴─(ß)─┴──M── ─────
-```
+![QWERT-Ebene mit Haupt- und Daumentasten](images/qwert.svg)
 
-### NEO2
+In der mittleren Reihe sind pro Hand vier Tasten zugleich Modifikatortasten:
+links GUI, Alt, Shift und Ctrl, rechts Ctrl, Shift, Alt und GUI. Beim Tippen
+senden sie weiterhin den jeweiligen Buchstaben. Mit `COMBO_ENABLE` sind die
+mit `**` markierten Mitteltasten als `LT(SYMB, Taste)` konfiguriert; sonst
+senden sie nur den Buchstaben. Zusätzliche Buchstabenkombinationen sind in der
+NOTED-Ebene L+F → J und R+H → ß, in der QWERT-Ebene O+P → Ü und L+Ö → Ä.
 
-```
-      x  │  v  │  l  │  c  │  w          k  │  h  │  g  │  f  │  q  │ (ß)
-    ─────┼─────┼─────┼─────┼─────      ─────┼─────┼─────┼─────┼───── ─────
-      u  │  i  │  a  │  e  │  o          s  │  n  │  r  │  t  │  d  │ (y)
-    ──G──┼──A──┼──S──┼──C──┼─(Σ)─      ─(Σ)─┼──C──┼──S──┼──A──┼──G── ─────
-      ü  │  ö  │  ä  │  p  │  z          b  │  m  │  ,  │  .  │  j  │
-    ──M──┴─────┴─────┴─────┴─────      ─────┴─────┴─(y)─┴─(ß)─┴──M── ─────
-```
+## Zusätzliche Ebenen
 
-### Colemak (Mod DH, German adaption)
+Diese Ebenen werden je nach Tastatur über die zugehörigen Daumentasten
+aktiviert und verschwinden beim Loslassen.
+Tastaturen mit Zeigegerät können zusätzlich die optionale `PNTR`-Ebene
+bereitstellen.
 
-```
-      q  │  w  │  f  │  p  │  b          j  │  l  │  u  │  y  │  ö  │ (ü)
-    ─────┼─────┼─────┼─────┼─────      ─────┼─────┼─────┼─────┼───── ─────
-      a  │  r  │  s  │  t  │ g           m  │  n  │  e  │  i  │  o  │ (ä)
-    ──G──┼──A──┼──S──┼──C──┼─(Σ)─      ─(Σ)─┼──C──┼──S──┼──A──┼──G── ─────
-      z  │  x  │  c  │  d  │  v          k  │  h  │  ,  │  .  │  ß  │
-    ──M──┴─────┴─────┴─────┴─────      ─────┴─────┴─(ä)─┴─(ü)─┴──M── ─────
-```
+### SYMB — Symbole
 
-### DVORAK (German adaption)
+![SYMB-Ebene mit Haupt- und Daumentasten](images/symb.svg)
 
-```
-      ü  │  ,  │  .  │  p  │  y          f  │  g  │  c  │  t  │  z  │ (ß)
-    ─────┼─(ß)─┼─(l)─┼─────┼─────      ─────┼─────┼─────┼─────┼───── ─────
-      a  │  o  │  e  │  i  │  u          h  │  d  │  r  │  n  │  s  │ (l)
-    ──G──┼──A──┼──S──┼──C──┼─(Σ)─      ─(Σ)─┼──C──┼──S──┼──A──┼──G── ─────
-(ä)│  ö  │  q  │  j  │  k  │  x          b  │  m  │  w  │  v  │  ä  │
-    ──M──┴─────┴─────┴─────┴─────      ─────┴─────┴─────┴─────┴──M── ─────
-```
+### NAVI — Navigation und Satzzeichen
 
-## Special Layers (not very useful perhaps?)
+![NAVI-Ebene mit Haupt- und Daumentasten](images/navi.svg)
 
-These are not used for normal writing. They are not persisted and gone after a restart.
+Die rechten Satzzeichentasten der mittleren Reihe geben beim Tippen `·`, `‚`,
+`‘` und `’` aus. Gedrückt gehalten wirken sie als Ctrl, Shift, Alt bzw. GUI.
 
-### Game Layer
+### NUMS — Zahlen und Funktionstasten
 
-(You have to reset the keyboard to return to normal behaviour)
+![NUMS-Ebene mit Haupt- und Daumentasten](images/nums.svg)
 
-```
-(TAB)  q │ w │ e │ r │ t         6 │ 7 │ 8 │ 9 │Esc (Bsp)
-───── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ─────
-(Ctl)  a │ s │ d │ f │ g         ← │ ↓ │ ↑ │ → │ 5  (Ent)
-───── ───┼───┼───┼───┼───       ───┼───┼───┼───┼─── ─────
-(Sft)  y │ x │ c │ v │ b         0 │ 1 │ 2 │ 3 │ 4  (Sft)
-              ┌───┬───┬───┐ ┌───┬───┬───┐
-              │Ctl│Ent│Tab│ │Sft│Spc│Alt│
-              └───┴───┴───┘ └───┴───┴───┘
-```
+### PNTR — Zeigegerät (optional)
 
-### ASETNIOP Layer
+`PNTR` wird nur einkompiliert, wenn die Firmware `POINTING_DEVICE_ENABLE`
+aktiviert. Die Ebene enthält Trackball-/Maussteuerung, Maustasten und
+Modifikatortasten. Ihre konkrete Belegung hängt von der jeweiligen
+Zeigegeräte-Konfiguration ab und ist nicht für jede Tastatur Teil der Firmware.
 
-```
-        │   │   │   │             │   │   │   │
-     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
-        │   │   │   │    [TBD]    │   │   │   │
-     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
-        │   │   │   │             │   │   │   │
-              ┌───┬───┬───┐ ┌───┬───┬───┐
-              │   │   │   │ │   │   │   │
-              └───┴───┴───┘ └───┴───┴───┘
-```
+## Daumenbelegungen
 
-### ARTSEN.IO Layer
+Die Daumengrafiken verwenden logische Positionen, keine verbindliche
+Tastaturgeometrie. Zwei Daumentasten pro Seite sind als reguläre Positionen
+gezeigt; die äußere dritte Taste ist optional für Tastaturen mit mindestens
+drei Daumentasten auf der Seite. Die Positionen können je nach Layout fehlen
+oder physisch anders angeordnet sein. Die Firmware ordnet die Funktionen den
+vorhandenen Positionen der jeweiligen Tastatur zu.
 
-```
-        │   │   │   │             │   │   │   │
-     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
-        │   │   │   │    [TBD]    │   │   │   │
-     ───┼───┼───┼───┼───       ───┼───┼───┼───┼───
-        │   │   │   │             │   │   │   │
-              ┌───┬───┬───┐ ┌───┬───┬───┐
-              │   │   │   │ │   │   │   │
-              └───┴───┴───┘ └───┴───┴───┘
-```
+## Schreibweise und Verhalten
 
-## Additional Layers
-
-### Raise (Navigation, edit and media control keys)
-
-(the home row modifiers on the right are sticky)
-
-```
- Bsp │ PUp │ BSp │  ↑  │ Del │ PDn         Prv │ Ply │ Nxt │ Stp │ Ejt │ Pse
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
- Ins │ Hme │  ←  │  ↓  │  →  │ End       * Meh │  C  │  S  │  A  │  G  │ SLk
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
- Rdo │ Udo │ Cut │ Cpy │ Pst │ All         PSc │ Ins │ CpW │ AGr │ APP │
-                    ─────┌─────┬─────┐ ┌─────┬─────┐─────
-                     Prv │ V - │ V × │ │ (v) │ V + │ Nxt
-                    ─────└──S──┴─ATT─┘ └─────┴──S──┘─────
-```
-
-### Lower (Function keys and numbers)
-
-```
- Bsp │ F1  │  F2 │ F3  │ F4  │  £           /  │  7  │  8  │  9  │  +  │  $
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-  ¥  │ F5  │ F6  │ F7  │ F8  │  €           :  │  4  │  5  │  6  │  -  │  #
-───── ──G──┼──A──┼──S──┼──C──┼─────       ─────┼──C──┼──S──┼──A──┼──G── ─────
-     │ F9  │ F10 │ F11 │ F12 │  ¢           0  │  1  │  2  │  3  │  ,  │
-                    ─────┌─────┬─────┐ ┌─────┬─────┐─────
-                      $  │  ¥  │ (v) │ │  .  │ Spc │  $
-                    ─────└─────┴─────┘ └─ATT─┴─────┘─────
-```
-
-### Symbols
-
-```
-     │  @  │  _  │  [  │  ]  │  ^           !  │  <  │  >  │  =  │  &  │  ſ
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-     │  \  │  /  │  {  │  }  │  *           ?  │  (  │  )  │  -  │  :  │  §
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-     │  #  │  $  │  |  │  ~  │  ´           +  │  %  │  "  │  '  │  ;  │  …
-                    ─────┌─────┬─────┐ ┌─────┬─────┐─────
-                      °  │  §  │ G+ˇ │ │  …  │ Spc │  ſ
-                    ─────└─────┴─────┘ └─────┴─────┘─────
-```
-
-### Pointer (Mouse, only if enabled)
-
-```
-     │ MW↓ │ MW← │ Ms↑ │ MW→ │ MW↑             │     │     │     │     │
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-     │ Bt4 │ Ms← │ Ms↓ │ Ms→ │ Bt5         Meh │  C  │  S  │  A  │  G  │
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
-     │ Tb← │ Cut │ Cpy │ Pst │ All         Slo │ Med │ Fst │ AGr │ Tb→ │
-                    ─────┌─────┬─────┐ ┌─────┬─────┐─────
-                         │ Bt1 │ Bt2 │ │ Bt3 │ Bt1 │
-                    ─────└─────┴─────┘ └─────┴─────┘─────
-```
-
-### attic (adjustments and missing stuff)
-
-```
- QBt │ QBt │LARTS│LASET│LGAME│ MDX          ¡  │  ‹  │  «  │  »  │  ›  │ QBt
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
- ECl │ ECl │ Ly↓ │ Ly↑ │ BsL │ UGl          ¿  │  •  │  ‚  │  ‘  │  ’  │ ECl
-───── ─────┼─────┼─────┼─────┼─────       ─────┼─────┼─────┼─────┼───── ─────
- Rst │U_Spd│U_Sat│U_Hue│U_Val│U_Mod        n-– │ m-— │  „  │  “  │  ”  │ Pwr
-                    ─────┌─────┬─────┐ ┌─────┬─────┐─────
-                         │ Br- │ (v) │ │ (v) │ Br+ │ RSf
-                    ─────└──S──┴─────┘ └─────┴──S──┘─────
-```
-
-## Portfolio
-
-Currently my board contains the following beauties:
-
-1. Redox (03/2021) (ready assembled)
-2. Kyria rev.2 (05/2021)
-3. dracuLad w/ Pimorini (08/2022)
-4. Iris rev.6 (08/2022)
-5. Paintbrush (10/2022)
-6. [never worked: Aurora sweep (wireless) (03/2023)]
-7. Cantor (11/2023)
-8. Bastard Keyboards Charybdis mini (10/2024)
-9. Corne (wireless) (01/2025)
+- `LT(Ebene, Taste)`: Tippen sendet `Taste`; Halten aktiviert `Ebene`.
+- `LGUI_T(X)`, `LALT_T(X)`, `LSFT_T(X)` und entsprechende rechte Varianten:
+  Tippen sendet `X`; Halten aktiviert den jeweiligen Modifikator.
+- `KC_TRNS` (transparent) lässt die darunterliegende Ebene durchscheinen;
+  `KC_NO` hat keine Funktion.
+- Die Taste zum Umschalten der Grundebene wechselt zwischen NOTED und QWERT
+  und speichert die Auswahl dauerhaft.
