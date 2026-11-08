@@ -12,65 +12,97 @@ KEYBOARD=""
 KEYMAP="struckmb"
 SIDE="left"
 CLEAN_ONLY="false"
+TEST_MODE="false"
 
 show_help() {
     cat << EOF
 
-Verwendung: $(basename "$0") [Optionen]
+Verwendung: $(basename "$0") [Optionen] <kb>
 
 Optionen:
     -c      Clean: Führt 'qmk clean' aus und löscht alle .hex, .bin, .uf2 Dateien
     -f      Flashen der Firmware nach dem Kompilieren
     -h      Zeigt diese Hilfe an
-    -k <kb> Bestimmt die Tastatur (z.B. charybdis, kyria, redox oder eigener Pfad)
     -l      Kompiliert für die LINKE Seite (Standard)
     -m <km> Verwendet eine eigene Keymap (Standard: struckmb)
     -r      Kompiliert für die RECHTE Seite
     -t      Testmodus (Gibt die Befehle nur im Terminal aus)
 
+Keyboard: charybdis, kyria, redox oder ein eigener Pfad
+Optionen müssen vor dem Keyboard stehen.
+
 EOF
 }
 
 clean_firmware() {
-    echo "Führe QMK Clean aus..."
-    $CMD clean
+    if [ "$TEST_MODE" = "false" ]; then
+        echo "Führe QMK Clean aus..."
+    fi
+    run_command "$CMD" clean
 
     if [ "$CMD" = "qmk" ]; then
-        echo "Räume Firmware-Dateien im aktuellen Verzeichnis auf..."
-        rm -f ./*.hex ./*.bin ./*.uf2
+        if [ "$TEST_MODE" = "false" ]; then
+            echo "Räume Firmware-Dateien im aktuellen Verzeichnis auf..."
+        fi
+        run_command rm -f ./*.hex ./*.bin ./*.uf2
     fi
-    echo "--> Aufräumen beendet."
+    if [ "$TEST_MODE" = "false" ]; then
+        echo "--> Aufräumen beendet."
+    fi
 }
 
-# 1. Erst alle Optionen sammeln (damit -t auch vor -c oder -k wirkt)
-while getopts 'cfhk:lm:rs:t' opt; do
+run_command() {
+    if [ "$TEST_MODE" = "true" ]; then
+        printf '+ %s\n' "$*"
+        return 0
+    fi
+    "$@"
+}
+
+# 1. Erst alle Optionen sammeln (damit -t auch vor -c wirkt)
+while getopts 'cfhlm:rst' opt; do
     case "$opt" in
     c) CLEAN_ONLY="true" ;;
     f) ACTION="flash" ;;
     h) show_help; exit 0 ;;
-    k)
-        if [ "$OPTARG" = "bastardkb" ] || [ "$OPTARG" = "charybdis" ]; then
-            KEYBOARD="$KB_CHARYBDIS"
-        elif [ "$OPTARG" = "kyria" ]; then
-            KEYBOARD="$KB_KYRIA"
-        elif [ "$OPTARG" = "redox" ]; then
-            KEYBOARD="$KB_REDOX"
-        else
-            KEYBOARD="$OPTARG"
-        fi
-        ;;
     l) SIDE="left" ;;
     m) KEYMAP="$OPTARG" ;;
     r) SIDE="right" ;;
-    t) CMD="echo qmk" ;;
+    t) TEST_MODE="true" ;;
     *) show_help; exit 1 ;;
     esac
 done
+
+shift "$((OPTIND - 1))"
+if [ "$#" -gt 1 ]; then
+    echo "Fehler: Es darf nur ein Keyboard angegeben werden!" >&2
+    show_help
+    exit 1
+fi
+
+if [ "$#" -eq 1 ]; then
+    if [ "$1" = "bastardkb" ] || [ "$1" = "charybdis" ]; then
+        KEYBOARD="$KB_CHARYBDIS"
+    elif [ "$1" = "kyria" ]; then
+        KEYBOARD="$KB_KYRIA"
+    elif [ "$1" = "redox" ]; then
+        KEYBOARD="$KB_REDOX"
+    else
+        KEYBOARD="$1"
+    fi
+fi
+
+if [ "$TEST_MODE" = "true" ]; then
+    echo "Testmodus: Es werden keine Befehle ausgeführt."
+fi
 
 # 2. Clean-Befehl ausführen (Testmodus -t funktioniert nun unabhängig von der Argumentenreihenfolge)
 if [ "$CLEAN_ONLY" = "true" ]; then
     clean_firmware
     if [ -z "$KEYBOARD" ]; then
+        if [ "$TEST_MODE" = "true" ]; then
+            echo "Testmodus beendet: Es wurden keine Dateien verändert."
+        fi
         exit 0
     fi
 fi
@@ -84,22 +116,33 @@ fi
 
 # 4. Hauptlogik
 if [ "$KEYBOARD" = "cantor" ] && [ "$ACTION" = "flash" ]; then
-    echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
-    $CMD "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}" -bl "dfu-util-split-${SIDE}"
+    if [ "$TEST_MODE" = "false" ]; then
+        echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
+    fi
+    run_command "$CMD" "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}" -bl "dfu-util-split-${SIDE}"
 else
-    echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
+    if [ "$TEST_MODE" = "false" ]; then
+        echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
+    fi
 
     # Ausführen und Status prüfen
-    if $CMD "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}"; then
-        echo "--> QMK Befehl erfolgreich ausgeführt!"
+    if run_command "$CMD" "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}"; then
+        if [ "$TEST_MODE" = "false" ]; then
+            echo "--> QMK Befehl erfolgreich ausgeführt!"
+        fi
     else
         echo "--> Fehler beim QMK Befehl!" >&2
         exit 1
     fi
 
     if [ "$KEYBOARD" = "cantor" ]; then
-        rm -f cantor_"${KEYMAP}"*
-        echo "removed unusable firmware (use flash and select correct side)"
+        run_command rm -f cantor_"${KEYMAP}"*
+        if [ "$TEST_MODE" = "false" ]; then
+            echo "removed unusable firmware (use flash and select correct side)"
+        fi
     fi
 fi
 
+if [ "$TEST_MODE" = "true" ]; then
+    echo "Testmodus beendet: Es wurden keine Dateien verändert."
+fi
