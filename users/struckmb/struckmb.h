@@ -37,10 +37,10 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define EMPTY__THUMBS KC_TRNS, KC_TRNS
 #define BASE_LA_THUMB LT(_NAVI, KC_ESC)
 #define BASE_L_THUMBS LGUI_T(KC_ENT), LT(_NUMS, KC_TAB)
-#define BASE_R_THUMBS LT(_NAVI, KC_ESC), KC_SPC
-#define BASE_RA_THUMB LT(_NUMS, KC_TAB)
+#define BASE_R_THUMBS LT(_NAVI, KC_BSPC), KC_SPC
+#define BASE_RA_THUMB LT(_NUMS, KC_DEL)
 #define BASE_LI_THUMBS LT(_NUMS, KC_TAB), LGUI_T(KC_ENT)
-#define BASE_RI_THUMBS KC_SPC, LT(_NAVI, KC_ESC)
+#define BASE_RI_THUMBS KC_SPC, LT(_NAVI, KC_BSPC)
 
 #define BASE_L3_TMB BASE_LA_THUMB, BASE_L_THUMBS
 #define BASE_R3_TMB BASE_R_THUMBS, BASE_RA_THUMB
@@ -143,7 +143,7 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define NUMS_ML_THUMB KC_TRNS
 #define NUMS_R_THUMBS DE_0, DE_DOT
 #define NUMS_L3_TMB NUMS_L_THUMBS, NUMS_ML_THUMB
-#define NUMS_R3_TMB KC_TRNS, NUMS_R_THUMBS
+#define NUMS_R3_TMB DE_COMM, NUMS_R_THUMBS
 
 #ifdef COMBO_ENABLE
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record);
