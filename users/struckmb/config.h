@@ -2,6 +2,10 @@
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 
+#ifdef OLED_ENABLE
+#    define SPLIT_LAYER_STATE_ENABLE
+#endif
+
 /** select at least on of those base layers **/
 // #define QWERTY_ENABLE
 // #define NOTED_ENABLE

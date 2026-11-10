@@ -1,5 +1,11 @@
 #include "struckmb.h"
 
+// #define CAPS_WORD_ENABLE
+// #define COMBO_ENABLE
+// #define KEYBOARD_draculad
+// #define OLED_ENABLE
+// #define OLED_LAYOUT_VERTICAL
+
 typedef struct {
     uint16_t keycode;
     uint16_t tap_keycode;
@@ -146,6 +152,72 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 static uint32_t bongo_timer      = 0;
 static bool     is_bongo_tapping = false;
 
+static void render_thumb_keys(const char *first, const char *second, const char *third) {
+    oled_set_cursor(0, oled_max_lines() - 1);
+#    ifndef OLED_LAYOUT_VERTICAL
+    oled_write_P(PSTR("Thumb: "), false);
+#    endif
+
+    oled_write_P(first, false);
+
+    oled_write_P(PSTR(" "), false);
+    oled_write_P(second, false);
+
+    oled_write_P(PSTR(" "), false);
+    oled_write_ln_P(third, false);
+}
+
+static void render_thumb_keymap(uint8_t layer) {
+    if (is_keyboard_left()) {
+        switch (layer) {
+            case _SYMB:
+                render_thumb_keys(PSTR("@ "), PSTR("Ret"), PSTR("G^"));
+                break;
+            case _NAVI:
+                render_thumb_keys(PSTR("Nv"), PSTR("Ret"), PSTR("Tb"));
+                break;
+            case _NUMS:
+                render_thumb_keys(PSTR("Nv"), PSTR(" , "), PSTR("Tb"));
+                break;
+            default:
+                render_thumb_keys(PSTR("Ec"), PSTR("Ret"), PSTR("Tb"));
+                break;
+        }
+    } else {
+#    ifdef KEYBOARD_draculad
+        switch (layer) {
+            case _SYMB:
+                render_thumb_keys(PSTR("Spc"), PSTR(""), PSTR("RAlt"));
+                break;
+            case _NAVI:
+                render_thumb_keys(PSTR("lnS"), PSTR(""), PSTR("Base"));
+                break;
+            case _NUMS:
+                render_thumb_keys(PSTR("  0"), PSTR(""), PSTR(" ."));
+                break;
+            default:
+                render_thumb_keys(PSTR("Spc"), PSTR(""), PSTR("BSpc"));
+                break;
+        }
+#    else
+        switch (layer) {
+            case _SYMB:
+                render_thumb_keys(PSTR("Bsp"), PSTR("Spc"), PSTR("RAlt"));
+                break;
+            case _NAVI:
+                render_thumb_keys(PSTR("Bsp"), PSTR("s"), PSTR("Base"));
+                break;
+            case _NUMS:
+                render_thumb_keys(PSTR(","), PSTR("0"), PSTR("."));
+                break;
+            default:
+                render_thumb_keys(PSTR("Bsp"), PSTR("Spc"), PSTR("Del"));
+                break;
+        }
+#    endif
+    }
+}
+
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         is_bongo_tapping = true;
@@ -206,6 +278,7 @@ bool oled_task_user(void) {
         oled_write_ln_P(caps_lock ? PSTR("*CAPSLCK*") : caps_active || (mods & MOD_MASK_SHIFT) ? PSTR(" *SHIFT  ") : PSTR("  shift  "), caps_active);
         oled_write_ln_P(mods & MOD_MASK_ALT ? PSTR(" *ALT") : PSTR("  alt"), false);
         oled_write_ln_P(mods & MOD_MASK_GUI ? PSTR(" *GUI") : PSTR("  gui"), false);
+        render_thumb_keymap(layer);
 
     } else {
         for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
@@ -240,6 +313,7 @@ bool oled_task_user(void) {
         }
 
         oled_write_ln_P(PSTR("  [=====]\n  [=====]\n   U   U"), false);
+        render_thumb_keymap(layer);
     }
 #    else // OLED_LAYOUT_VERTICAL
     if (is_keyboard_master()) {
@@ -280,6 +354,7 @@ bool oled_task_user(void) {
         } else {
             oled_write_ln_P(PSTR(""), false);
         }
+        render_thumb_keymap(layer);
 
     } else {
         extern const char bongo_cat_tap[];
@@ -295,6 +370,7 @@ bool oled_task_user(void) {
         } else {
             oled_write_raw_P(bongo_cat_idle, 256);
         }
+        render_thumb_keymap(layer);
     }
 #    endif     // OLED_LAYOUT_VERTICAL
     return false;
