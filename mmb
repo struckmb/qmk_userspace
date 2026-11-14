@@ -20,7 +20,7 @@ SIDE_SPECIFIED="false"
 show_help() {
     cat << EOF
 
-Verwendung: $(basename "$0") [Optionen] [-a | <kb>]
+Verwendung: $(basename "$0") [Optionen] [-a | <kb>] [Optionen]
 
 Optionen:
     -a      Kompiliert alle Keyboards mit der gewählten Keymap in keyboards/
@@ -34,7 +34,7 @@ Optionen:
     -t      Testmodus (Gibt die Befehle nur im Terminal aus)
 
 Keyboard: charybdis, kyria, redox oder ein eigener Pfad
-Optionen müssen vor dem Keyboard stehen. -a kann nicht mit <kb> kombiniert werden.
+Optionen können vor oder nach dem Keyboard stehen. -a kann nicht mit <kb> kombiniert werden.
 
 EOF
 }
@@ -135,43 +135,86 @@ compile_keyboard() {
     fi
 }
 
-# 1. Erst alle Optionen sammeln (damit -t auch vor -c wirkt)
-while getopts 'abcfhlm:rst' opt; do
-    case "$opt" in
-    a) ALL_KEYBOARDS="true" ;;
-    b) BOTH_SIDES="true"; ACTION="flash" ;;
-    c) CLEAN_UP="true" ;;
-    f) ACTION="flash" ;;
-    h) show_help; exit 0 ;;
-    l) SIDE="left"; SIDE_SPECIFIED="true" ;;
-    m) KEYMAP="$OPTARG" ;;
-    r) SIDE="right"; SIDE_SPECIFIED="true" ;;
-    t) TEST_MODE="true" ;;
-    *) show_help; exit 1 ;;
+# 1. Erst alle Optionen sammeln (damit -t auch vor -c wirkt und das Keyboard
+#    an beliebiger Position stehen kann)
+POSITIONAL_COUNT=0
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+    --)
+        shift
+        while [ "$#" -gt 0 ]; do
+            POSITIONAL_COUNT=$((POSITIONAL_COUNT + 1))
+            if [ "$POSITIONAL_COUNT" -eq 1 ]; then
+                KEYBOARD="$1"
+            fi
+            shift
+        done
+        ;;
+    -?*)
+        options=${1#-}
+        shift
+        while [ -n "$options" ]; do
+            opt=${options%"${options#?}"}
+            options=${options#?}
+            case "$opt" in
+            a) ALL_KEYBOARDS="true" ;;
+            b) BOTH_SIDES="true"; ACTION="flash" ;;
+            c) CLEAN_UP="true" ;;
+            f) ACTION="flash" ;;
+            h) show_help; exit 0 ;;
+            l) SIDE="left"; SIDE_SPECIFIED="true" ;;
+            m)
+                if [ -n "$options" ]; then
+                    KEYMAP="$options"
+                    options=""
+                elif [ "$#" -gt 0 ]; then
+                    KEYMAP="$1"
+                    shift
+                else
+                    echo "Fehler: -m benötigt eine Keymap als Argument!" >&2
+                    show_help
+                    exit 1
+                fi
+                ;;
+            r) SIDE="right"; SIDE_SPECIFIED="true" ;;
+            s) show_help; exit 1 ;;
+            t) TEST_MODE="true" ;;
+            *)
+                echo "Fehler: Unbekannte Option -${opt}!" >&2
+                show_help
+                exit 1
+                ;;
+            esac
+        done
+        ;;
+    *)
+        POSITIONAL_COUNT=$((POSITIONAL_COUNT + 1))
+        if [ "$POSITIONAL_COUNT" -eq 1 ]; then
+            KEYBOARD="$1"
+        fi
+        shift
+        ;;
     esac
 done
 
-shift "$((OPTIND - 1))"
 if [ "$BOTH_SIDES" = "true" ] && [ "$SIDE_SPECIFIED" = "true" ]; then
     echo "Fehler: -b kann nicht mit -l oder -r kombiniert werden!" >&2
     show_help
     exit 1
 fi
-if [ "$#" -gt 1 ] || { [ "$ALL_KEYBOARDS" = "true" ] && [ "$#" -gt 0 ]; }; then
+if [ "$POSITIONAL_COUNT" -gt 1 ] || { [ "$ALL_KEYBOARDS" = "true" ] && [ "$POSITIONAL_COUNT" -gt 0 ]; }; then
     echo "Fehler: -a kann nicht mit einem einzelnen Keyboard kombiniert werden; ansonsten ist höchstens ein Keyboard erlaubt!" >&2
     show_help
     exit 1
 fi
 
-if [ "$ALL_KEYBOARDS" = "false" ] && [ "$#" -eq 1 ]; then
-    if [ "$1" = "bastardkb" ] || [ "$1" = "charybdis" ]; then
+if [ "$ALL_KEYBOARDS" = "false" ] && [ "$POSITIONAL_COUNT" -eq 1 ]; then
+    if [ "$KEYBOARD" = "bastardkb" ] || [ "$KEYBOARD" = "charybdis" ]; then
         KEYBOARD="$KB_CHARYBDIS"
-    elif [ "$1" = "kyria" ]; then
+    elif [ "$KEYBOARD" = "kyria" ]; then
         KEYBOARD="$KB_KYRIA"
-    elif [ "$1" = "redox" ]; then
+    elif [ "$KEYBOARD" = "redox" ]; then
         KEYBOARD="$KB_REDOX"
-    else
-        KEYBOARD="$1"
     fi
 fi
 
