@@ -11,17 +11,22 @@ ACTION="compile"
 KEYBOARD=""
 KEYMAP="struckmb"
 SIDE="left"
-CLEAN_ONLY="false"
+CLEAN_UP="false"
 TEST_MODE="false"
+ALL_KEYBOARDS="false"
+BOTH_SIDES="false"
+SIDE_SPECIFIED="false"
 
 show_help() {
     cat << EOF
 
-Verwendung: $(basename "$0") [Optionen] <kb>
+Verwendung: $(basename "$0") [Optionen] [-a | <kb>]
 
 Optionen:
+    -a      Kompiliert alle Keyboards mit der gewählten Keymap in keyboards/
+    -b      Flash-Vorgang für beide Seiten ausführen (links, dann rechts)
     -c      Clean: Führt 'qmk clean' aus und löscht alle .hex, .bin, .uf2 Dateien
-    -f      Flashen der Firmware nach dem Kompilieren
+    -f      Flashen der Firmware
     -h      Zeigt diese Hilfe an
     -l      Kompiliert für die LINKE Seite (Standard)
     -m <km> Verwendet eine eigene Keymap (Standard: struckmb)
@@ -29,7 +34,7 @@ Optionen:
     -t      Testmodus (Gibt die Befehle nur im Terminal aus)
 
 Keyboard: charybdis, kyria, redox oder ein eigener Pfad
-Optionen müssen vor dem Keyboard stehen.
+Optionen müssen vor dem Keyboard stehen. -a kann nicht mit <kb> kombiniert werden.
 
 EOF
 }
@@ -59,28 +64,106 @@ run_command() {
     "$@"
 }
 
+read_key() {
+    tty_settings=$(stty -g < /dev/tty) || return 1
+    if ! stty -icanon -echo min 1 time 0 < /dev/tty; then
+        return 1
+    fi
+    trap 'stty "$tty_settings" < /dev/tty' 0
+    answer=$(dd bs=1 count=1 2>/dev/null < /dev/tty)
+    read_status=$?
+    stty "$tty_settings" < /dev/tty || return 1
+    trap - 0
+    printf '\n'
+    return "$read_status"
+}
+
+compile_keyboard() {
+    keyboard="$1"
+    if [ "$ACTION" = "flash" ]; then
+        if [ "$BOTH_SIDES" = "true" ]; then
+            for flash_side in left right; do
+                if [ "$flash_side" = "right" ] && [ "$TEST_MODE" = "false" ]; then
+                    sleep 3
+                fi
+                if [ "$TEST_MODE" = "false" ]; then
+                    echo "keyboard: ${keyboard}, keymap: ${KEYMAP}, side: ${flash_side}"
+                fi
+                if [ "$keyboard" = "cantor" ]; then
+                    if ! run_command "$CMD" "$ACTION" -kb "$keyboard" -km "$KEYMAP" -bl "dfu-util-split-${flash_side}"; then
+                        echo "--> Fehler beim QMK Befehl für ${keyboard} (${flash_side})!" >&2
+                        return 1
+                    fi
+                elif ! run_command "$CMD" "$ACTION" -kb "$keyboard" -km "$KEYMAP"; then
+                    echo "--> Fehler beim QMK Befehl für ${keyboard} (${flash_side})!" >&2
+                    return 1
+                fi
+            done
+            return 0
+        fi
+
+        if [ "$keyboard" = "cantor" ]; then
+            if [ "$TEST_MODE" = "false" ]; then
+                echo "keyboard: ${keyboard}, keymap: ${KEYMAP}, side: ${SIDE}"
+            fi
+            if ! run_command "$CMD" "$ACTION" -kb "$keyboard" -km "$KEYMAP" -bl "dfu-util-split-${SIDE}"; then
+                echo "--> Fehler beim QMK Befehl für ${keyboard} (${SIDE})!" >&2
+                return 1
+            fi
+            return 0
+        fi
+    fi
+
+    if [ "$TEST_MODE" = "false" ]; then
+        echo "keyboard: ${keyboard}, keymap: ${KEYMAP}"
+    fi
+
+    if ! run_command "$CMD" "$ACTION" -kb "$keyboard" -km "$KEYMAP"; then
+        echo "--> Fehler beim QMK Befehl für ${keyboard}!" >&2
+        return 1
+    fi
+
+    if [ "$TEST_MODE" = "false" ]; then
+        echo "--> QMK Befehl erfolgreich ausgeführt!"
+    fi
+
+    if [ "$keyboard" = "cantor" ]; then
+        if [ "$TEST_MODE" = "false" ]; then
+            run_command rm -f cantor_"${KEYMAP}"*
+            echo "removed unusable firmware (use flash and select correct side)"
+        fi
+    fi
+}
+
 # 1. Erst alle Optionen sammeln (damit -t auch vor -c wirkt)
-while getopts 'cfhlm:rst' opt; do
+while getopts 'abcfhlm:rst' opt; do
     case "$opt" in
-    c) CLEAN_ONLY="true" ;;
+    a) ALL_KEYBOARDS="true" ;;
+    b) BOTH_SIDES="true"; ACTION="flash" ;;
+    c) CLEAN_UP="true" ;;
     f) ACTION="flash" ;;
     h) show_help; exit 0 ;;
-    l) SIDE="left" ;;
+    l) SIDE="left"; SIDE_SPECIFIED="true" ;;
     m) KEYMAP="$OPTARG" ;;
-    r) SIDE="right" ;;
+    r) SIDE="right"; SIDE_SPECIFIED="true" ;;
     t) TEST_MODE="true" ;;
     *) show_help; exit 1 ;;
     esac
 done
 
 shift "$((OPTIND - 1))"
-if [ "$#" -gt 1 ]; then
-    echo "Fehler: Es darf nur ein Keyboard angegeben werden!" >&2
+if [ "$BOTH_SIDES" = "true" ] && [ "$SIDE_SPECIFIED" = "true" ]; then
+    echo "Fehler: -b kann nicht mit -l oder -r kombiniert werden!" >&2
+    show_help
+    exit 1
+fi
+if [ "$#" -gt 1 ] || { [ "$ALL_KEYBOARDS" = "true" ] && [ "$#" -gt 0 ]; }; then
+    echo "Fehler: -a kann nicht mit einem einzelnen Keyboard kombiniert werden; ansonsten ist höchstens ein Keyboard erlaubt!" >&2
     show_help
     exit 1
 fi
 
-if [ "$#" -eq 1 ]; then
+if [ "$ALL_KEYBOARDS" = "false" ] && [ "$#" -eq 1 ]; then
     if [ "$1" = "bastardkb" ] || [ "$1" = "charybdis" ]; then
         KEYBOARD="$KB_CHARYBDIS"
     elif [ "$1" = "kyria" ]; then
@@ -97,9 +180,9 @@ if [ "$TEST_MODE" = "true" ]; then
 fi
 
 # 2. Clean-Befehl ausführen (Testmodus -t funktioniert nun unabhängig von der Argumentenreihenfolge)
-if [ "$CLEAN_ONLY" = "true" ]; then
+if [ "$CLEAN_UP" = "true" ]; then
     clean_firmware
-    if [ -z "$KEYBOARD" ]; then
+    if [ -z "$KEYBOARD" ] && [ "$ALL_KEYBOARDS" = "false" ]; then
         if [ "$TEST_MODE" = "true" ]; then
             echo "Testmodus beendet: Es wurden keine Dateien verändert."
         fi
@@ -108,38 +191,59 @@ if [ "$CLEAN_ONLY" = "true" ]; then
 fi
 
 # 3. Validierung
-if [ -z "$KEYBOARD" ]; then
+if [ -z "$KEYBOARD" ] && [ "$ALL_KEYBOARDS" = "false" ]; then
     echo "Fehler: Es wurde keine Tastatur angegeben!" >&2
     show_help
     exit 1
 fi
 
 # 4. Hauptlogik
-if [ "$KEYBOARD" = "cantor" ] && [ "$ACTION" = "flash" ]; then
-    if [ "$TEST_MODE" = "false" ]; then
-        echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}, side: ${SIDE}"
-    fi
-    run_command "$CMD" "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}" -bl "dfu-util-split-${SIDE}"
-else
-    if [ "$TEST_MODE" = "false" ]; then
-        echo "keyboard: ${KEYBOARD}, keymap: ${KEYMAP}"
-    fi
-
-    # Ausführen und Status prüfen
-    if run_command "$CMD" "$ACTION" -kb "$KEYBOARD" -km "${KEYMAP}"; then
-        if [ "$TEST_MODE" = "false" ]; then
-            echo "--> QMK Befehl erfolgreich ausgeführt!"
-        fi
-    else
-        echo "--> Fehler beim QMK Befehl!" >&2
+if [ "$ALL_KEYBOARDS" = "true" ]; then
+    KEYMAP_FILES=$(find keyboards -type f -path "*/keymaps/${KEYMAP}/keymap.c" -print | sort)
+    if [ -z "$KEYMAP_FILES" ]; then
+        echo "Fehler: Keine Keyboards mit der Keymap '${KEYMAP}' in keyboards/ gefunden!" >&2
         exit 1
     fi
 
-    if [ "$KEYBOARD" = "cantor" ]; then
-        run_command rm -f cantor_"${KEYMAP}"*
+    FAILED="false"
+    for KEYMAP_FILE in $KEYMAP_FILES; do
+        KEYBOARD_DIR=${KEYMAP_FILE%/keymaps/${KEYMAP}/keymap.c}
+        case "$KEYBOARD_DIR" in
+        keyboards/bastardkb/charybdis/3x6) KEYBOARD="$KB_CHARYBDIS" ;;
+        keyboards/splitkb/kyria/rev1/base) KEYBOARD="$KB_KYRIA" ;;
+        *) KEYBOARD=${KEYBOARD_DIR#keyboards/} ;;
+        esac
+
         if [ "$TEST_MODE" = "false" ]; then
-            echo "removed unusable firmware (use flash and select correct side)"
+            if [ "$ACTION" = "flash" ]; then
+                action_label="flashen"
+            else
+                action_label="kompilieren"
+            fi
+            while :; do
+                printf "Keyboard %s %s? (y/n): " "$KEYBOARD" "$action_label"
+                if ! read_key; then
+                    echo "Fehler: Eingabe über das Terminal nicht möglich." >&2
+                    exit 1
+                fi
+                case "$answer" in
+                y|Y) break ;;
+                n|N) continue 2 ;;
+                *) echo "Bitte y oder n eingeben." >&2 ;;
+                esac
+            done
         fi
+
+        if ! compile_keyboard "$KEYBOARD"; then
+            FAILED="true"
+        fi
+    done
+    if [ "$FAILED" = "true" ]; then
+        exit 1
+    fi
+else
+    if ! compile_keyboard "$KEYBOARD"; then
+        exit 1
     fi
 fi
 

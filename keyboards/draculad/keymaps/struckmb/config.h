@@ -2,6 +2,8 @@
 
 #include_next "config.h"
 
+#define QWERTY_DISABLED
+
 // ==================================================================================
 // GENERAL SPLIT & OLED SETTINGS (Immer aktiv, wenn das Display läuft)
 // ==================================================================================

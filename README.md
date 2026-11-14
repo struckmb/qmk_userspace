@@ -2,8 +2,8 @@
 
 Die Grafiken zeigen Haupt- und Daumentasten in einer allgemeinen,
 geteilten Anordnung. Orange, gestrichelte Tasten markieren optionale äußere
-Spalten und optionale dritte Daumentasten. Auf den Grundebenen liegt die
-optionale Daumentaste außen; auf den zusätzlichen Ebenen liegt sie innen.
+Spalten und optionale dritte Daumentasten. Auf allen Ebenen liegt die
+optionale Daumentaste außen.
 Fehlt sie an der Tastatur, entfällt sie; die übrigen Tasten werden nicht
 verschoben. Grau gestrichelte Tasten sind nicht belegt oder geben die
 darunterliegende Ebene frei.

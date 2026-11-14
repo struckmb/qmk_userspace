@@ -8,41 +8,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         NOTED_L6_TOP, NOTED_R6_TOP, //
         NOTED_L6_MID, NOTED_R6_MID, //
         NOTED_L6_BOT, NOTED_R6_BOT, //
-        BASE_L3_TMB, BASE_R_THUMBS),
+        BASE_L3_TMB, BASE_R2_TMB),
 
     [_QWERT] = CHARYBDIS_MAP(       //
         QWERT_L6_TOP, QWERT_R6_TOP, //
         QWERT_L6_MID, QWERT_R6_MID, //
         QWERT_L6_BOT, QWERT_R6_BOT, //
-        BASE_L3_TMB, BASE_R_THUMBS),
+        BASE_L3_TMB, BASE_R2_TMB),
 
     [_SYMB] = CHARYBDIS_MAP(      //
         SYMB_L6_TOP, SYMB_R6_TOP, //
         SYMB_L6_MID, SYMB_R6_MID, //
         SYMB_L6_BOT, SYMB_R6_BOT, //
-        SYMB_L3_TMB, SYMB_R_THUMBS),
+        SYMB_L3_TMB, SYMB_R2_TMB),
 
     [_NAVI] = CHARYBDIS_MAP(      //
         NAVI_L6_TOP, NAVI_R6_TOP, //
         NAVI_L6_MID, NAVI_R6_MID, //
         NAVI_L6_BOT, NAVI_R6_BOT, //
-        NAVI_L3_TMB, NAVI_R_THUMBS),
+        NAVI_L3_TMB, NAVI_R2_TMB),
 
     [_NUMS] = CHARYBDIS_MAP(      //
         NUMS_L6_TOP, NUMS_R6_TOP, //
         NUMS_L6_MID, NUMS_R6_MID, //
         NUMS_L6_BOT, NUMS_R6_BOT, //
-        NUMS_L3_TMB, NUMS_R_THUMBS)
+        NUMS_L3_TMB, NUMS_R2_TMB)
 
 #ifdef POINTING_DEVICE_ENABLE
-#    define EMPTY_ROW KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+#    define CHARYBDIS_EMPTY_ROW KC_2NO, KC_2NO, KC_2NO
         ,
     [_PNTR] = CHARYBDIS_MAP(                                //
-        KC_NO, KC_NO, KC_NO, S_D_MOD, DPI_MOD, KC_NO,       //
-        EMPTY_ROW,                                          //
+        KC_2NO, KC_NO, S_D_MOD, DPI_MOD, KC_NO,             //
+        CHARYBDIS_EMPTY_ROW,                                //
         KC_NO, MS_BTN4, DRG_TOG, DRGSCRL, SNIPING, MS_BTN5, //
         OS_MEH, OS_LCTL, OS_LSFT, OS_LALT, OS_LGUI, KC_NO,  //
-        EMPTY_ROW,                                          //
+        CHARYBDIS_EMPTY_ROW,                                //
         KC_NO, SNIPING, DRGSCRL, DRG_TOG, KC_NO, KC_RCTL,   //
         KC_NO, MS_BTN1, MS_BTN2, MS_BTN1, MS_BTN3)};
 

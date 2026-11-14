@@ -1,15 +1,23 @@
 #pragma once
 
 #ifdef COMBO_ENABLE
-#    define COMBO_COUNT 4
-#endif // COMBO_ENABLE
+#    ifndef QWERTY_DISABLED
+#        define COMBO_COUNT 6
+#    else
+#        define COMBO_COUNT 4
+#    endif // QWERTY_DISABLED
+#endif     // COMBO_ENABLE
 
 #include QMK_KEYBOARD_H
 #include "keymap_german_extended.h"
 
+#define MC_NXTW G(DE_CIRC) // MAC: next window
+enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU, SZ_COMBO };
 enum custom_layers {
     _NOTED = 0,
+#ifndef QWERTY_DISABLED
     _QWERT,
+#endif
     _SYMB,
     _NAVI,
     _NUMS
@@ -18,7 +26,6 @@ enum custom_layers {
     _PNTR
 #endif // POINTING_DEVICE_ENABLE
 };
-enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU };
 
 #ifdef POINTING_DEVICE_ENABLE
 #    define PTR(kc) LT(_PNTR, kc)
@@ -31,20 +38,7 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #    define _BASE_CENTER_(kc) kc
 #endif
 
-// ==================================================================================
-// DIE GLOBALEN DAUMEN-BAUSTEINE
-// ==================================================================================
-#define EMPTY__THUMBS KC_TRNS, KC_TRNS
-#define BASE_LA_THUMB LT(_NAVI, KC_ESC)
-#define BASE_L_THUMBS LGUI_T(KC_ENT), LT(_NUMS, KC_TAB)
-#define BASE_R_THUMBS LT(_NAVI, KC_BSPC), KC_SPC
-#define BASE_RA_THUMB LT(_NUMS, KC_DEL)
-#define BASE_LI_THUMBS LT(_NUMS, KC_TAB), LGUI_T(KC_ENT)
-#define BASE_RI_THUMBS KC_SPC, LT(_NAVI, KC_BSPC)
-
-#define BASE_L3_TMB BASE_LA_THUMB, BASE_L_THUMBS
-#define BASE_R3_TMB BASE_R_THUMBS, BASE_RA_THUMB
-
+#define KC_2NO KC_NO, KC_NO
 #define _BASE_L_TOP_ LALT_T(KC_BSPC)
 #define _BASE_L_MID_ LT(_SYMB, KC_ESC)
 #define _BASE_L_BOT_ KC_LSFT
@@ -53,7 +47,7 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define _BASE_R_BOT_ RCTL_T(KC_APP)
 
 // ==================================================================================
-// DIE TASTEN-ZEILEN (3x5 ANORDNUNG)
+// DIE BASIS-EBENEN (3x5/6 ANORDNUNG)
 // ==================================================================================
 
 /* --- NOTED LAYER --- */
@@ -70,20 +64,34 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define NOTED_R6_MID NOTED_R_MID, _BASE_R_MID_(DE_SS)
 #define NOTED_R6_BOT NOTED_R_BOT, _BASE_R_BOT_
 
+#ifndef QWERTY_DISABLED
 /* --- QWERT LAYER --- */
-#define QWERT_L_TOP DE_Q, DE_W, DE_E, DE_R, DE_T
-#define QWERT_L_MID LGUI_T(DE_A), LALT_T(DE_S), LSFT_T(DE_D), LCTL_T(DE_F), _BASE_CENTER_(DE_G)
-#define QWERT_L_BOT PTR(DE_Y), DE_X, DE_C, DE_V, DE_B
-#define QWERT_R_TOP DE_Z, DE_U, DE_I, DE_O, DE_P
-#define QWERT_R_MID _BASE_CENTER_(DE_H), RCTL_T(DE_J), RSFT_T(DE_K), LALT_T(DE_L), RGUI_T(DE_ODIA)
-#define QWERT_R_BOT DE_N, DE_M, DE_COMM, DE_DOT, PTR(DE_SS)
-#define QWERT_L6_TOP _BASE_L_TOP_, QWERT_L_TOP
-#define QWERT_L6_MID _BASE_L_MID_, QWERT_L_MID
-#define QWERT_L6_BOT _BASE_L_BOT_, QWERT_L_BOT
-#define QWERT_R6_TOP QWERT_R_TOP, _BASE_R_TOP_(DE_UDIA)
-#define QWERT_R6_MID QWERT_R_MID, _BASE_R_MID_(DE_ADIA)
-#define QWERT_R6_BOT QWERT_R_BOT, _BASE_R_BOT_
+#    define QWERT_L_TOP DE_Q, DE_W, DE_E, DE_R, DE_T
+#    define QWERT_L_MID LGUI_T(DE_A), LALT_T(DE_S), LSFT_T(DE_D), LCTL_T(DE_F), _BASE_CENTER_(DE_G)
+#    define QWERT_L_BOT PTR(DE_Y), DE_X, DE_C, DE_V, DE_B
+#    define QWERT_R_TOP DE_Z, DE_U, DE_I, DE_O, DE_P
+#    define QWERT_R_MID _BASE_CENTER_(DE_H), RCTL_T(DE_J), RSFT_T(DE_K), LALT_T(DE_L), RGUI_T(DE_ODIA)
+#    define QWERT_R_BOT DE_N, DE_M, DE_COMM, DE_DOT, PTR(DE_SS)
+#    define QWERT_L6_TOP _BASE_L_TOP_, QWERT_L_TOP
+#    define QWERT_L6_MID _BASE_L_MID_, QWERT_L_MID
+#    define QWERT_L6_BOT _BASE_L_BOT_, QWERT_L_BOT
+#    define QWERT_R6_TOP QWERT_R_TOP, _BASE_R_TOP_(DE_UDIA)
+#    define QWERT_R6_MID QWERT_R_MID, _BASE_R_MID_(DE_ADIA)
+#    define QWERT_R6_BOT QWERT_R_BOT, _BASE_R_BOT_
+#endif
 
+// ==================================================================================
+// DIE GLOBALEN DAUMEN-BAUSTEINE
+// ==================================================================================
+#define BASE_L3_TMB LT(_NAVI, KC_ESC), LGUI_T(KC_ENT), LT(_NUMS, KC_TAB)
+#define BASE_RI_TMB KC_SPC, LT(_NAVI, KC_BSPC)
+#define BASE_R2_TMB LT(_NAVI, KC_BSPC), KC_SPC
+#define BASE_RA_TMB LT(_NUMS, KC_DEL)
+#define BASE_R3_TMB BASE_R2_TMB, BASE_RA_TMB
+
+// ==================================================================================
+// ZUSÄTZLICHE EBENEN
+// ==================================================================================
 #define _ADD_L_TOP KC_BSPC
 #define _ADD_L_MID KC_ESC
 #define _ADD_L_BOT KC_LSFT
@@ -101,11 +109,12 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define SYMB_R6_TOP SYMB_R_TOP, DE_SLNG
 #define SYMB_R6_MID SYMB_R_MID, DE_AT
 #define SYMB_R6_BOT SYMB_R_BOT, DE_SECT
-#define SYMB_L_THUMBS DE_AT, KC_ENT
-#define SYMB_ML_THUMB G(DE_CIRC)
-#define SYMB_R_THUMBS KC_SPC, KC_RALT
-#define SYMB_L3_TMB SYMB_L_THUMBS, SYMB_ML_THUMB
-#define SYMB_R3_TMB KC_TRNS, SYMB_R_THUMBS
+// Thumbs
+#define SYMB_L3_TMB KC_ESC, KC_ENT, MC_NXTW
+#define SYMB_RI_TMB KC_SPC, DE_AT
+#define SYMB_R2_TMB DE_AT, KC_SPC
+#define SYMB_RA_TMB DE_SECT
+#define SYMB_R3_TMB SYMB_R2_TMB, SYMB_RA_TMB
 
 /* --- NAVIGATION LAYER --- */
 #define NAVI_L_TOP KC_PGUP, KC_BSPC, KC_UP, KC_DEL, KC_PGDN
@@ -117,14 +126,15 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define NAVI_L6_TOP _ADD_L_TOP, NAVI_L_TOP
 #define NAVI_L6_MID _ADD_L_MID, NAVI_L_MID
 #define NAVI_L6_BOT _ADD_L_BOT, NAVI_L_BOT
-#define NAVI_R6_TOP NAVI_R_TOP, KC_NO
-#define NAVI_R6_MID NAVI_R_MID, KC_NO
-#define NAVI_R6_BOT NAVI_R_BOT, KC_NO
-#define NAVI_L_THUMBS TG(_NAVI), KC_TRNS
-#define NAVI_ML_THUMB KC_TRNS
-#define NAVI_R_THUMBS DE_SLNG, LY_TOGG
-#define NAVI_L3_TMB NAVI_L_THUMBS, NAVI_ML_THUMB
-#define NAVI_R3_TMB KC_TRNS, NAVI_R_THUMBS
+#define NAVI_R6_TOP NAVI_R_TOP, KC_MNXT
+#define NAVI_R6_MID NAVI_R_MID, KC_MPLY
+#define NAVI_R6_BOT NAVI_R_BOT, KC_MPRV
+// Thumbs
+#define NAVI_L3_TMB TG(_NAVI), KC_ENT, TG(_NUMS)
+#define NAVI_RI_TMB OS_RALT, LY_TOGG
+#define NAVI_R2_TMB LY_TOGG, OS_RALT
+#define NAVI_RA_TMB DE_SLNG
+#define NAVI_R3_TMB NAVI_R2_TMB, NAVI_RA_TMB
 
 /* --- NUMBERS LAYER --- */
 #define NUMS_L_TOP KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
@@ -136,14 +146,15 @@ enum custom_keycodes { LY_TOGG = SAFE_RANGE, TC_MDOT, TS_SRQU, TA_LSQU, TG_RSQU 
 #define NUMS_L6_TOP _ADD_L_TOP, NUMS_L_TOP
 #define NUMS_L6_MID _ADD_L_MID, NUMS_L_MID
 #define NUMS_L6_BOT _ADD_L_BOT, NUMS_L_BOT
-#define NUMS_R6_TOP NUMS_R_TOP, DE_COMM
-#define NUMS_R6_MID NUMS_R_MID, DE_DOT
-#define NUMS_R6_BOT NUMS_R_BOT, DE_EQL
-#define NUMS_L_THUMBS TG(_NAVI), DE_COMM
-#define NUMS_ML_THUMB KC_TRNS
-#define NUMS_R_THUMBS DE_0, DE_DOT
-#define NUMS_L3_TMB NUMS_L_THUMBS, NUMS_ML_THUMB
-#define NUMS_R3_TMB DE_COMM, NUMS_R_THUMBS
+#define NUMS_R6_TOP NUMS_R_TOP, DE_PND
+#define NUMS_R6_MID NUMS_R_MID, DE_EURO
+#define NUMS_R6_BOT NUMS_R_BOT, DE_CENT
+// Thumbs
+#define NUMS_L3_TMB TG(_NAVI), KC_ENT, TG(_NUMS)
+#define NUMS_RI_TMB DE_0, DE_DOT
+#define NUMS_R2_TMB DE_DOT, DE_0
+#define NUMS_RA_TMB DE_COMM
+#define NUMS_R3_TMB NUMS_RA_TMB, NUMS_R2_TMB
 
 #ifdef COMBO_ENABLE
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record);

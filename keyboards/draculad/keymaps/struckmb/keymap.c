@@ -10,34 +10,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { //
         NOTED_L_MID, NOTED_R_MID, //
         NOTED_L_BOT, NOTED_R_BOT, //
         KC_MUTE, KC_MPLY,         // Encoders
-        BASE_L3_TMB, KC_NO, BASE_RI_THUMBS),
+        BASE_L3_TMB, KC_NO, BASE_RI_TMB),
 
+#ifndef QWERTY_DISABLED
     [_QWERT] = DRACULAD_MAP(      //
         QWERT_L_TOP, QWERT_R_TOP, //
         QWERT_L_MID, QWERT_R_MID, //
         QWERT_L_BOT, QWERT_R_BOT, //
         KC_MUTE, KC_MPLY,         // Encoders
-        BASE_L3_TMB, KC_NO, BASE_RI_THUMBS),
+        BASE_L3_TMB, KC_NO, BASE_RI_TMB),
+#endif
 
     [_SYMB] = DRACULAD_MAP(     //
         SYMB_L_TOP, SYMB_R_TOP, //
         SYMB_L_MID, SYMB_R_MID, //
         SYMB_L_BOT, SYMB_R_BOT, //
         KC_TRNS, KC_TRNS,       // Encoders
-        SYMB_L3_TMB, KC_TRNS, SYMB_R_THUMBS),
+        SYMB_L3_TMB, KC_TRNS, SYMB_RI_TMB),
 
     [_NAVI] = DRACULAD_MAP(     //
         NAVI_L_TOP, NAVI_R_TOP, //
         NAVI_L_MID, NAVI_R_MID, //
         NAVI_L_BOT, NAVI_R_BOT, //
         KC_TRNS, KC_TRNS,       // Encoders
-        NAVI_L3_TMB, KC_TRNS, NAVI_R_THUMBS),
+        NAVI_L3_TMB, KC_TRNS, NAVI_RI_TMB),
 
     [_NUMS] = DRACULAD_MAP(     //
         NUMS_L_TOP, NUMS_R_TOP, //
         NUMS_L_MID, NUMS_R_MID, //
         NUMS_L_BOT, NUMS_R_BOT, //
         KC_TRNS, KC_TRNS,       // Encoders
-        NUMS_L3_TMB, KC_TRNS, NUMS_R_THUMBS)
+        NUMS_L3_TMB, KC_TRNS, NUMS_RI_TMB)
 
 };

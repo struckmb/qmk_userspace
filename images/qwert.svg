@@ -12,8 +12,8 @@
     .thumb rect { fill: #eaf2ff; stroke: #5576a8; }
     .thumb.optional rect { fill: #fff7df; stroke: #b7791f; stroke-dasharray: 5 3; }
     .pass-through rect { fill: #f1f2f4; stroke: #9aa1ab; stroke-dasharray: 3 3; }
-    .thumb-label { font-size: 15px; font-weight: 650; text-anchor: middle; }
-    .thumb-hint { font-size: 10px; text-anchor: middle; fill: #596579; }
+    .thumb-label { font-size: 19px; font-weight: 650; text-anchor: middle; }
+    .thumb-hint { font-size: 8px; text-anchor: middle; fill: #596579; }
     .section { font-size: 12px; font-weight: 700; fill: #566174; }
     .note { font-size: 11px; fill: #596579; }
   </style>
@@ -32,7 +32,7 @@
   <g class="key" transform="translate(684 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">P</text></g>
   <g class="key optional" transform="translate(748 30)"><rect width="56" height="54"/><text class="label" x="28" y="34">Ü</text><text class="hint" x="28" y="48">Alt</text></g>
 
-  <g class="key optional" transform="translate(20 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">Esc</text><text class="hint" x="28" y="48">SYMB</text></g>
+  <g class="key optional" transform="translate(20 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">⎋</text><text class="hint" x="28" y="48">SYMB</text></g>
   <g class="key" transform="translate(84 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">A</text><text class="hint" x="28" y="48">GUI</text></g>
   <g class="key" transform="translate(148 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">S</text><text class="hint" x="28" y="48">Alt</text></g>
   <g class="key" transform="translate(212 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">D</text><text class="hint" x="28" y="48">Shift</text></g>
@@ -45,7 +45,7 @@
   <g class="key" transform="translate(684 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">Ö</text><text class="hint" x="28" y="48">GUI</text></g>
   <g class="key optional" transform="translate(748 94)"><rect width="56" height="54"/><text class="label" x="28" y="34">Ä</text><text class="hint" x="28" y="48">SYMB</text></g>
 
-  <g class="key optional" transform="translate(20 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">Shift</text></g>
+  <g class="key optional" transform="translate(20 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">⇧</text></g>
   <g class="key" transform="translate(84 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">Y</text></g>
   <g class="key" transform="translate(148 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">X</text></g>
   <g class="key" transform="translate(212 158)"><rect width="56" height="54"/><text class="label" x="28" y="34">C</text></g>
@@ -62,10 +62,10 @@
   <text class="section" x="20" y="270">DAUMEN · LOGISCHE REIHENFOLGE, PHYSISCHE ANORDNUNG VARIIERT</text>
   <text class="note" x="20" y="298">Links außen → innen</text>
   <text class="note" x="428" y="298">Rechts innen → außen</text>
-  <g class="key thumb optional" transform="translate(20 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">Esc</text><text class="thumb-hint" x="60" y="44">NAVI</text></g>
-  <g class="key thumb" transform="translate(148 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">Enter</text><text class="thumb-hint" x="60" y="44">GUI</text></g>
-  <g class="key thumb" transform="translate(276 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">Tab</text><text class="thumb-hint" x="60" y="44">NUMS</text></g>
-  <g class="key thumb" transform="translate(428 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">Esc</text><text class="thumb-hint" x="60" y="44">NAVI</text></g>
-  <g class="key thumb" transform="translate(556 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">Leertaste</text></g>
-  <g class="key thumb optional" transform="translate(684 307)"><rect width="120" height="48"/><text class="thumb-label" x="60" y="30">Tab</text><text class="thumb-hint" x="60" y="44">NUMS</text></g>
+  <g class="key thumb optional" transform="translate(148 307)"><rect width="77.333" height="48"/><text class="thumb-label" x="38.667" y="30">⎋</text><text class="thumb-hint" x="38.667" y="44">NAVI</text></g>
+  <g class="key thumb" transform="translate(233.333 307)"><rect width="77.333" height="48"/><text class="thumb-label" x="38.667" y="30">↵</text><text class="thumb-hint" x="38.667" y="44">GUI</text></g>
+  <g class="key thumb" transform="translate(318.667 307)"><rect width="77.333" height="48"/><text class="thumb-label" x="38.667" y="30">⇥</text><text class="thumb-hint" x="38.667" y="44">NUMS</text></g>
+  <g class="key thumb" transform="translate(428 307)"><rect width="77.333" height="48"/><text class="thumb-label" x="38.667" y="30">⌫</text><text class="thumb-hint" x="38.667" y="44">NAVI</text></g>
+  <g class="key thumb" transform="translate(513.333 307)"><rect width="77.333" height="48"/><text class="thumb-label" x="38.667" y="30">␣</text></g>
+  <g class="key thumb optional" transform="translate(598.667 307)"><rect width="77.333" height="48"/><text class="thumb-label" x="38.667" y="30">⌦</text><text class="thumb-hint" x="38.667" y="44">NUMS</text></g>
 </svg>

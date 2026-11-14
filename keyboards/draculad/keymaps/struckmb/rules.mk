@@ -2,6 +2,7 @@
 # It's a tiny 3x5+3/2 keyboard so use combos
 COMBO_ENABLE = yes
 OLED_ENABLE = yes
+KEY_OVERRIDE_ENABLE = no
 
 BACKLIGHT_ENABLE = no
 RGBLIGHT_ENABLE = no

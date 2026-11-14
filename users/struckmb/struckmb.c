@@ -3,8 +3,25 @@
 // #define CAPS_WORD_ENABLE
 // #define COMBO_ENABLE
 // #define KEYBOARD_draculad
+// #define KEY_OVERRIDE_ENABLE
 // #define OLED_ENABLE
 // #define OLED_LAYOUT_VERTICAL
+// #define QWERTY_DISABLED
+
+#ifdef KEY_OVERRIDE_ENABLE
+const key_override_t sz_noted_shift_override = ko_make_with_layers(MOD_MASK_SHIFT, _BASE_R_MID_(DE_SS), DE_UCSZ, (layer_state_t)1 << _NOTED);
+
+#    ifndef QWERTY_DISABLED
+const key_override_t sz_qwert_shift_override = ko_make_with_layers(MOD_MASK_SHIFT, PTR(DE_SS), DE_UCSZ, (layer_state_t)1 << _QWERT);
+#    endif
+
+const key_override_t *key_overrides[] = {
+    &sz_noted_shift_override,
+#    ifndef QWERTY_DISABLED
+    &sz_qwert_shift_override,
+#    endif
+};
+#endif
 
 typedef struct {
     uint16_t keycode;
@@ -90,6 +107,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
         case LY_TOGG:
+#ifndef QWERTY_DISABLED
             if (record->event.pressed) {
                 uint8_t current_default = get_highest_layer(default_layer_state);
                 if (current_default == _QWERT) {
@@ -97,6 +115,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 } else {
                     set_single_persistent_default_layer(_QWERT);
                 }
+            }
+#endif // QWERTY_DISABLED
+            return false;
+        case SZ_COMBO:
+            if (record->event.pressed) {
+                tap_code16(get_mods() & MOD_MASK_SHIFT ? DE_UCSZ : DE_SS);
             }
             return false;
         default:
@@ -129,23 +153,33 @@ bool caps_word_press_user(uint16_t keycode) {
 // --- NOTED LAYER COMBOS ---
 const uint16_t PROGMEM j_noted_combo[]  = {DE_L, DE_F, COMBO_END};
 const uint16_t PROGMEM sz_noted_combo[] = {LALT_T(DE_R), RGUI_T(DE_H), COMBO_END};
-
+#    ifndef QWERTY_DISABLED
 // --- QWERT LAYER COMBOS ---
 const uint16_t PROGMEM ue_qwertz_combo[] = {DE_O, DE_P, COMBO_END};
 const uint16_t PROGMEM ae_qwertz_combo[] = {LALT_T(DE_L), RGUI_T(DE_ODIA), COMBO_END};
+#    endif
+// --- SYMB LAYER COMBOS ---
+const uint16_t PROGMEM ls_symbol_combo[] = {DE_EQL, DE_AMPR, COMBO_END};
+const uint16_t PROGMEM at_symbol_combo[] = {DE_MINS, DE_COLN, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(j_noted_combo, DE_J),      // Index 0
-    COMBO(sz_noted_combo, DE_SS),    // Index 1
+    COMBO(sz_noted_combo, SZ_COMBO), // Index 1
+#    ifndef QWERTY_DISABLED
     COMBO(ue_qwertz_combo, DE_UDIA), // Index 2
-    COMBO(ae_qwertz_combo, DE_ADIA)  // Index 3
+    COMBO(ae_qwertz_combo, DE_ADIA), // Index 3
+#    endif                           // QWERTY_DISABLED
+    COMBO(ls_symbol_combo, DE_SLNG), // Index 4
+    COMBO(at_symbol_combo, DE_AT)    // Index 5
 };
 
+#    ifndef QWERTY_DISABLED
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     uint8_t current_layer = get_highest_layer(layer_state);
     return (current_layer == _NOTED) ? combo_index < 2 : combo_index > 1;
 }
-#endif // COMBO_ENABLE
+#    endif // QWERTY_DISABLED
+#endif     // COMBO_ENABLE
 
 #ifdef OLED_ENABLE
 // Globale Variablen für Animationen im OLED-Scope
@@ -234,10 +268,9 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 bool oled_task_user(void) {
-    uint8_t default_layer = get_highest_layer(default_layer_state);
-    uint8_t layer         = get_highest_layer(layer_state);
-    uint8_t mods          = get_mods();
-    bool    caps_lock     = host_keyboard_led_state().caps_lock;
+    uint8_t layer     = get_highest_layer(layer_state);
+    uint8_t mods      = get_mods();
+    bool    caps_lock = host_keyboard_led_state().caps_lock;
     bool    caps_active =
 #    ifdef CAPS_WORD_ENABLE
         is_caps_word_on() ||
@@ -251,7 +284,12 @@ bool oled_task_user(void) {
         oled_write_ln_P(PSTR("=========\n"), false);
 
         oled_write_ln_P(PSTR("  BASE   "), true);
+#        ifndef QWERTY_DISABLED
+        uint8_t default_layer = get_highest_layer(default_layer_state);
         oled_write_ln_P(default_layer == _QWERT ? PSTR(" QWERT") : PSTR(" NOTED "), false);
+#        else
+        oled_write_ln_P(PSTR(" NOTED "), false);
+#        endif // QWERTY_DISABLED
 
         switch (layer) {
             case _SYMB:
@@ -320,7 +358,12 @@ bool oled_task_user(void) {
         oled_write_ln_P(PSTR("== QMK KEYBOARD =="), false);
 
         oled_write_P(PSTR("Base:   "), false);
-        oled_write_ln_P(default_layer == _QWERT ? PSTR("QWERT Layout") : PSTR("Noted Layout"), false);
+        oled_write_ln_P(
+#        ifndef QWERTY_DISABLED
+            default_layer == _QWERT ? PSTR("QWERT Layout") :
+#        endif // QWERTY_DISABLED
+                                    PSTR("Noted Layout"),
+            false);
 
         oled_write_P(PSTR("  └> "), false);
         switch (layer) {
